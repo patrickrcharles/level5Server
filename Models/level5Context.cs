@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -8,13 +11,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class level5Context : DbContext
+    public partial class Level5Context : DbContext
     {
-        public level5Context()
+        public Level5Context()
         {
         }
 
-        public level5Context(DbContextOptions<level5Context> options)
+        public Level5Context(DbContextOptions<Level5Context> options)
             : base(options)
         {
         }
@@ -26,8 +29,8 @@ namespace mysql_scaffold_dbcontext_test.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=database-1.ctnfhe6sfb4k.us-east-2.rds.amazonaws.com;user id=admin;pwd=GREENelk93;database=level5;persistsecurityinfo=True", x => x.ServerVersion("8.0.20-mysql"));
+                //optionsBuilder.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             }
         }
 

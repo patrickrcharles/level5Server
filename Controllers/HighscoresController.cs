@@ -25,12 +25,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return View(await _context.Highscores.ToListAsync());
         }
 
-        // GET: Highscores
-        [Route("api/[controller]")]
-        public async Task<List<Highscores>> Index1()
-        {
-            return await _context.Highscores.ToListAsync();
-        }
+        //// GET: Highscores
+        //[Route("api/[controller]")]
+        //public async Task<List<Highscores>> Index1()
+        //{
+        //    return await _context.Highscores.ToListAsync();
+        //}
 
         [Route("[controller]/id/{id?}")]
         // GET: Highscores/Details/5

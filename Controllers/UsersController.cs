@@ -9,11 +9,11 @@ using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
-    public class UsersController : Controller
+    public class UsersApiController : Controller
     {
         private readonly Level5Context _context;
 
-        public UsersController(Level5Context context)
+        public UsersApiController(Level5Context context)
         {
             _context = context;
         }
@@ -25,6 +25,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
+        [Route("[controller]/{id}")]
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,7 +43,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
             return View(users);
         }
-
+        [Route("[controller]/create")]
         // GET: Users/Create
         public IActionResult Create()
         {
@@ -66,6 +67,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         // GET: Users/Edit/5
+        [Route("[controller]/edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +86,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("[controller]/edit/{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Userid,Username,Firstname,Lastname,Password,Email,Ipaddress,Signupdate,Lastlogin")] Users users)
@@ -97,8 +100,11 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 try
                 {
+                    System.Diagnostics.Debug.WriteLine("----- edit");
                     _context.Update(users);
+                    System.Diagnostics.Debug.WriteLine("----- _context.Update(users);");
                     await _context.SaveChangesAsync();
+                    System.Diagnostics.Debug.WriteLine("----- _context.Update(users);");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,6 +123,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         // GET: Users/Delete/5
+        [Route("[controller]/delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +142,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         // POST: Users/Delete/5
+        [Route("[controller]/delete/{id}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

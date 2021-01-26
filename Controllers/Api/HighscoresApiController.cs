@@ -1,173 +1,156 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Net.Http;
-//using System.Text;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using mysql_scaffold_dbcontext_test.Models;
-//using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using mysql_scaffold_dbcontext_test.Models;
 
-//namespace mysql_scaffold_dbcontext_test.Controllers
-//{
-//    public class HighscoresApiController : Controller
-//    {
-//        private readonly Level5Context _context;
+namespace mysql_scaffold_dbcontext_test.Controllers
+{
+    [Route("api/highscores")]
+    [ApiController]
+    public class HighscoresApiController : ControllerBase
+    {
+        private readonly Level5Context _context;
 
-//        public HighscoresApiController(Level5Context context)
-//        {
-//            _context = context;
-//        }
+        public HighscoresApiController(Level5Context context)
+        {
+            _context = context;
+        }
 
-//        // GET: all Highscores
-//        [Route("api/highscores")]
-//        public async Task<List<Highscores>> Index()
-//        {
-//            //System.Diagnostics.Debug.WriteLine("----- api/[controller]");
-//            return await _context.Highscores.ToListAsync();
-//        }
+        // GET: /api/highscores
+        // get all highscores
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighscores()
+        {
+            return await _context.Highscores.ToListAsync();
+        }
 
-//        [Route("api/highscores/{modeid?}")]
-//        // GET: highscores by mode id
-//        public async Task<Highscores> Details(int? modeid)
-//        {
-//            if (modeid == null)
-//            {
-//                return null;
-//            }
+        // GET: /api/highscores/modeid/1
+        // highscores by modeid 
+        [HttpGet("modeid/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetByModeId(int modeid)
+        {
+            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid).ToListAsync();
 
-//            var highscores = await _context.Highscores
-//                .FirstOrDefaultAsync(m => m.Modeid == modeid);
+            if (highscores == null)
+            {
+                return NotFound();
+            }
 
-//            if (highscores == null)
-//            {
-//                return null;
-//            }
-//            return highscores;
-//        }
+            return highscores;
+        }
 
-//        //    [Route("[controller]/create")]
-//        //    // GET: Highscores/Create
-//        //    public IActionResult Create()
-//        //    {
-//        //        return View();
-//        //    }
+        // GET: /api/highscores/modeid/1/userid/1
+        // highscores by modeid + userid
+        [HttpGet("modeid/{modeid}/userid/{userid}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetByModeIdUserId(int modeid, int userid)
+        {
+            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid ).ToListAsync();
 
-//        // POST: Highscores/Create
-//        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-//        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        //[ValidateAntiForgeryToken]
-//        [Route("api/highscores")]
-//        //public async Task<IActionResult> Create([Bind("Id,Userid,Modeid,Characterid,Levelid,Character,Level,Os,Version,Date,Time,TotalPoints,LongestShot,TotalDistance,MaxShotMade,MaxShotAtt,ConsecutiveShots,TrafficEnabled,HardcoreEnabled,EnemiesKilled,Platform,Device,Ipaddress,Scoreid,TwoMade,TwoAtt,ThreeMade,ThreeAtt,FourMade,FourAtt,SevenMade,SevenAtt")] Highscores highscores)
-//        public async void Post([FromBody] String highscores)
-//        {            
-//            System.Diagnostics.Debug.WriteLine("----- highscores : "+ highscores);
+            if (highscores == null)
+            {
+                return NotFound();
+            }
 
-//            var json = JsonConvert.SerializeObject(highscores);
-//            System.Diagnostics.Debug.WriteLine("----- json : " + json);
+            return highscores;
+        }
+        // GET: /api/highscores/modeid/1/platform/1
+        // highscores by modeid + platform
+        [HttpGet("modeid/{modeid}/platform/{platform}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetByModeIdPlatform(int modeid, string platform)
+        {
+            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
 
-//            var content = new StringContent(json, Encoding.UTF8, "application/json");
-//            System.Diagnostics.Debug.WriteLine("----- content : " + content);
+            if (highscores == null)
+            {
+                return NotFound();
+            }
 
-//            ////var result1 = client.PostAsync("api/Users/InsertUsers", content).Result;
+            return highscores;
+        }
 
+        // GET: /api/highscores/modeid/1/platform/1
+        // highscores by modeid + platform
+        [HttpGet("modeid/{modeid}/hardcore/{hardcore}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetByModeIdHardcore(int modeid, int hardcore)
+        {
+            var highscores = await _context.Highscores.Where(x => x.HardcoreEnabled == hardcore).ToListAsync();
 
-//            _context.Add(highscores);
-//            await _context.SaveChangesAsync();
-//            //if (ModelState.IsValid)
-//            //{
-//            //    _context.Add(highscores);
-//            //    await _context.SaveChangesAsync();
-//            //    //return RedirectToAction(nameof(Index));
-//            //}
-//            //return View(highscores);
-//        }
+            if (highscores == null)
+            {
+                return NotFound();
+            }
 
-//        //    // GET: Highscores/Edit/5
-//        //    public async Task<IActionResult> Edit(int? id)
-//        //    {
-//        //        if (id == null)
-//        //        {
-//        //            return NotFound();
-//        //        }
+            return highscores;
+        }
 
-//        //        var highscores = await _context.Highscores.FindAsync(id);
-//        //        if (highscores == null)
-//        //        {
-//        //            return NotFound();
-//        //        }
-//        //        return View(highscores);
-//        //    }
+        // PUT: api/Highscores1/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutHighscores(int id, Highscores highscores)
+        {
+            if (id != highscores.Id)
+            {
+                return BadRequest();
+            }
 
-//        //    // POST: Highscores/Edit/5
-//        //    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-//        //    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-//        //    [HttpPost]
-//        //    [ValidateAntiForgeryToken]
-//        //    public async Task<IActionResult> Edit(int id, [Bind("Id,Userid,Modeid,Characterid,Levelid,Character,Level,Os,Version,Date,Time,TotalPoints,LongestShot,TotalDistance,MaxShotMade,MaxShotAtt,ConsecutiveShots,TrafficEnabled,HardcoreEnabled,EnemiesKilled,Platform,Device,Ipaddress,Scoreid,TwoMade,TwoAtt,ThreeMade,ThreeAtt,FourMade,FourAtt,SevenMade,SevenAtt")] Highscores highscores)
-//        //    {
-//        //        if (id != highscores.Id)
-//        //        {
-//        //            return NotFound();
-//        //        }
+            _context.Entry(highscores).State = EntityState.Modified;
 
-//        //        if (ModelState.IsValid)
-//        //        {
-//        //            try
-//        //            {
-//        //                _context.Update(highscores);
-//        //                await _context.SaveChangesAsync();
-//        //            }
-//        //            catch (DbUpdateConcurrencyException)
-//        //            {
-//        //                if (!HighscoresExists(highscores.Id))
-//        //                {
-//        //                    return NotFound();
-//        //                }
-//        //                else
-//        //                {
-//        //                    throw;
-//        //                }
-//        //            }
-//        //            return RedirectToAction(nameof(Index));
-//        //        }
-//        //        return View(highscores);
-//        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!HighscoresExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-//        //    // GET: Highscores/Delete/5
-//        //    public async Task<IActionResult> Delete(int? id)
-//        //    {
-//        //        if (id == null)
-//        //        {
-//        //            return NotFound();
-//        //        }
+            return NoContent();
+        }
 
-//        //        var highscores = await _context.Highscores
-//        //            .FirstOrDefaultAsync(m => m.Id == id);
-//        //        if (highscores == null)
-//        //        {
-//        //            return NotFound();
-//        //        }
+        // POST: api/Highscores1
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<Highscores>> PostHighscores(Highscores highscores)
+        {
+            System.Diagnostics.Debug.WriteLine("----- highscores : " + highscores);
+            _context.Highscores.Add(highscores);
+            await _context.SaveChangesAsync();
 
-//        //        return View(highscores);
-//        //    }
+            return CreatedAtAction(nameof(GetHighscores), new { id = highscores.Id }, highscores);
+        }
 
-//        //    // POST: Highscores/Delete/5
-//        //    [HttpPost, ActionName("Delete")]
-//        //    [ValidateAntiForgeryToken]
-//        //    public async Task<IActionResult> DeleteConfirmed(int id)
-//        //    {
-//        //        var highscores = await _context.Highscores.FindAsync(id);
-//        //        _context.Highscores.Remove(highscores);
-//        //        await _context.SaveChangesAsync();
-//        //        return RedirectToAction(nameof(Index));
-//        //    }
+        // DELETE: api/Highscores1/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Highscores>> DeleteHighscores(int id)
+        {
+            var highscores = await _context.Highscores.FindAsync(id);
+            if (highscores == null)
+            {
+                return NotFound();
+            }
 
-//        private bool HighscoresExists(int id)
-//        {
-//            return _context.Highscores.Any(e => e.Id == id);
-//        }
-//    }
-//}
+            _context.Highscores.Remove(highscores);
+            await _context.SaveChangesAsync();
+
+            return highscores;
+        }
+
+        private bool HighscoresExists(int id)
+        {
+            return _context.Highscores.Any(e => e.Id == id);
+        }
+    }
+}

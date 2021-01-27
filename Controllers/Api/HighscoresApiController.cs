@@ -88,8 +88,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         // PUT: api/Highscores1/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // "insert, replace if already exists"
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHighscores(int id, Highscores highscores)
         {
@@ -119,9 +118,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return NoContent();
         }
 
-        // POST: api/Highscores1
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // POST: api/Highscores
+        // "create new"
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscores(Highscores highscores)
         {

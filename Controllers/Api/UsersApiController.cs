@@ -9,6 +9,8 @@ using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.Api
 {
+    [Route("api/users")]
+    [ApiController]
     public class UsersApiController : Controller
     {
         private readonly Level5Context _context;
@@ -18,16 +20,18 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             _context = context;
         }
 
-        // GET: all Users
-        [Route("api/users")]
-        public async Task<List<Users>> Index()
+        // GET: /api/users
+        // get all users
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        [Route("api/users/{userid}")]
+        [HttpGet("{userid}")]
         // GET: Users by userid
-        public async Task<Users> Details(int? userid)
+        // get user by user id
+        public async Task<Users> GetUserDetails(int? userid)
         {
             if (userid == null)
             {
@@ -43,28 +47,63 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
             return users;
         }
-        //    [Route("[controller]/create")]
-        //    // GET: Users/Create
-        //    public IActionResult Create()
-        //    {
-        //        return View();
-        //    }
+        // PUT: api/users/5
+        // "insert, replace if already exists"
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(int id, Users user)
+        {
+            if (id != user.Userid)
+            {
+                return BadRequest();
+            }
 
-        //    // POST: Users/Create
-        //    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public async Task<IActionResult> Create([Bind("Userid,Username,Firstname,Lastname,Password,Email,Ipaddress,Signupdate,Lastlogin")] Users users)
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            _context.Add(users);
-        //            await _context.SaveChangesAsync();
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        return View(users);
-        //    }
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsersExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Highscores
+        // "create new"
+        [HttpPost]
+        public async Task<ActionResult<Users>> PostUser(Users user)
+        {
+
+            System.Diagnostics.Debug.WriteLine("----- public async Task<ActionResult<Users>> PostUser(Users user)");
+            System.Diagnostics.Debug.WriteLine("----- users : " + user);
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetUsers), new { id = user.Userid }, user);
+        }
+
+        // POST: api/Highscores
+        // "create new"
+        //[HttpPost]
+        //public async Task<ActionResult<Highscores>> PostHighscores(Highscores highscores)
+        //{
+        //    System.Diagnostics.Debug.WriteLine("----- highscores : " + highscores);
+        //    _context.Highscores.Add(highscores);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction(nameof(GetHighscores), new { id = highscores.Id }, highscores);
+        //}
+
 
         //    // GET: Users/Edit/5
         //    [Route("[controller]/edit/{id}")]
@@ -153,9 +192,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         //        return RedirectToAction(nameof(Index));
         //    }
 
-        //    private bool UsersExists(int id)
-        //    {
-        //        return _context.Users.Any(e => e.Userid == id);
-        //    }
+        private bool UsersExists(int id)
+        {
+            return _context.Users.Any(e => e.Userid == id);
+        }
     }
 }

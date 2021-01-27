@@ -111,7 +111,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         }
 
         //--------------------- UTILITY FUNCTIONS ---------------------------------------------------
-
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Userid == id);

@@ -20,10 +20,11 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             _context = context;
         }
 
+        //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/users
         // get all users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
         {
             return await _context.Users.ToListAsync();
         }
@@ -31,7 +32,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         [HttpGet("{userid}")]
         // GET: Users by userid
         // get user by user id
-        public async Task<Users> GetUserDetails(int? userid)
+        public async Task<Users> GetUserById(int? userid)
         {
             if (userid == null)
             {
@@ -47,6 +48,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
             return users;
         }
+
+        //--------------------- HTTP PUT ---------------------------------------------------
         // PUT: api/users/5
         // "insert, replace if already exists"
         [HttpPut("{id}")]
@@ -65,7 +68,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -78,121 +81,38 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             return NoContent();
         }
 
+        //--------------------- HTTP POST ---------------------------------------------------
         // POST: api/Highscores
         // "create new"
         [HttpPost]
         public async Task<ActionResult<Users>> PostUser(Users user)
         {
-
-            System.Diagnostics.Debug.WriteLine("----- public async Task<ActionResult<Users>> PostUser(Users user)");
-            System.Diagnostics.Debug.WriteLine("----- users : " + user);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUsers), new { id = user.Userid }, user);
+            return CreatedAtAction(nameof(GetAllUsers), new { id = user.Userid }, user);
         }
 
-        // POST: api/Highscores
-        // "create new"
-        //[HttpPost]
-        //public async Task<ActionResult<Highscores>> PostHighscores(Highscores highscores)
-        //{
-        //    System.Diagnostics.Debug.WriteLine("----- highscores : " + highscores);
-        //    _context.Highscores.Add(highscores);
-        //    await _context.SaveChangesAsync();
+        //--------------------- HTTP DELETE ---------------------------------------------------
+        // DELETE: api/users/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Users>> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    return CreatedAtAction(nameof(GetHighscores), new { id = highscores.Id }, highscores);
-        //}
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
 
+            return user;
+        }
 
-        //    // GET: Users/Edit/5
-        //    [Route("[controller]/edit/{id}")]
-        //    public async Task<IActionResult> Edit(int? id)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return NotFound();
-        //        }
+        //--------------------- UTILITY FUNCTIONS ---------------------------------------------------
 
-        //        var users = await _context.Users.FindAsync(id);
-        //        if (users == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return View(users);
-        //    }
-
-        //    // POST: Users/Edit/5
-        //    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //    // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //    [Route("[controller]/edit/{id}")]
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public async Task<IActionResult> Edit(int id, [Bind("Userid,Username,Firstname,Lastname,Password,Email,Ipaddress,Signupdate,Lastlogin")] Users users)
-        //    {
-        //        if (id != users.Userid)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        if (ModelState.IsValid)
-        //        {
-        //            try
-        //            {
-        //                System.Diagnostics.Debug.WriteLine("----- edit");
-        //                _context.Update(users);
-        //                System.Diagnostics.Debug.WriteLine("----- _context.Update(users);");
-        //                await _context.SaveChangesAsync();
-        //                System.Diagnostics.Debug.WriteLine("----- _context.Update(users);");
-        //            }
-        //            catch (DbUpdateConcurrencyException)
-        //            {
-        //                if (!UsersExists(users.Userid))
-        //                {
-        //                    return NotFound();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        return View(users);
-        //    }
-
-        //    // GET: Users/Delete/5
-        //    [Route("[controller]/delete/{id}")]
-        //    public async Task<IActionResult> Delete(int? id)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        var users = await _context.Users
-        //            .FirstOrDefaultAsync(m => m.Userid == id);
-        //        if (users == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return View(users);
-        //    }
-
-        //    // POST: Users/Delete/5
-        //    [Route("[controller]/delete/{id}")]
-        //    [HttpPost, ActionName("Delete")]
-        //    [ValidateAntiForgeryToken]
-        //    public async Task<IActionResult> DeleteConfirmed(int id)
-        //    {
-        //        var users = await _context.Users.FindAsync(id);
-        //        _context.Users.Remove(users);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-
-        private bool UsersExists(int id)
+        private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Userid == id);
         }

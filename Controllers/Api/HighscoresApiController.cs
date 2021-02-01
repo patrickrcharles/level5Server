@@ -88,6 +88,23 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return highscores;
         }
 
+        // GET: /api/highscores/scoreid/{scoreid}
+        // all highscores by unique scoreid
+        [HttpGet("scoreid/{scoreid}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByScoreId(string scoreid)
+        {
+            System.Diagnostics.Debug.WriteLine("---------- scoreid : " + scoreid);
+            var highscores = await _context.Highscores.Where(x => x.Scoreid == scoreid).ToListAsync();
+
+            if (!ScoreIdExists(scoreid))
+            {
+                System.Diagnostics.Debug.WriteLine("---------- scoreid NOT FOUND: " + scoreid);
+                return NotFound();
+            }
+
+            return highscores;
+        }
+
         //--------------------- HTTP PUT ---------------------------------------------------
 
         // PUT: api/Highscores1/5
@@ -155,6 +172,11 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         private bool HighscoreExists(int id)
         {
             return _context.Highscores.Any(e => e.Id == id);
+        }
+
+        private bool ScoreIdExists(string scoreid)
+        {
+            return _context.Highscores.Any(e => e.Scoreid == scoreid);
         }
     }
 }

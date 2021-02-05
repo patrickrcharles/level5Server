@@ -29,6 +29,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return await _context.Highscores.ToListAsync();
         }
 
+        //--------------------- HTTP GET  Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/1
         // highscores by modeid 
         [HttpGet("modeid/{modeid}")]
@@ -88,6 +89,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return highscores;
         }
 
+        //--------------------- HTTP GET  Scoreid ---------------------------------------------------
         // GET: /api/highscores/scoreid/{scoreid}
         // all highscores by unique scoreid
         [HttpGet("scoreid/{scoreid}")]
@@ -106,14 +108,21 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         //--------------------- HTTP PUT ---------------------------------------------------
-
-        // PUT: api/Highscores1/5
+        // PUT: api/Highscores/scoreid/5
         // "insert, replace if already exists"
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutHighscore(int id, Highscores highscores)
+        [HttpPut("scoreid/{scoreid}")]
+        public async Task<IActionResult> PutHighscore(string scoreid, Highscores highscores)
         {
-            if (id != highscores.Id)
+            System.Diagnostics.Debug.WriteLine("----- scoreid : " + scoreid);
+            System.Diagnostics.Debug.WriteLine("----- highscores.Scoreid : " + highscores.Scoreid);
+            //highscores.Id = GetDatabaseIdByScoreId(scoreid);
+
+            System.Diagnostics.Debug.WriteLine("----- highscores.Id : " + highscores.Id);
+
+            if (scoreid != highscores.Scoreid)
             {
+                System.Diagnostics.Debug.WriteLine("----- SERVER : BAD REQUEST : \n" + 
+                    scoreid + " NOT EQUAL to " + highscores.Scoreid);
                 return BadRequest();
             }
 
@@ -122,11 +131,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                System.Diagnostics.Debug.WriteLine("----- SERVER : scoreid modified : " + scoreid);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
-                if (!HighscoreExists(id))
+                System.Diagnostics.Debug.WriteLine("----- SERVER : ERROR : " + e);
+                //System.Diagnostics.Debug.WriteLine("----- SERVER : scoreid not found : " + scoreid);
+                if (!ScoreIdExists(scoreid))
                 {
+                    System.Diagnostics.Debug.WriteLine("----- SERVER : scoreid not found : " + scoreid);
                     return NotFound();
                 }
                 else
@@ -169,14 +182,28 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         //--------------------- UTILITY FUNCTIONS ---------------------------------------------------
-        private bool HighscoreExists(int id)
+        //private bool HighscoreExists(string scoreid)
+        //{
+        //    return _context.Highscores.Any(e => e.Scoreid == scoreid);
+        //}
+
+        private int GetDatabaseIdByScoreId(string scoreid)
         {
-            return _context.Highscores.Any(e => e.Id == id);
+            int id = _context.Highscores.Where(e => e.Scoreid == scoreid).FirstOrDefault().Id;
+            System.Diagnostics.Debug.WriteLine("----- GetDatabaseIdByScoreId : " + id);
+
+            return id;
         }
 
         private bool ScoreIdExists(string scoreid)
         {
             return _context.Highscores.Any(e => e.Scoreid == scoreid);
+        }
+
+
+        private bool PlatformExists(string platform)
+        {
+            return _context.Highscores.Any(e => e.Platform == platform);
         }
     }
 }

@@ -41,5 +41,8 @@ namespace mysql_scaffold_dbcontext_test.Models
         public int? FourAtt { get; set; }
         public int? SevenMade { get; set; }
         public int? SevenAtt { get; set; }
+        public int? BonusPoints { get; set; }
+        public int? MoneyBallMade { get; set; }
+        public int? MoneyBallAtt { get; set; }
     }
 }

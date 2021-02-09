@@ -13,15 +13,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
     [ApiController]
     public class UsersApiController : Controller
     {
-        private readonly Level5Context _context;
+        private readonly databaseContext _context;
 
-        public UsersApiController(Level5Context context)
+        public UsersApiController(databaseContext context)
         {
             _context = context;
         }
 
         //--------------------- HTTP GET ---------------------------------------------------
-        // GET: /api/users
+        // GET: /api/highscores
         // get all users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
@@ -29,24 +29,108 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             return await _context.Users.ToListAsync();
         }
 
-        [HttpGet("{userid}")]
+
+        //--------------------- HTTP GET Userid ---------------------------------------------------
+        // GET: /api/highscores/userid/{userid}
+        // get all highscores
+        [HttpGet("userid/{userid}")]
         // GET: Users by userid
         // get user by user id
-        public async Task<Users> GetUserById(int? userid)
+        public async Task<ActionResult<Users>> GetUserById(int userid)
         {
-            if (userid == null)
+            if (!UserIdExists(userid))
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var users = await _context.Users
+                    .FirstOrDefaultAsync(m => m.Userid == userid);
+                if (users == null)
+                {
+                    return null;
+                }
+
+                HideUserDetails(users);
+
+                return users;
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
+                return BadRequest();
+            }
+        }
+
+        //--------------------- HTTP GET Username ---------------------------------------------------
+        // GET: /api/users/username/{userid}
+        // get all highscores
+        [HttpGet("username/{username}")]
+        // GET: Users by userid
+        // get user by user id
+        public async Task<ActionResult<Users>> GetUserByUsername(string username)
+        {
+            if (username == null)
             {
                 return null;
             }
+            if (!UserNameExists(username))
+            {
+                return NotFound();
+            }
+            else
+            {
+                try
+                {
+                    var user = await _context.Users
+                        .FirstOrDefaultAsync(m => m.Username == username);
 
-            var users = await _context.Users
-                .FirstOrDefaultAsync(m => m.Userid == userid);
-            if (users == null)
+                    HideUserDetails(user);
+
+                    return user;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
+                    return BadRequest();
+                }
+            }
+        }
+
+        //--------------------- HTTP GET Username ---------------------------------------------------
+        // GET: /api/users/username/{userid}
+        // get all highscores
+        [HttpGet("email/{email}")]
+        // GET: Users by userid
+        // get user by user id
+        public async Task<ActionResult<Users>> GetUserByEmail(string email)
+        {
+            if (email == null)
             {
                 return null;
             }
+            if (!UserNameExists(email))
+            {
+                return NotFound();
+            }
+            else
+            {
+                try
+                {
+                    var user = await _context.Users
+                        .FirstOrDefaultAsync(m => m.Email == email);
 
-            return users;
+                    HideUserDetails(user);
+
+                    return user;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
+                    return BadRequest();
+                }
+            }
         }
 
         //--------------------- HTTP PUT ---------------------------------------------------
@@ -66,9 +150,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
-                if (!UserExists(id))
+                if (!UserIdExists(id))
                 {
                     return NotFound();
                 }
@@ -77,7 +161,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
                     throw;
                 }
             }
-
             return NoContent();
         }
 
@@ -87,10 +170,23 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         [HttpPost]
         public async Task<ActionResult<Users>> PostUser(Users user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            if (UserNameExists(user.Username))
+            {
+                return BadRequest();
+            }
 
-            return CreatedAtAction(nameof(GetAllUsers), new { id = user.Userid }, user);
+            try
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetAllUsers), new { id = user.Userid }, user);
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
+                return BadRequest();
+            }
         }
 
         //--------------------- HTTP DELETE ---------------------------------------------------
@@ -111,9 +207,24 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         }
 
         //--------------------- UTILITY FUNCTIONS ---------------------------------------------------
-        private bool UserExists(int id)
+        private bool UserIdExists(int id)
         {
             return _context.Users.Any(e => e.Userid == id);
+        }
+
+        private bool UserNameExists(string username)
+        {
+            return _context.Users.Any(e => e.Username == username);
+        }
+
+        private static void HideUserDetails(Users users)
+        {
+            users.Firstname = "*************";
+            users.Lastname = "*************";
+            users.Email = "*************";
+            users.Password = "*************";
+            users.Ipaddress = "*************";
+            users.Lastlogin = null;
         }
     }
 }

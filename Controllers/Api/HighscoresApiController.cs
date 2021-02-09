@@ -13,9 +13,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
     [ApiController]
     public class HighscoresApiController : ControllerBase
     {
-        private readonly Level5Context _context;
+        private readonly databaseContext _context;
 
-        public HighscoresApiController(Level5Context context)
+        public HighscoresApiController(databaseContext context)
         {
             _context = context;
         }
@@ -27,6 +27,22 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
             return await _context.Highscores.ToListAsync();
+        }
+
+        //--------------------- HTTP GET  Platform ---------------------------------------------------
+        // GET: /api/highscores/modeid/1
+        // highscores by modeid 
+        [HttpGet("platform/{platform}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByPlatform(string platform)
+        {
+            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
+
+            if (highscores == null)
+            {
+                return NotFound();
+            }
+
+            return highscores;
         }
 
         //--------------------- HTTP GET  Modeid ---------------------------------------------------
@@ -158,6 +174,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
             System.Diagnostics.Debug.WriteLine("----- highscores : " + highscores);
+            System.Diagnostics.Debug.WriteLine("----- bonus : " + highscores.BonusPoints);
+            System.Diagnostics.Debug.WriteLine("----- MBmade : " + highscores.MoneyBallMade);
+            System.Diagnostics.Debug.WriteLine("----- MBatt : " + highscores.MoneyBallAtt);
+
             _context.Highscores.Add(highscores);
             await _context.SaveChangesAsync();
 

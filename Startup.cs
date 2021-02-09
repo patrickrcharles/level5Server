@@ -29,7 +29,7 @@ namespace mysql_scaffold_dbcontext_test
         {
             services.AddControllers();
             services.AddRazorPages();
-            services.AddDbContext<Level5Context>(options =>
+            services.AddDbContext<databaseContext>(options =>
         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
         }
 

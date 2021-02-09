@@ -11,13 +11,13 @@ using Microsoft.IdentityModel.Protocols;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class Level5Context : DbContext
+    public partial class databaseContext : DbContext
     {
-        public Level5Context()
+        public databaseContext()
         {
         }
 
-        public Level5Context(DbContextOptions<Level5Context> options)
+        public databaseContext(DbContextOptions<databaseContext> options)
             : base(options)
         {
         }
@@ -146,6 +146,12 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.TwoMade).HasColumnName("twoMade");
 
                 entity.Property(e => e.Userid).HasColumnName("userid");
+
+                entity.Property(e => e.Userid).HasColumnName("bonusPoints");
+
+                entity.Property(e => e.Userid).HasColumnName("moneyBallMade");
+
+                entity.Property(e => e.Userid).HasColumnName("moneyBallAtt");
 
                 entity.Property(e => e.Version)
                     .IsRequired()

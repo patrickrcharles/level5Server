@@ -16,7 +16,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public string Ipaddress { get; set; }
-        public DateTime? Signupdate { get; set; }
-        public DateTime? Lastlogin { get; set; }
+        public string Signupdate { get; set; }
+        public string Lastlogin { get; set; }
     }
 }

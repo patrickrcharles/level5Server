@@ -26,6 +26,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
         {
+            foreach(Users u in _context.Users)
+            {
+                HideUserDetails(u);
+            }
             return await _context.Users.ToListAsync();
         }
 
@@ -224,7 +228,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             users.Email = "*************";
             users.Password = "*************";
             users.Ipaddress = "*************";
-            users.Lastlogin = null;
+            users.Lastlogin = "*************";
+            users.Signupdate = "*************";
         }
     }
 }

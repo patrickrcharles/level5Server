@@ -147,11 +147,11 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.Userid).HasColumnName("userid");
 
-                entity.Property(e => e.Userid).HasColumnName("bonusPoints");
+                entity.Property(e => e.BonusPoints).HasColumnName("bonusPoints");
 
-                entity.Property(e => e.Userid).HasColumnName("moneyBallMade");
+                entity.Property(e => e.MoneyBallMade).HasColumnName("moneyBallMade");
 
-                entity.Property(e => e.Userid).HasColumnName("moneyBallAtt");
+                entity.Property(e => e.MoneyBallAtt).HasColumnName("moneyBallAtt");
 
                 entity.Property(e => e.Version)
                     .IsRequired()
@@ -199,7 +199,9 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.Lastlogin)
                     .HasColumnName("lastlogin")
-                    .HasColumnType("datetime");
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Lastname)
                     .HasColumnName("lastname")
@@ -216,7 +218,9 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.Signupdate)
                     .HasColumnName("signupdate")
-                    .HasColumnType("datetime");
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Username)
                     .IsRequired()

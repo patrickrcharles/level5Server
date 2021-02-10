@@ -33,16 +33,16 @@ namespace mysql_scaffold_dbcontext_test.Models
         public string Device { get; set; }
         public string Ipaddress { get; set; }
         public string Scoreid { get; set; }
-        public int? TwoMade { get; set; }
-        public int? TwoAtt { get; set; }
-        public int? ThreeMade { get; set; }
-        public int? ThreeAtt { get; set; }
-        public int? FourMade { get; set; }
-        public int? FourAtt { get; set; }
-        public int? SevenMade { get; set; }
-        public int? SevenAtt { get; set; }
-        public int? BonusPoints { get; set; }
-        public int? MoneyBallMade { get; set; }
-        public int? MoneyBallAtt { get; set; }
+        public int TwoMade { get; set; }
+        public int TwoAtt { get; set; }
+        public int ThreeMade { get; set; }
+        public int ThreeAtt { get; set; }
+        public int FourMade { get; set; }
+        public int FourAtt { get; set; }
+        public int SevenMade { get; set; }
+        public int SevenAtt { get; set; }
+        public int BonusPoints { get; set; }
+        public int MoneyBallMade { get; set; }
+        public int MoneyBallAtt { get; set; }
     }
 }

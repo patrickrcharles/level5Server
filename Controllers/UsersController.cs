@@ -9,23 +9,25 @@ using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
-    public class UsersApiController : Controller
+    //[Route("users")]
+    [Controller]
+    public class UsersController : Controller
     {
         private readonly databaseContext _context;
 
-        public UsersApiController(databaseContext context)
+        public UsersController(databaseContext context)
         {
             _context = context;
         }
 
         // GET: Users
-        [Route("[controller]")]
+        [Route("users")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
 
-        [Route("[controller]/{id}")]
+        [Route("users/{id}")]
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {

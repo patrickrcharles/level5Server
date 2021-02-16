@@ -48,10 +48,6 @@ namespace mysql_scaffold_dbcontext_test
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
-                //endpoints.MapBlazorHub();
-                //endpoints.MapFallbackToPage("/_Host");
-                //endpoints.MapHealthChecks("/health");
             });
         }
     }

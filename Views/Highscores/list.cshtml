@@ -3,11 +3,22 @@
 @model IEnumerable<mysql_scaffold_dbcontext_test.Models.Highscores>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>List</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -172,3 +183,4 @@
         }
     </tbody>
 </table>
+

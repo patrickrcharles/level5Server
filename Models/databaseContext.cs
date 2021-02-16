@@ -11,13 +11,13 @@ using Microsoft.IdentityModel.Protocols;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class databaseContext : DbContext
+    public partial class DatabaseContext : DbContext
     {
-        public databaseContext()
+        public DatabaseContext()
         {
         }
 
-        public databaseContext(DbContextOptions<databaseContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }

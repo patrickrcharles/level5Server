@@ -1,21 +1,22 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
+    [Authorize]
     [Route("api/highscores")]
     [ApiController]
     public class HighscoresApiController : ControllerBase
     {
-        private readonly databaseContext _context;
+        private readonly DatabaseContext _context;
 
-        public HighscoresApiController(databaseContext context)
+        public HighscoresApiController(DatabaseContext context)
         {
             _context = context;
         }

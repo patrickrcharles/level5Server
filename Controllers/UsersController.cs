@@ -13,9 +13,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
     [Controller]
     public class UsersController : Controller
     {
-        private readonly databaseContext _context;
+        private readonly DatabaseContext _context;
 
-        public UsersController(databaseContext context)
+        public UsersController(DatabaseContext context)
         {
             _context = context;
         }

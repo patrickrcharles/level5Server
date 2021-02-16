@@ -11,9 +11,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 {
     public class HighscoresController : Controller
     {
-        private readonly databaseContext _context;
+        private readonly DatabaseContext _context;
 
-        public HighscoresController(databaseContext context)
+        public HighscoresController(DatabaseContext context)
         {
             _context = context;
         }
@@ -25,12 +25,32 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return View(await _context.Highscores.ToListAsync());
         }
 
-        //// GET: Highscores
-        //[Route("api/[controller]")]
-        //public async Task<List<Highscores>> Index1()
-        //{
-        //    return await _context.Highscores.ToListAsync();
-        //}
+        // GET: Highscores
+        [Route("[controller]/list")]
+        public async Task<IActionResult> List()
+        {
+            //ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            //var highscores = from h in _context.Highscores
+            //               select h;
+            //switch (sortOrder)
+            //{
+            //    case "name_desc":
+            //        highscores = highscores.OrderByDescending(s => s.TotalPoints);
+            //        break;
+            //    case "Date":
+            //        highscores = highscores.OrderBy(s => s.MaxShotMade);
+            //        break;
+            //    case "date_desc":
+            //        highscores = highscores.OrderByDescending(s => s.MaxShotAtt);
+            //        break;
+            //    default:
+            //        highscores = highscores.OrderBy(s => s.Date);
+            //        break;
+            //}
+
+            return View(await _context.Highscores.ToListAsync());
+        }
 
         [Route("[controller]/id/{id?}")]
         // GET: Highscores/Details/5

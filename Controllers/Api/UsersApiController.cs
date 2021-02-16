@@ -1,21 +1,22 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.Api
 {
+    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UsersApiController : Controller
     {
-        private readonly databaseContext _context;
+        private readonly DatabaseContext _context;
 
-        public UsersApiController(databaseContext context)
+        public UsersApiController(DatabaseContext context)
         {
             _context = context;
         }

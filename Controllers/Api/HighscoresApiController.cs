@@ -60,17 +60,17 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET  Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/1
         // highscores by modeid 
-        [HttpGet("modeid/{modeid}/{field}")]
-        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeId(int modeid, string field)
+        [HttpGet("modeid/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeId(int modeid)
         {
-            ActionResult<IEnumerable<Object>> list = null;
 
+            ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
             if (modeid == 1 || (modeid > 14 && modeid < 20))
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.TotalPoints, x.Character, x.Level, x.Date, x.Time })
+                    .Select(x => new { x.TotalPoints, x.Character, x.Level, x.Date, x.Time, x.Userid })
                     .OrderByDescending(x => x.TotalPoints)
                     .ToListAsync();
                 list = highscores;
@@ -80,7 +80,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.MaxShotMade, x.Character, x.Level, x.Date, x.Time })
+                    .Select(x => new { x.MaxShotMade, x.Character, x.Level, x.Date, x.Time, x.UserName })
                     .OrderByDescending(x => x.MaxShotMade)
                     .ToListAsync();
                 list = highscores;
@@ -90,31 +90,43 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new
-                    {
-                        x.TotalDistance,
-                        x.Character,
-                        x.Level,
-                        x.Date,
-                        x.Time
-                    })
+                    .Select(x => new { x.TotalDistance, x.Character, x.Level, x.Date, x.Time, x.UserName })
                     .OrderByDescending(x => x.TotalDistance)
                     .ToListAsync();
 
                 list = highscores;
             }
+            // time highscore
             if ((modeid > 6 && modeid < 10))
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new
-                    {
-                        x.Time,
-                        x.Character,
-                        x.Level,
-                        x.Date
-                    })
-                    .OrderBy(field, "DESC")
+                    .Select(x => new { x.Time, x.UserName, x.Character, x.Level, x.Date })
+                    .OrderBy(x => x.Time)
+                    .ToListAsync();
+                list = highscores;
+            }
+
+            // consecutive shots highscore
+            if (modeid == 14)
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new { x.ConsecutiveShots, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .OrderByDescending(x => x.ConsecutiveShots)
+                    .ToListAsync();
+                list = highscores;
+            }
+
+            // enemies killed highscore
+            if (modeid == 20)
+            {
+                var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
+
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new { x.EnemiesKilled, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .OrderByDescending(x => x.EnemiesKilled)
                     .ToListAsync();
 
                 list = highscores;

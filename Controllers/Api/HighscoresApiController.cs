@@ -1,18 +1,23 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
+using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
+using System.Reflection;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/highscores")]
     [ApiController]
-    public class HighscoresApiController : ControllerBase
+    public class HighscoresApiController : Controller
     {
         private readonly DatabaseContext _context;
 
@@ -24,6 +29,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
         // get all highscores
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
@@ -45,29 +51,88 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
             return highscores;
         }
+        public IEnumerable<string> GetColumn(List<Highscores> items, string columnName)
+        {
+            var values = items.Select(x => x.GetType().GetProperty(columnName).GetValue(x).ToString());
+            return values;
+        }
 
         //--------------------- HTTP GET  Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/1
         // highscores by modeid 
-        [HttpGet("modeid/{modeid}")]
-        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeId(int modeid)
+        [HttpGet("modeid/{modeid}/{field}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeId(int modeid, string field)
         {
-            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid).ToListAsync();
+            ActionResult<IEnumerable<Object>> list = null;
 
-            if (highscores == null)
+            // totalpoints highscore
+            if (modeid == 1 || (modeid > 14 && modeid < 20))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new { x.TotalPoints, x.Character, x.Level, x.Date, x.Time })
+                    .OrderByDescending(x => x.TotalPoints)
+                    .ToListAsync();
+                list = highscores;
+            }
+            // maxshotmade highscore
+            if ((modeid > 1 && modeid < 5))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new { x.MaxShotMade, x.Character, x.Level, x.Date, x.Time })
+                    .OrderByDescending(x => x.MaxShotMade)
+                    .ToListAsync();
+                list = highscores;
+            }
+            // totaldistance highscore
+            if (modeid == 6)
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        x.TotalDistance,
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        x.Time
+                    })
+                    .OrderByDescending(x => x.TotalDistance)
+                    .ToListAsync();
+
+                list = highscores;
+            }
+            if ((modeid > 6 && modeid < 10))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        x.Time,
+                        x.Character,
+                        x.Level,
+                        x.Date
+                    })
+                    .OrderBy(field, "DESC")
+                    .ToListAsync();
+
+                list = highscores;
+            }
+            if (list == null)
             {
                 return NotFound();
             }
-
-            return highscores;
+            return list;
         }
+
 
         // GET: /api/highscores/modeid/1/userid/1
         // highscores by modeid + userid
         [HttpGet("modeid/{modeid}/userid/{userid}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdUserId(int modeid, int userid)
         {
-            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid ).ToListAsync();
+            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid).ToListAsync();
 
             if (highscores == null)
             {
@@ -138,7 +203,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
             if (scoreid != highscores.Scoreid)
             {
-                System.Diagnostics.Debug.WriteLine("----- SERVER : BAD REQUEST : \n" + 
+                System.Diagnostics.Debug.WriteLine("----- SERVER : BAD REQUEST : \n" +
                     scoreid + " NOT EQUAL to " + highscores.Scoreid);
                 return BadRequest();
             }

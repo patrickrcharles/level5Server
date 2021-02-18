@@ -15,7 +15,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 {
     [Route("api/token")]
     [ApiController]
-    public class TokenController : ControllerBase
+    public class TokenController : Controller
     {
         public IConfiguration _configuration;
         private readonly DatabaseContext _context;
@@ -29,7 +29,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         [HttpPost]
         public async Task<ActionResult> Post(Users _userData)
         {
-
             if (_userData != null && _userData.Username != null && _userData.Password != null)
             {
                 var user = await GetUser(_userData.Username, _userData.Password);

@@ -51,25 +51,53 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
             return highscores;
         }
-        public IEnumerable<string> GetColumn(List<Highscores> items, string columnName)
+
+        //--------------------- HTTP GET  Modeid by Userid ---------------------------------------------------
+        // GET: /api/highscores/modeid/1/userid/1
+        // highscores by modeid + userid
+        [HttpGet("modeid/{modeid}/userid/{userid}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdUserId(int modeid, int userid)
         {
-            var values = items.Select(x => x.GetType().GetProperty(columnName).GetValue(x).ToString());
-            return values;
+            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid).ToListAsync();
+
+            if (highscores == null)
+            {
+                return NotFound();
+            }
+
+            return highscores;
+        }
+        //--------------------- HTTP GET Modeid by Platform ---------------------------------------------------
+        // GET: /api/highscores/modeid/1/platform/1
+        // highscores by modeid + platform
+        [HttpGet("modeid/{modeid}/platform/{platform}")]
+        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdPlatform(int modeid, string platform)
+        {
+            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
+
+            if (highscores == null)
+            {
+                return NotFound();
+            }
+
+            return highscores;
         }
 
-        //--------------------- HTTP GET  Modeid ---------------------------------------------------
-        // GET: /api/highscores/modeid/1
-        // highscores by modeid 
-        [HttpGet("game/modeid/{modeid}")]
-        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid)
+        //--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
+        // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
+        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        [HttpGet("modeid/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid, int hardcore, int traffic, int enemies)
         {
-
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
             if (modeid == 1 || (modeid > 14 && modeid < 20))
             {
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.TotalPoints.ToString(),
@@ -81,6 +109,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.TotalPoints,
                         x.UserName,
                         x.HardcoreEnabled,
+                        x.EnemiesEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
                         x.Platform
@@ -93,7 +122,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             if ((modeid > 1 && modeid < 5))
             {
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.MaxShotMade.ToString(),
@@ -105,6 +137,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.MaxShotMade,
                         x.UserName,
                         x.HardcoreEnabled,
+                        x.EnemiesEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
                         x.Platform
@@ -117,7 +150,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             if (modeid == 6)
             {
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.TotalDistance.ToString(),
@@ -129,6 +165,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.TotalDistance,
                         x.UserName,
                         x.HardcoreEnabled,
+                        x.EnemiesEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
                         x.Platform
@@ -142,7 +179,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             if ((modeid > 6 && modeid < 10))
             {
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.Time.ToString(),
@@ -153,6 +193,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         UserId = x.Userid.ToString(),
                         x.UserName,
                         x.HardcoreEnabled,
+                        x.EnemiesEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
                         x.Platform
@@ -166,7 +207,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             if (modeid == 14)
             {
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.ConsecutiveShots.ToString(),
@@ -177,6 +221,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         UserId = x.Userid.ToString(),
                         x.ConsecutiveShots,
                         x.UserName,
+                        x.EnemiesEnabled,
                         x.HardcoreEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
@@ -193,7 +238,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
 
                 var highscores = await _context.Highscores
-                    .Where(x => x.Modeid == modeid)
+                    .Where(x => x.Modeid == modeid
+                    && x.HardcoreEnabled == hardcore
+                    && x.TrafficEnabled == traffic
+                    && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
                         Score = x.EnemiesKilled.ToString(),
@@ -204,6 +252,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         UserId = x.Userid.ToString(),
                         x.UserName,
                         x.HardcoreEnabled,
+                        x.EnemiesEnabled,
                         x.TrafficEnabled,
                         x.EnemiesKilled,
                         x.Platform
@@ -218,69 +267,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 return NotFound();
             }
             return list;
-        }
-
-
-        // GET: /api/highscores/modeid/1/userid/1
-        // highscores by modeid + userid
-        [HttpGet("modeid/{modeid}/userid/{userid}")]
-        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdUserId(int modeid, int userid)
-        {
-            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid).ToListAsync();
-
-            if (highscores == null)
-            {
-                return NotFound();
-            }
-
-            return highscores;
-        }
-        // GET: /api/highscores/modeid/1/platform/1
-        // highscores by modeid + platform
-        [HttpGet("modeid/{modeid}/platform/{platform}")]
-        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdPlatform(int modeid, string platform)
-        {
-            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
-
-            if (highscores == null)
-            {
-                return NotFound();
-            }
-
-            return highscores;
-        }
-
-        // GET: /api/highscores/modeid/1/platform/1
-        // all highscores by modeid + platform
-        [HttpGet("modeid/{modeid}/hardcore/{hardcore}")]
-        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdHardcore(int modeid, int hardcore)
-        {
-            var highscores = await _context.Highscores.Where(x => x.HardcoreEnabled == hardcore).ToListAsync();
-
-            if (highscores == null)
-            {
-                return NotFound();
-            }
-
-            return highscores;
-        }
-
-        //--------------------- HTTP GET  Scoreid ---------------------------------------------------
-        // GET: /api/highscores/scoreid/{scoreid}
-        // all highscores by unique scoreid
-        [HttpGet("scoreid/{scoreid}")]
-        public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByScoreId(string scoreid)
-        {
-            System.Diagnostics.Debug.WriteLine("---------- scoreid : " + scoreid);
-            var highscores = await _context.Highscores.Where(x => x.Scoreid == scoreid).ToListAsync();
-
-            if (!ScoreIdExists(scoreid))
-            {
-                System.Diagnostics.Debug.WriteLine("---------- scoreid NOT FOUND: " + scoreid);
-                return NotFound();
-            }
-
-            return highscores;
         }
 
         //--------------------- HTTP PUT ---------------------------------------------------
@@ -327,7 +313,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return NoContent();
         }
 
-        //--------------------- HTTP POST ---------------------------------------------------
+        //--------------------- HTTP POST Highscore ---------------------------------------------------
         // POST: api/Highscores
         // "create new"
         [HttpPost]
@@ -339,7 +325,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return CreatedAtAction(nameof(GetAllHighscores), new { id = highscores.Id }, highscores);
         }
 
-        //--------------------- HTTP DELETE ---------------------------------------------------
+        //--------------------- HTTP DELETE HighScore ---------------------------------------------------
         // DELETE: api/Highscores1/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Highscores>> DeleteHighscore(int id)
@@ -365,7 +351,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         private int GetDatabaseIdByScoreId(string scoreid)
         {
             int id = _context.Highscores.Where(e => e.Scoreid == scoreid).FirstOrDefault().Id;
-            System.Diagnostics.Debug.WriteLine("----- GetDatabaseIdByScoreId : " + id);
 
             return id;
         }

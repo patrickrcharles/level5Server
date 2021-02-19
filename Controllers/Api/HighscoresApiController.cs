@@ -33,7 +33,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
-            return await _context.Highscores.ToListAsync();
+            return await _context.Highscores.OrderByDescending(x => x.Id).ToListAsync();
         }
 
         //--------------------- HTTP GET  Platform ---------------------------------------------------
@@ -42,7 +42,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet("platform/{platform}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByPlatform(string platform)
         {
-            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
+            var highscores = await _context.Highscores.Where(x => x.Platform == platform)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
 
             if (highscores == null)
             {
@@ -58,7 +60,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet("modeid/{modeid}/userid/{userid}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdUserId(int modeid, int userid)
         {
-            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid).ToListAsync();
+            var highscores = await _context.Highscores.Where(x => x.Modeid == modeid && x.Userid == userid)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
 
             if (highscores == null)
             {
@@ -73,7 +77,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet("modeid/{modeid}/platform/{platform}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdPlatform(int modeid, string platform)
         {
-            var highscores = await _context.Highscores.Where(x => x.Platform == platform).ToListAsync();
+            var highscores = await _context.Highscores.Where(x => x.Platform == platform)
+                .OrderByDescending(x => x.Id)
+                .ToListAsync();
 
             if (highscores == null)
             {

@@ -11,7 +11,7 @@ namespace mysql_scaffold_dbcontext_test.Models
     {
         public int Id { get; set; }
         public int Userid { get; set; }
-        public int UserName { get; set; }
+        public string UserName { get; set; }
         public int Modeid { get; set; }
         public int Characterid { get; set; }
         public int Levelid { get; set; }
@@ -29,6 +29,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public int ConsecutiveShots { get; set; }
         public int TrafficEnabled { get; set; }
         public int HardcoreEnabled { get; set; }
+        public int EnemiesEnabled { get; set; }
         public int EnemiesKilled { get; set; }
         public string Platform { get; set; }
         public string Device { get; set; }

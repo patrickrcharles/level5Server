@@ -60,8 +60,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET  Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/1
         // highscores by modeid 
-        [HttpGet("modeid/{modeid}")]
-        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeId(int modeid)
+        [HttpGet("game/modeid/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid)
         {
 
             ActionResult<IEnumerable<Object>> list = null;
@@ -70,7 +70,21 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.TotalPoints, x.Character, x.Level, x.Date, x.Time, x.Userid })
+                    .Select(x => new
+                    {
+                        Score = x.TotalPoints.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.TotalPoints,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderByDescending(x => x.TotalPoints)
                     .ToListAsync();
                 list = highscores;
@@ -80,7 +94,21 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.MaxShotMade, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .Select(x => new
+                    {
+                        Score = x.MaxShotMade.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.MaxShotMade,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderByDescending(x => x.MaxShotMade)
                     .ToListAsync();
                 list = highscores;
@@ -90,7 +118,21 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.TotalDistance, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .Select(x => new
+                    {
+                        Score = x.TotalDistance.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.TotalDistance,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderByDescending(x => x.TotalDistance)
                     .ToListAsync();
 
@@ -101,7 +143,20 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.Time, x.UserName, x.Character, x.Level, x.Date })
+                    .Select(x => new
+                    {
+                        Score = x.Time.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        x.Time,
+                        UserId = x.Userid.ToString(),
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderBy(x => x.Time)
                     .ToListAsync();
                 list = highscores;
@@ -112,7 +167,21 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.ConsecutiveShots, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .Select(x => new
+                    {
+                        Score = x.ConsecutiveShots.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.ConsecutiveShots,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderByDescending(x => x.ConsecutiveShots)
                     .ToListAsync();
                 list = highscores;
@@ -125,7 +194,20 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
-                    .Select(x => new { x.EnemiesKilled, x.Character, x.Level, x.Date, x.Time, x.UserName })
+                    .Select(x => new
+                    {
+                        Score = x.EnemiesKilled.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
                     .OrderByDescending(x => x.EnemiesKilled)
                     .ToListAsync();
 
@@ -251,11 +333,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
-            System.Diagnostics.Debug.WriteLine("----- highscores : " + highscores);
-            System.Diagnostics.Debug.WriteLine("----- bonus : " + highscores.BonusPoints);
-            System.Diagnostics.Debug.WriteLine("----- MBmade : " + highscores.MoneyBallMade);
-            System.Diagnostics.Debug.WriteLine("----- MBatt : " + highscores.MoneyBallAtt);
-
             _context.Highscores.Add(highscores);
             await _context.SaveChangesAsync();
 

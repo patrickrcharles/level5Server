@@ -22,7 +22,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [Route("[controller]")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Highscores.OrderByDescending(x => x.Id).ToListAsync());
+            //get last 50 scores
+            return View(await _context.Highscores.OrderByDescending(x => x.Id).Skip(0).Take(50).ToListAsync());
+                
         }
 
         // GET: Highscores

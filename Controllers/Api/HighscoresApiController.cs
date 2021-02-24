@@ -33,7 +33,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
-            return await _context.Highscores.OrderByDescending(x => x.Id).ToListAsync();
+            return await _context.Highscores.OrderByDescending(x => x.Id)
+                .ToListAsync();
         }
 
         //--------------------- HTTP GET  Platform ---------------------------------------------------
@@ -93,7 +94,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
         // highscores by modeid with optiona; filters by hardcore, traffic, enemies
         [HttpGet("modeid/{modeid}")]
-        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid, int hardcore, int traffic, int enemies)
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid,
+            int hardcore, 
+            int traffic,
+            int enemies,
+            int page,
+            int results)
         {
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
@@ -121,6 +127,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderByDescending(x => x.TotalPoints)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
                 list = highscores;
             }
@@ -149,6 +157,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderByDescending(x => x.MaxShotMade)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
                 list = highscores;
             }
@@ -177,6 +187,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderByDescending(x => x.TotalDistance)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
 
                 list = highscores;
@@ -205,6 +217,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderBy(x => x.Time)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
                 list = highscores;
             }
@@ -234,6 +248,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderByDescending(x => x.ConsecutiveShots)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
                 list = highscores;
             }
@@ -264,6 +280,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                         x.Platform
                     })
                     .OrderByDescending(x => x.EnemiesKilled)
+                    .Skip(page * 10)
+                    .Take(results)
                     .ToListAsync();
 
                 list = highscores;

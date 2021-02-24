@@ -8,5 +8,12 @@
     "solution-stack" : "64bit Windows Server 2019 v2.6.2 running IIS 10.0",
     "iis-website"    : "Default Web Site",
     "app-path"       : "/",
-    "enable-xray"    : true
+    "enable-xray"    : true,
+    "cname"          : "level5server-prod",
+    "environment-type" : "SingleInstance",
+    "instance-profile" : "aws-elasticbeanstalk-ec2-role",
+    "service-role"     : "aws-elasticbeanstalk-service-role",
+    "health-check-url" : "/",
+    "instance-type"    : "t2.micro",
+    "key-pair"         : "supremeleader"
 }

@@ -95,7 +95,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // highscores by modeid with optiona; filters by hardcore, traffic, enemies
         [HttpGet("modeid/{modeid}")]
         public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid,
-            int hardcore, 
+            int hardcore,
             int traffic,
             int enemies,
             int page,
@@ -389,5 +389,28 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         {
             return _context.Highscores.Any(e => e.Platform == platform);
         }
+
+
+        //--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
+        // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
+        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        [HttpGet("modeid/count/{modeid}")]
+        public ActionResult<object> GetHighScoreCountByModeId(int modeid,
+            int hardcore,
+            int traffic,
+            int enemies)
+        {
+            var count = _context.Highscores
+                .Where(x => x.Modeid == modeid
+                && x.HardcoreEnabled == hardcore
+                && x.TrafficEnabled == traffic
+                && x.EnemiesEnabled == enemies)
+                .Select(x => x.Id)
+                .Count();
+
+            return count;
+        }
     }
 }
+
+

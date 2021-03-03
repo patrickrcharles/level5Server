@@ -93,7 +93,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
                     var user = await _context.Users
                         .FirstOrDefaultAsync(m => m.Username == username);
 
-                    HideUserDetails(user);
+                    //HideUserDetails(user);
 
                     return user;
                 }

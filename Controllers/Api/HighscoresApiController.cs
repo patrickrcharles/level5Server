@@ -343,10 +343,17 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
-            _context.Highscores.Add(highscores);
-            await _context.SaveChangesAsync();
+            if (string.IsNullOrEmpty(highscores.UserName))
+            {
+                return BadRequest();
+            }
+            else
+            {
+                _context.Highscores.Add(highscores);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAllHighscores), new { id = highscores.Id }, highscores);
+                return CreatedAtAction(nameof(GetAllHighscores), new { id = highscores.Id }, highscores);
+            }
         }
 
         //--------------------- HTTP DELETE HighScore ---------------------------------------------------

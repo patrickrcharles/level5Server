@@ -7,10 +7,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Scores</h1>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HardcoreEnabled)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
@@ -28,9 +34,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Version)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Time)
@@ -87,9 +90,6 @@
                 @Html.DisplayNameFor(model => model.MoneyBallAtt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HardcoreEnabled)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TrafficEnabled)
             </th>
             <th>
@@ -105,6 +105,12 @@
         @foreach (var item in Model)
         {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HardcoreEnabled)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
@@ -122,9 +128,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Version)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
@@ -179,9 +182,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MoneyBallAtt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HardcoreEnabled)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TrafficEnabled)

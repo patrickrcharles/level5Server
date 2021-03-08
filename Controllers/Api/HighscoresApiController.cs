@@ -343,7 +343,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
-            if (string.IsNullOrEmpty(highscores.UserName))
+            //_context.Users.Where(e => e.Userid == highscores.Userid).Any();
+            // if empty username  or userid NOT in user table
+            if (string.IsNullOrEmpty(highscores.UserName) || !_context.Users.Where(e => e.Userid == highscores.Userid).Any())
             {
                 return BadRequest();
             }

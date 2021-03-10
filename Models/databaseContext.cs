@@ -24,6 +24,7 @@ namespace mysql_scaffold_dbcontext_test.Models
 
         public virtual DbSet<Highscores> Highscores { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Application> Application { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -228,6 +229,23 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+            });
+
+            modelBuilder.Entity<Application>(entity =>
+            {
+                entity.HasKey(e => e.id)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("Application");
+
+                entity.Property(e => e.id).HasColumnName("id");
+                entity.Property(e => e.CurrentVersion)
+                    .HasColumnName("currentVersion")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+
             });
 
             OnModelCreatingPartial(modelBuilder);

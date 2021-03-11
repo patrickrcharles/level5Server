@@ -26,16 +26,17 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         {
             return await _context.Application.OrderByDescending(x => x.id)
                 .ToListAsync();
-                
+
         }
 
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
         // get all highscores
         [HttpGet("version/current")]
-        public ActionResult<Application> GetCurrentVersion()
+        public ActionResult<object> GetCurrentVersion()
         {
             var version = _context.Application
+                .Select(x => x.CurrentVersion)
                 .ToList()
                 .LastOrDefault();
 
@@ -51,7 +52,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         {
             //_context.Users.Where(e => e.Userid == highscores.Userid).Any();
             // if empty username  or userid NOT in user table
-            if (string.IsNullOrEmpty(application.CurrentVersion) 
+            if (string.IsNullOrEmpty(application.CurrentVersion)
                 || _context.Application.Where(e => e.CurrentVersion == application.CurrentVersion).Any())
             {
                 return BadRequest();
@@ -64,5 +65,26 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
                 return CreatedAtAction(nameof(GetAllVersions), new { id = application.id }, application);
             }
         }
+
+        ////--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
+        //// GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
+        //// highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        //[HttpGet("modeid/count/{modeid}")]
+        //public ActionResult<object> GetHighScoreCountByModeId(int modeid,
+        //    int hardcore,
+        //    int traffic,
+        //    int enemies)
+        //{
+        //    var count = _context.Highscores
+        //        .Where(x => x.Modeid == modeid
+        //        && x.HardcoreEnabled == hardcore
+        //        && x.TrafficEnabled == traffic
+        //        && x.EnemiesEnabled == enemies)
+        //        .Select(x => x.Id)
+        //        .Count();
+
+        //    return count;
+        //}
     }
 }
+

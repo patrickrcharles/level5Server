@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
+    [Route("[controller]")]
     public class HomeController : Controller
     {
         public IActionResult Index()

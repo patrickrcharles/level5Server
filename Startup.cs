@@ -58,6 +58,8 @@ namespace mysql_scaffold_dbcontext_test
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

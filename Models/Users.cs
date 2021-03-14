@@ -18,5 +18,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public string Ipaddress { get; set; }
         public string Signupdate { get; set; }
         public string Lastlogin { get; set; }
+        public int IsDev { get; set; }
+
     }
 }

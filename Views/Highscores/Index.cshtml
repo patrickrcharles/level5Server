@@ -98,6 +98,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.EnemiesKilled)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SniperEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SniperMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SniperModeName)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -191,6 +200,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EnemiesKilled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperModeName)
             </td>
         </tr>
         }

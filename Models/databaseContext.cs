@@ -164,6 +164,10 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
+                entity.Property(e => e.SniperEnabled).HasColumnName("sniperHits");
+
+                entity.Property(e => e.SniperMode).HasColumnName("sniperShots");
+
                 entity.Property(e => e.Version)
                     .IsRequired()
                     .HasColumnName("version")

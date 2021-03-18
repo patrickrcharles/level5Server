@@ -49,5 +49,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public int SniperEnabled { get; set; }
         public int SniperMode { get; set; }
         public string SniperModeName { get; set; }
+        public int SniperHits { get; set; }
+        public int SniperShots { get; set; }
     }
 }

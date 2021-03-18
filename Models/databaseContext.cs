@@ -158,7 +158,7 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.SniperMode).HasColumnName("sniperMode");
 
-                entity.Property(e => e.Platform)
+                entity.Property(e => e.SniperModeName)
                     .HasColumnName("sniperModeName")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")

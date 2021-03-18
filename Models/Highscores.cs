@@ -46,5 +46,8 @@ namespace mysql_scaffold_dbcontext_test.Models
         public int BonusPoints { get; set; }
         public int MoneyBallMade { get; set; }
         public int MoneyBallAtt { get; set; }
+        public int SniperEnabled { get; set; }
+        public int SniperMode { get; set; }
+        public string SniperModeName { get; set; }
     }
 }

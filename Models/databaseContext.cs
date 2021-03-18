@@ -154,6 +154,16 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.MoneyBallAtt).HasColumnName("moneyBallAtt");
 
+                entity.Property(e => e.SniperEnabled).HasColumnName("sniperEnabled");
+
+                entity.Property(e => e.SniperMode).HasColumnName("sniperMode");
+
+                entity.Property(e => e.Platform)
+                    .HasColumnName("sniperModeName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.Version)
                     .IsRequired()
                     .HasColumnName("version")

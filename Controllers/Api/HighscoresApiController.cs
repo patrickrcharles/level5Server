@@ -95,7 +95,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET  Modeid by Modeid - Filtered  ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
         // highscores by modeid with optiona; filters by hardcore, traffic, enemies
-        [HttpGet("modeid/all/{modeid}")]
+        [HttpGet("modeid/filter/{modeid}")]
         public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayFiltered(int modeid,
             int hardcore,
             int traffic,
@@ -305,7 +305,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET  Modeid by Modeid - All  ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
         // highscores by modeid with optiona; filters by hardcore, traffic, enemies
-        [HttpGet("modeid/filter/{modeid}")]
+        [HttpGet("modeid/all/{modeid}")]
         public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayAll(int modeid,
             int page,
             int results)

@@ -159,5 +159,13 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         {
             return _context.Users.Any(e => e.Userid == id);
         }
+
+        public bool isDev(string username)
+        {
+            // find any user that matches username + isDev = 1;
+            // this means, the username is a dev account username
+            var isDev = _context.Users.Any(e => e.Username == username && e.IsDev == 1);
+            return isDev;
+        }
     }
 }

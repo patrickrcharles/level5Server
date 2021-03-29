@@ -29,10 +29,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
         // get all highscores
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
+            //ModePlayedCount(16);
+
             return await _context.Highscores.OrderByDescending(x => x.Id)
                 .ToListAsync();
         }
@@ -90,14 +92,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return highscores;
         }
 
-        //--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
+        //--------------------- HTTP GET  Modeid by Modeid - Filtered  ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
         // highscores by modeid with optiona; filters by hardcore, traffic, enemies
-        [HttpGet("modeid/{modeid}")]
-        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplay(int modeid,
+        [HttpGet("modeid/all/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayFiltered(int modeid,
             int hardcore,
             int traffic,
             int enemies,
+            int sniper,
             int page,
             int results)
         {
@@ -109,6 +112,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
@@ -139,6 +143,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
@@ -169,6 +174,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
@@ -200,6 +206,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
@@ -230,6 +237,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
                     .Select(x => new
                     {
@@ -263,7 +271,190 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
+                    && x.SniperEnabled == sniper
                     && x.EnemiesEnabled == enemies)
+                    .Select(x => new
+                    {
+                        Score = x.EnemiesKilled.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.EnemiesEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderByDescending(x => x.EnemiesKilled)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+
+                list = highscores;
+            }
+            if (list == null)
+            {
+                return NotFound();
+            }
+            return list;
+        }
+
+        //--------------------- HTTP GET  Modeid by Modeid - All  ---------------------------------------------------
+        // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
+        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        [HttpGet("modeid/filter/{modeid}")]
+        public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayAll(int modeid,
+            int page,
+            int results)
+        {
+            ActionResult<IEnumerable<Object>> list = null;
+            // totalpoints highscore
+            if (modeid == 1 || (modeid > 14 && modeid < 20))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        Score = x.TotalPoints.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.TotalPoints,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.EnemiesEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderByDescending(x => x.TotalPoints)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+                list = highscores;
+            }
+            // maxshotmade highscore
+            if ((modeid > 1 && modeid < 5))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        Score = x.MaxShotMade.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.MaxShotMade,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.EnemiesEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderByDescending(x => x.MaxShotMade)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+                list = highscores;
+            }
+            // totaldistance highscore
+            if (modeid == 6)
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        Score = x.TotalDistance.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.TotalDistance,
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.EnemiesEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderByDescending(x => x.TotalDistance)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+
+                list = highscores;
+            }
+            // time highscore
+            if ((modeid > 6 && modeid < 10))
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        Score = x.Time.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        x.Time,
+                        UserId = x.Userid.ToString(),
+                        x.UserName,
+                        x.HardcoreEnabled,
+                        x.EnemiesEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderBy(x => x.Time)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+                list = highscores;
+            }
+
+            // consecutive shots highscore
+            if (modeid == 14)
+            {
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
+                    .Select(x => new
+                    {
+                        Score = x.ConsecutiveShots.ToString(),
+                        x.Character,
+                        x.Level,
+                        x.Date,
+                        Time = x.Time.ToString(),
+                        UserId = x.Userid.ToString(),
+                        x.ConsecutiveShots,
+                        x.UserName,
+                        x.EnemiesEnabled,
+                        x.HardcoreEnabled,
+                        x.TrafficEnabled,
+                        x.EnemiesKilled,
+                        x.Platform
+                    })
+                    .OrderByDescending(x => x.ConsecutiveShots)
+                    .Skip(page * 10)
+                    .Take(results)
+                    .ToListAsync();
+                list = highscores;
+            }
+
+            // enemies killed highscore
+            if (modeid == 20)
+            {
+                var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
+
+                var highscores = await _context.Highscores
+                    .Where(x => x.Modeid == modeid)
                     .Select(x => new
                     {
                         Score = x.EnemiesKilled.ToString(),
@@ -399,6 +590,22 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return _context.Highscores.Any(e => e.Platform == platform);
         }
 
+        //public bool isDev(string username)
+        //{
+        //    // find any user that matches username + isDev = 1;
+        //    // this means, the username is a dev account username
+        //    var isDev = _context.Users.Any(e => e.Username == username && e.IsDev == 1);
+        //    return isDev;
+        //}
+
+        [HttpGet("modeid/count")]
+        public async Task<ActionResult<IEnumerable<Object>>> ModePlayedCount(int modeid)
+        {
+            var modeidList = _context.Highscores
+                .GroupBy(e => e.Modeid)
+                .Select(e => new {Modeid = e.Key, Count = e.Count()}).ToListAsync();
+            return await modeidList;
+        }
 
         //--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
@@ -407,12 +614,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         public ActionResult<object> GetHighScoreCountByModeId(int modeid,
             int hardcore,
             int traffic,
+            int sniper,
             int enemies)
         {
             var count = _context.Highscores
                 .Where(x => x.Modeid == modeid
                 && x.HardcoreEnabled == hardcore
                 && x.TrafficEnabled == traffic
+                && x.SniperEnabled == sniper
                 && x.EnemiesEnabled == enemies)
                 .Select(x => x.Id)
                 .Count();

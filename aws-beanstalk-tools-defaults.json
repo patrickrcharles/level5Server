@@ -9,7 +9,7 @@
     "iis-website"    : "Default Web Site",
     "app-path"       : "/",
     "enable-xray"    : true,
-    "cname"          : "level5server-prod",
+    "cname"          : "level5server-dev",
     "environment-type" : "SingleInstance",
     "instance-profile" : "aws-elasticbeanstalk-ec2-role",
     "service-role"     : "aws-elasticbeanstalk-service-role",

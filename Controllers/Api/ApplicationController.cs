@@ -36,9 +36,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         public ActionResult<object> GetCurrentVersion()
         {
             var version = _context.Application
+                .OrderByDescending(x => x.id)
                 .Select(x => x.CurrentVersion)
                 .ToList()
-                .LastOrDefault();
+                .First();
 
             return version;
         }

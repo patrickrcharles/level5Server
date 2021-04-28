@@ -24,35 +24,32 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         {
             //get last 50 scores
             return View(await _context.Highscores.OrderByDescending(x => x.Id).Skip(0).Take(50).ToListAsync());
-                
+
         }
 
-        // GET: Highscores
-        [Route("[controller]/list")]
-        public async Task<IActionResult> List()
-        {
-            //ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            //var highscores = from h in _context.Highscores
-            //               select h;
-            //switch (sortOrder)
-            //{
-            //    case "name_desc":
-            //        highscores = highscores.OrderByDescending(s => s.TotalPoints);
-            //        break;
-            //    case "Date":
-            //        highscores = highscores.OrderBy(s => s.MaxShotMade);
-            //        break;
-            //    case "date_desc":
-            //        highscores = highscores.OrderByDescending(s => s.MaxShotAtt);
-            //        break;
-            //    default:
-            //        highscores = highscores.OrderBy(s => s.Date);
-            //        break;
-            //}
+        //// GET: Highscores
+        //[Route("[controller]")]
+        //public async Task<IActionResult> Index(string sortOrder)
+        //{
+        //    ViewData["ModeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "mode_desc" : "";
+        //    ViewData["PlatformSortParm"] = sortOrder == "Platform" ? "platform_desc" : "Platform";
+        //    var highscores = from h in _context.Highscores
+        //                     select h;
+        //    switch (sortOrder)
+        //    {
+        //        case "mode_desc":
+        //            highscores = highscores.OrderByDescending(s => s.Modeid);
+        //            break;
+        //        case "platform_desc":
+        //            highscores = highscores.OrderBy(s => s.Platform);
+        //            break;
+        //        default:
+        //            highscores = highscores.OrderByDescending(x => x.Id).Skip(0).Take(50);
+        //            break;
+        //    }
 
-            return View(await _context.Highscores.ToListAsync());
-        }
+        //    return View(await highscores.ToListAsync());
+        //}
 
         [Route("[controller]/id/{id?}")]
         // GET: Highscores/Details/5

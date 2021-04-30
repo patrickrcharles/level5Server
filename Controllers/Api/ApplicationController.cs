@@ -26,7 +26,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         {
             return await _context.Application.OrderByDescending(x => x.id)
                 .ToListAsync();
-
         }
 
         //--------------------- HTTP GET ---------------------------------------------------

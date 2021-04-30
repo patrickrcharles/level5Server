@@ -7,111 +7,159 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>latest scores</h3>
+
+<h3>scores</h3>
 <table class="table">
     <thead>
+        @*<tr>
+            <th>
+                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.ModeSortParm })
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.PlatformSortParm })
+            </th>
+            <th></th>
+        </tr>*@
+
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @*@Html.DisplayNameFor(model => model.Date)*@
+                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HardcoreEnabled)
+                @*@Html.DisplayNameFor(model => model.HardcoreEnabled)*@
+                @Html.ActionLink("HardcoreEnabled", "Index", new { sortOrder = ViewBag.HardcoreSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @*@Html.DisplayNameFor(model => model.UserName)*@
+                @Html.ActionLink("UserName", "Index", new { sortOrder = ViewBag.UsernameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Platform)
+                @*@Html.DisplayNameFor(model => model.Platform)*@
+                @Html.ActionLink("Platform", "Index", new { sortOrder = ViewBag.PlatformSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Modeid)
+                @Html.ActionLink("ModeId", "Index", new { sortOrder = ViewBag.ModeSortParm })
+                @*@Html.DisplayNameFor(model => model.Modeid)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Character)
+                @*@Html.DisplayNameFor(model => model.Character)*@
+                @Html.ActionLink("Character", "Index", new { sortOrder = ViewBag.CharacterSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Level)
+                @*@Html.DisplayNameFor(model => model.Level)*@
+                @Html.ActionLink("Level", "Index", new { sortOrder = ViewBag.LevelSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Version)
+                @*@Html.DisplayNameFor(model => model.Version)*@
+                @Html.ActionLink("Version", "Index", new { sortOrder = ViewBag.VersionSortParam })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time)
+                @*@Html.DisplayNameFor(model => model.Time)*@
+                @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalPoints)
+                @*@Html.DisplayNameFor(model => model.TotalPoints)*@
+                @Html.ActionLink("TotalPoints", "Index", new { sortOrder = ViewBag.TotalPointsSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LongestShot)
+                @*@Html.DisplayNameFor(model => model.LongestShot)*@
+                @Html.ActionLink("LongestShot", "Index", new { sortOrder = ViewBag.LongestShotSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalDistance)
+                @*@Html.DisplayNameFor(model => model.TotalDistance)*@
+                @Html.ActionLink("TotalDistance", "Index", new { sortOrder = ViewBag.TotalDistanceSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxShotMade)
+                @*@Html.DisplayNameFor(model => model.MaxShotMade)*@
+                @Html.ActionLink("MaxShotMade", "Index", new { sortOrder = ViewBag.MaxShotMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxShotAtt)
+                @*@Html.DisplayNameFor(model => model.MaxShotAtt)*@
+                @Html.ActionLink("MaxShotMade", "Index", new { sortOrder = ViewBag.MaxShotMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ConsecutiveShots)
+                @*@Html.DisplayNameFor(model => model.ConsecutiveShots)*@
+                @Html.ActionLink("ConsecutiveShots", "Index", new { sortOrder = ViewBag.ConsecutiveShotsSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TwoMade)
+                @*@Html.DisplayNameFor(model => model.TwoMade)*@
+                @Html.ActionLink("TwoMade", "Index", new { sortOrder = ViewBag.TwoMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TwoAtt)
+                @*@Html.DisplayNameFor(model => model.TwoAtt)*@
+                @Html.ActionLink("TwoAtt", "Index", new { sortOrder = ViewBag.TwoAttSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThreeMade)
+                @*@Html.DisplayNameFor(model => model.ThreeMade)*@
+                @Html.ActionLink("ThreeMade", "Index", new { sortOrder = ViewBag.ThreeMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThreeAtt)
+                @*@Html.DisplayNameFor(model => model.ThreeAtt)*@
+                @Html.ActionLink("ThreeAtt", "Index", new { sortOrder = ViewBag.ThreeAttMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FourMade)
+                @*@Html.DisplayNameFor(model => model.FourMade)*@
+                @Html.ActionLink("FourMade", "Index", new { sortOrder = ViewBag.FourMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FourAtt)
+                @*@Html.DisplayNameFor(model => model.FourAtt)*@
+                @Html.ActionLink("FourAtt", "Index", new { sortOrder = ViewBag.FourAttSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SevenMade)
+                @*@Html.DisplayNameFor(model => model.SevenMade)*@
+                @Html.ActionLink("SevenMade", "Index", new { sortOrder = ViewBag.SevenMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SevenAtt)
+                @*@Html.DisplayNameFor(model => model.SevenAtt)*@
+                @Html.ActionLink("SevenAtt", "Index", new { sortOrder = ViewBag.SevenAttSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BonusPoints)
+                @*@Html.DisplayNameFor(model => model.BonusPoints)*@
+                @Html.ActionLink("BonusPoints", "Index", new { sortOrder = ViewBag.BonusPointsSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MoneyBallMade)
+                @*@Html.DisplayNameFor(model => model.MoneyBallMade)*@
+                @Html.ActionLink("MoneyBallMade", "Index", new { sortOrder = ViewBag.MoneyBallMadeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MoneyBallAtt)
+                @*@Html.DisplayNameFor(model => model.MoneyBallAtt)*@
+                @Html.ActionLink("MoneyBallAtt", "Index", new { sortOrder = ViewBag.MoneyBallAttSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TrafficEnabled)
+                @*@Html.DisplayNameFor(model => model.TrafficEnabled)*@
+                @Html.ActionLink("Traffic", "Index", new { sortOrder = ViewBag.TrafficSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnemiesEnabled)
+                @*@Html.DisplayNameFor(model => model.EnemiesEnabled)*@
+                @Html.ActionLink("EnemiesEnabled", "Index", new { sortOrder = ViewBag.EnemiesSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnemiesKilled)
+                @*@Html.DisplayNameFor(model => model.EnemiesKilled)*@
+                @Html.ActionLink("EnemiesKilled", "Index", new { sortOrder = ViewBag.EnemieskilledSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SniperEnabled)
+                @*@Html.DisplayNameFor(model => model.SniperEnabled)*@
+                @Html.ActionLink("SniperEnabled", "Index", new { sortOrder = ViewBag.SniperSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SniperMode)
+                @*@Html.DisplayNameFor(model => model.SniperMode)*@
+                @Html.ActionLink("SniperMode", "Index", new { sortOrder = ViewBag.SniperModeSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SniperModeName)
+                @*@Html.DisplayNameFor(model => model.SniperModeName)*@
+                @Html.ActionLink("SniperModeName", "Index", new { sortOrder = ViewBag.SniperModeNameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SniperHits)
+                @*@Html.DisplayNameFor(model => model.SniperHits)*@
+                @Html.ActionLink("SniperHits", "Index", new { sortOrder = ViewBag.SniperHitsSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SniperShots)
+                @*@Html.DisplayNameFor(model => model.SniperShots)*@
+                @Html.ActionLink("SniperShots", "Index", new { sortOrder = ViewBag.SniperShotsSortParm })
             </th>
             <th></th>
         </tr>

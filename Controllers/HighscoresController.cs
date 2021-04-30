@@ -206,10 +206,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             switch (sortOrder)
             {
                 case "date_desc":
-                    highscores = highscores.OrderByDescending(s => s.Date);
+                    highscores = highscores.OrderByDescending(s => s.Id);
                     break;
                 case "date_asc":
-                    highscores = highscores.OrderBy(s => s.Date);
+                    highscores = highscores.OrderBy(s => s.Id);
                     break;
                 case "hardcore_desc":
                     highscores = highscores.OrderByDescending(s => s.HardcoreEnabled);

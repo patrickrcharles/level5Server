@@ -19,7 +19,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public string Level { get; set; }
         public string Os { get; set; }
         public string Version { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public float Time { get; set; }
         public int TotalPoints { get; set; }
         public float LongestShot { get; set; }

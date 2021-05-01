@@ -13,6 +13,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
     {
         private readonly DatabaseContext _context;
 
+        private string previousSearchString;
+
         public HighscoresController(DatabaseContext context)
         {
             _context = context;
@@ -29,7 +31,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Highscores
         [Route("[controller]")]
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["DateSortParm"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
             ViewData["HardcoreSortParm"] = sortOrder == "hardcore_asc" ? "hardcore_desc" : "hardcore_asc";
@@ -66,8 +68,31 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             ViewData["SniperHitsSortParm"] = sortOrder == "sniperHits_asc" ? "sniperHits_desc" : "sniperHits_asc";
             ViewData["SniperShotsSortParm"] = sortOrder == "sniperShots_asc" ? "sniperShots_desc" : "sniperShots_asc";
 
+
             var highscores = from h in _context.Highscores
                              select h;
+            // if no search is submitted
+            //if (String.IsNullOrEmpty(searchString))
+            //{
+            //    previousSearchString = "";
+            //}
+            // if search term is entered
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                previousSearchString = searchString; // save search in case of sorting
+                highscores = highscores.Where
+                    (s => s.UserName.Contains(searchString) || s.Platform.Contains(searchString)
+                    || s.Character.Contains(searchString) || s.Level.Contains(searchString)
+                    || s.Version.Contains(searchString));
+            }
+            // if search term is not entered but sort has been clicked
+            //if (!String.IsNullOrEmpty(previousSearchString) && !String.IsNullOrEmpty(sortOrder))
+            //{
+            //    highscores = highscores.Where
+            //        (s => s.UserName.Contains(previousSearchString) || s.Platform.Contains(previousSearchString)
+            //        || s.Character.Contains(previousSearchString) || s.Level.Contains(previousSearchString)
+            //        || s.Version.Contains(previousSearchString));
+            //}
 
             highscores = sortHighscores(sortOrder, highscores);
 

@@ -104,6 +104,12 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.Modeid).HasColumnName("modeid");
 
+                entity.Property(e => e.ModeName)
+                    .HasColumnName("modeName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.Os)
                     .IsRequired()
                     .HasColumnName("os")

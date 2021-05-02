@@ -13,6 +13,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public int Userid { get; set; }
         public string UserName { get; set; }
         public int Modeid { get; set; }
+        public string ModeName { get; set; }
         public int Characterid { get; set; }
         public int Levelid { get; set; }
         public string Character { get; set; }

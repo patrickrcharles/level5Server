@@ -12,7 +12,7 @@
     @using (Html.BeginForm())
     {
     <span>
-        find by username, platform, character, level, or version:
+        find by username, platform, character, level, mode name or version:
         &nbsp;
         @*@Html.DropDownList("filter", new List<SelectListItem>
                  {
@@ -61,7 +61,7 @@
                 @Html.ActionLink("Platform", "Index", new { sortOrder = ViewBag.PlatformSortParm })
             </th>
             <th>
-                @Html.ActionLink("ModeId", "Index", new { sortOrder = ViewBag.ModeSortParm })
+                @Html.ActionLink("ModeName", "Index", new { sortOrder = ViewBag.ModeSortParm })
             </th>
             <th>
                 @Html.ActionLink("Character", "Index", new { sortOrder = ViewBag.CharacterSortParm })
@@ -170,7 +170,7 @@
                     @Html.DisplayFor(modelItem => item.Platform)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Modeid)
+                    @Html.DisplayFor(modelItem => item.ModeName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Character)

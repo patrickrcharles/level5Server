@@ -34,7 +34,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
             //ModePlayedCount(16);
-
             return await _context.Highscores.OrderByDescending(x => x.Id)
                 .ToListAsync();
         }
@@ -542,6 +541,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             }
             else
             {
+                upDateModeName(highscores);
                 _context.Highscores.Add(highscores);
                 await _context.SaveChangesAsync();
 
@@ -603,7 +603,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         {
             var modeidList = _context.Highscores
                 .GroupBy(e => e.Modeid)
-                .Select(e => new {Modeid = e.Key, Count = e.Count()}).ToListAsync();
+                .Select(e => new { Modeid = e.Key, Count = e.Count() }).ToListAsync();
             return await modeidList;
         }
 
@@ -627,6 +627,88 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 .Count();
 
             return count;
+        }
+
+        private void upDateModeName(Highscores highscores)
+        {
+            System.Diagnostics.Debug.WriteLine("upDateModeName()");
+            //foreach (Highscores h in highscores)
+
+            // if modename is null, insert based on modeid
+            if (String.IsNullOrEmpty(highscores.ModeName))
+            {
+                {
+                    System.Diagnostics.Debug.WriteLine("highscores.Modeid : " + highscores.Modeid);
+                    switch (highscores.Modeid)
+                    {
+                        case 1:
+                            highscores.ModeName = "Total Points";
+                            break;
+                        case 2:
+                            highscores.ModeName = "Total 3 Pointers";
+                            break;
+                        case 3:
+                            highscores.ModeName = "Total 4 Pointers";
+                            break;
+                        case 4:
+                            highscores.ModeName = "Total 7 Pointers";
+                            break;
+                        case 6:
+                            highscores.ModeName = "Total Distance";
+                            break;
+                        case 7:
+                            highscores.ModeName = "Spot up some 3s";
+                            break;
+                        case 8:
+                            highscores.ModeName = "Spot up some 4s";
+                            break;
+                        case 9:
+                            highscores.ModeName = "Spot up some All";
+                            break;
+                        case 10:
+                            highscores.ModeName = "Moneyball 3s";
+                            break;
+                        case 11:
+                            highscores.ModeName = "Moneyball 4s";
+                            break;
+                        case 12:
+                            highscores.ModeName = "Moneyball All";
+                            break;
+                        case 14:
+                            highscores.ModeName = "Consecutive Shots";
+                            break;
+                        case 15:
+                            highscores.ModeName = "In the Pocket";
+                            break;
+                        case 16:
+                            highscores.ModeName = "3 point Contest";
+                            break;
+                        case 17:
+                            highscores.ModeName = "4 point Contest";
+                            break;
+                        case 18:
+                            highscores.ModeName = "All point Contest";
+                            break;
+                        case 19:
+                            highscores.ModeName = "Points by Distance";
+                            break;
+                        case 20:
+                            highscores.ModeName = "Bash up some Nerds";
+                            break;
+                        case 98:
+                            highscores.ModeName = "Arcade";
+                            break;
+                        case 99:
+                            highscores.ModeName = "Free Play";
+                            break;
+                        default:
+                            highscores.ModeName = "none";
+                            break;
+                    }
+                    System.Diagnostics.Debug.WriteLine("highscores.ModeName : " + highscores.ModeName);
+                }
+                _context.SaveChanges();
+            }
         }
     }
 }

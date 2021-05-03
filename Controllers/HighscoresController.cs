@@ -31,7 +31,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Highscores
         [Route("[controller]")]
-        [HttpGet]
+        //[HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {

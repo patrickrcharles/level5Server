@@ -32,6 +32,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // GET: Highscores
         [Route("[controller]")]
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["DateSortParm"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
@@ -102,6 +103,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         [Route("[controller]/id/{id?}")]
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         // GET: Highscores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -145,6 +147,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Highscores/Edit/5
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -197,6 +200,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Highscores/Delete/5
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -217,6 +221,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // POST: Highscores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var highscores = await _context.Highscores.FindAsync(id);

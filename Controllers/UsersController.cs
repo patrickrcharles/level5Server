@@ -23,6 +23,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // GET: Users
         [Route("users")]
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
@@ -30,6 +31,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         [Route("users/{id}")]
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -59,6 +61,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Create([Bind("Userid,Username,Firstname,Lastname,Password,Email,Ipaddress,Signupdate,Lastlogin")] Users users)
         {
             if (ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // GET: Users/Edit/5
         [Route("[controller]/edit/{id}")]
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +98,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [Route("[controller]/edit/{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Edit(int id, [Bind("Userid,Username,Firstname,Lastname,Password,Email,Ipaddress,Signupdate,Lastlogin")] Users users)
         {
             if (id != users.Userid)
@@ -130,6 +135,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         // GET: Users/Delete/5
         [Route("[controller]/delete/{id}")]
         [HttpDelete]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -151,6 +157,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [Route("[controller]/delete/{id}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var users = await _context.Users.FindAsync(id);

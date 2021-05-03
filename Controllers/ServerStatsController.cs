@@ -10,6 +10,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
     public class ServerStatsController : Controller
     {
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Index()
         {
             return View();

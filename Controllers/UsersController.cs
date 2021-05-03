@@ -22,12 +22,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Users
         [Route("users")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
 
         [Route("users/{id}")]
+        [HttpGet]
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,12 +47,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
             return View(users);
         }
-        [Route("[controller]/create")]
-        // GET: Users/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //[Route("[controller]/create")]
+        //// GET: Users/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -70,6 +72,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Users/Edit/5
         [Route("[controller]/edit/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,6 +129,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Users/Delete/5
         [Route("[controller]/delete/{id}")]
+        [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,12 +159,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UsersExists(int id)
+        internal bool UsersExists(int id)
         {
             return _context.Users.Any(e => e.Userid == id);
         }
 
-        public bool isDev(string username)
+        internal bool isDev(string username)
         {
             // find any user that matches username + isDev = 1;
             // this means, the username is a dev account username

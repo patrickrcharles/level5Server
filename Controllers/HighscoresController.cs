@@ -31,6 +31,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         // GET: Highscores
         [Route("[controller]")]
+        [HttpGet]
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["DateSortParm"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
@@ -100,6 +101,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         [Route("[controller]/id/{id?}")]
+        [HttpGet]
         // GET: Highscores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -142,6 +144,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //}
 
         // GET: Highscores/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -193,6 +196,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //}
 
         // GET: Highscores/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -221,12 +225,13 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HighscoresExists(int id)
+
+        internal bool HighscoresExists(int id)
         {
             return _context.Highscores.Any(e => e.Id == id);
         }
 
-        private static IQueryable<Highscores> sortHighscores(string sortOrder, IQueryable<Highscores> highscores)
+        internal static IQueryable<Highscores> sortHighscores(string sortOrder, IQueryable<Highscores> highscores)
         {
             switch (sortOrder)
             {

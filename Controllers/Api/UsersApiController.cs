@@ -201,6 +201,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP DELETE ---------------------------------------------------
         // DELETE: api/users/5
+        /// <summary>
+        /// Deletes a specific TodoItem.
+        /// </summary>
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Users>> DeleteUser(int id)

@@ -9,6 +9,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
     public class BuildsController : Controller
     {
         [Route("[controller]")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

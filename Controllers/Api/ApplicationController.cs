@@ -20,7 +20,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
-        // get all highscores
+        /// <summary>
+        /// Get all application versions
+        /// </summary>
         [HttpGet("version")]
         public async Task<ActionResult<IEnumerable<Application>>> GetAllVersions()
         {
@@ -30,7 +32,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
-        // get all highscores
+        /// <summary>
+        /// Get current application versions
+        /// </summary>
         [HttpGet("version/current")]
         public ActionResult<object> GetCurrentVersion()
         {
@@ -45,7 +49,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP POST new application version ---------------------------------------------------
         // POST: api/Highscores
-        // "create new"
+        /// <summary>
+        /// Add new application version
+        /// </summary>
         [Route("version")]
         [HttpPost]
         public async Task<ActionResult<Application>> PostHighscore(Application application)

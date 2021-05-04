@@ -23,6 +23,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
         // get all users
+        /// <summary>
+        /// Get all users in database
+        /// </summary>
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
@@ -37,7 +40,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP GET Userid ---------------------------------------------------
         // GET: /api/highscores/userid/{userid}
-        // get all highscores
+        /// <summary>
+        /// Get user by user id
+        /// </summary>
         [Authorize]
         [HttpGet("userid/{userid}")]
         // GET: Users by userid
@@ -71,7 +76,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP GET Username ---------------------------------------------------
         // GET: /api/users/username/{userid}
-        // get all highscores
+        /// <summary>
+        /// Get user by username
+        /// </summary>
         //[Authorize]
         [HttpGet("username/{username}")]
         // GET: Users by userid
@@ -107,11 +114,11 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP GET Username ---------------------------------------------------
         // GET: /api/users/username/{userid}
-        // get all highscores
+        /// <summary>
+        /// Get username by user id
+        /// </summary>
         [Authorize]
         [HttpGet("email/{email}")]
-        // GET: Users by userid
-        // get user by user id
         public async Task<ActionResult<Users>> GetUserByEmail(string email)
         {
             if (email == null)
@@ -143,7 +150,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP PUT ---------------------------------------------------
         // PUT: api/users/5
-        // "insert, replace if already exists"
+        /// <summary>
+        /// Update user data
+        /// </summary>
         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, Users user)
@@ -175,7 +184,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
 
         //--------------------- HTTP POST ---------------------------------------------------
         // POST: api/Highscores
-        // "create new"
+        /// <summary>
+        /// Create new user
+        /// </summary>
         //[Authorize]
         [HttpPost]
         public async Task<ActionResult<Users>> PostUser(Users user)
@@ -202,7 +213,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         //--------------------- HTTP DELETE ---------------------------------------------------
         // DELETE: api/users/5
         /// <summary>
-        /// Deletes a specific TodoItem.
+        /// Deletes user by user id.
         /// </summary>
         [Authorize]
         [HttpDelete("{id}")]

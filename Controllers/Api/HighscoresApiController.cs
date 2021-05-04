@@ -28,7 +28,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET ---------------------------------------------------
         // GET: /api/highscores
-        // get all highscores
+        /// <summary>
+        /// Get all high scores
+        /// </summary>
         //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
@@ -40,7 +42,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET  Platform ---------------------------------------------------
         // GET: /api/highscores/modeid/1
-        // highscores by modeid 
+        /// <summary>
+        /// Get high scores by platfoem. [handheld, desktop]
+        /// </summary>
         [HttpGet("platform/{platform}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByPlatform(string platform)
         {
@@ -58,7 +62,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET  Modeid by Userid ---------------------------------------------------
         // GET: /api/highscores/modeid/1/userid/1
-        // highscores by modeid + userid
+        /// <summary>
+        /// Get high scores by mode id and user id. 
+        /// </summary>
         [HttpGet("modeid/{modeid}/userid/{userid}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdUserId(int modeid, int userid)
         {
@@ -75,7 +81,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
         //--------------------- HTTP GET Modeid by Platform ---------------------------------------------------
         // GET: /api/highscores/modeid/1/platform/1
-        // highscores by modeid + platform
+        /// <summary>
+        /// Get high scores by mode id and platform. 
+        /// </summary>
         [HttpGet("modeid/{modeid}/platform/{platform}")]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetHighScoreByModeIdPlatform(int modeid, string platform)
         {
@@ -93,7 +101,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET  Modeid by Modeid - Filtered  ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
-        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        /// <summary>
+        /// Get high scores by mode id and optional filters. [hardcoreEnabled, trafficEnabled, enemiesEnabled, sniperEnabled] 
+        /// </summary>
         [HttpGet("modeid/filter/{modeid}")]
         public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayFiltered(int modeid,
             int hardcore,
@@ -303,7 +313,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET  Modeid by Modeid - All  ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
-        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        /// <summary>
+        /// Get all high scores for specific game mode by mode id
+        /// </summary>
         [HttpGet("modeid/all/{modeid}")]
         public async Task<ActionResult<IEnumerable<Object>>> GetHighScoreByModeIdForGameDisplayAll(int modeid,
             int page,
@@ -485,7 +497,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP PUT ---------------------------------------------------
         // PUT: api/Highscores/scoreid/5
-        // "insert, replace if already exists"
+        /// <summary>
+        /// Insert high score or replace if already exists
+        /// </summary>
         [HttpPut("scoreid/{scoreid}")]
         public async Task<IActionResult> PutHighscore(string scoreid, Highscores highscores)
         {
@@ -529,7 +543,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP POST Highscore ---------------------------------------------------
         // POST: api/Highscores
-        // "create new"
+        /// <summary>
+        /// Create new high score
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
@@ -550,7 +566,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         }
 
         //--------------------- HTTP DELETE HighScore ---------------------------------------------------
-        // DELETE: api/Highscores1/5
+        /// <summary>
+        /// Delete high score by score id
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<ActionResult<Highscores>> DeleteHighscore(int id)
         {
@@ -598,6 +616,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         //    return isDev;
         //}
 
+        /// <summary>
+        /// Get # high scores for game mode by mode id
+        /// </summary>
         [HttpGet("modeid/count")]
         public async Task<ActionResult<IEnumerable<Object>>> ModePlayedCount(int modeid)
         {
@@ -609,7 +630,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 
         //--------------------- HTTP GET  Modeid by Modeid ---------------------------------------------------
         // GET: /api/highscores/modeid/{modeid}?hardcore={int}&traffic={int}&enemies={int}
-        // highscores by modeid with optiona; filters by hardcore, traffic, enemies
+        /// <summary>
+        /// Get # high scores for game mode by mode id with optional filters
+        /// </summary>
         [HttpGet("modeid/count/{modeid}")]
         public ActionResult<object> GetHighScoreCountByModeId(int modeid,
             int hardcore,

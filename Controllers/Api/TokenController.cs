@@ -25,7 +25,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
             _configuration = config;
             _context = context;
         }
-
+        /// <summary>
+        /// Get bearer token for in game game log in and high score post
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult> Post(Users _userData)
         {

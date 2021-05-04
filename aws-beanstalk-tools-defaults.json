@@ -5,7 +5,7 @@
     "region"  : "us-east-2",
     "application" : "level5EBServer",
     "environment" : "level5dev",
-    "solution-stack" : "64bit Windows Server 2019 v2.6.2 running IIS 10.0",
+    "solution-stack" : "64bit Windows Server 2019 v2.6.5 running IIS 10.0",
     "iis-website"    : "Default Web Site",
     "app-path"       : "/",
     "enable-xray"    : true,

@@ -25,6 +25,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public virtual DbSet<Highscores> Highscores { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<ServerStats> ServerStats { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,31 +41,24 @@ namespace mysql_scaffold_dbcontext_test.Models
             modelBuilder.Entity<Highscores>(entity =>
             {
                 entity.ToTable("highscores");
-
                 entity.HasIndex(e => e.Id)
                     .HasName("scoreid_UNIQUE")
                     .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("id");
-
                 entity.Property(e => e.Character)
                     .IsRequired()
                     .HasColumnName("character")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-
                 entity.Property(e => e.Characterid).HasColumnName("characterid");
-
                 entity.Property(e => e.ConsecutiveShots).HasColumnName("consecutiveShots");
-
                 entity.Property(e => e.Date)
                     .IsRequired()
                     .HasColumnName("date")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-
                 entity.Property(e => e.Device)
                     .IsRequired()
                     .HasColumnName("device")
@@ -255,9 +249,7 @@ namespace mysql_scaffold_dbcontext_test.Models
             {
                 entity.HasKey(e => e.id)
                     .HasName("PRIMARY");
-
                 entity.ToTable("Application");
-
                 entity.Property(e => e.id).HasColumnName("id");
                 entity.Property(e => e.CurrentVersion)
                     .HasColumnName("currentVersion")
@@ -268,7 +260,50 @@ namespace mysql_scaffold_dbcontext_test.Models
 
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<ServerStats>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("ServerStats");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.NumberOfUsers).HasColumnName("NumberOfUsers");
+                entity.Property(e => e.NumberOfTotalTimePlayed).HasColumnName("NumberOfTotalTimePlayed");
+                entity.Property(e => e.NumberOfGamesPlayed).HasColumnName("NumberOfGamesPlayed");
+                entity.Property(e => e.NumberOfGamesPlayedHardcore).HasColumnName("NumberOfGamesPlayedHardcore");
+                entity.Property(e => e.NumberofGamesPlayedTraffic).HasColumnName("NumberofGamesPlayedTraffic");
+                entity.Property(e => e.NumberofGamesPlayedEnemies).HasColumnName("NumberofGamesPlayedEnemies");
+                entity.Property(e => e.NumberofGamesPlayedSniper).HasColumnName("NumberofGamesPlayedSniper");
+                
+                entity.Property(e => e.NumberOfTotal2ShotsMade).HasColumnName("NumberOfTotal2ShotsMade");
+                entity.Property(e => e.NumberOfTotal2ShotsAtt).HasColumnName("NumberOfTotal2ShotsAtt");
+
+                entity.Property(e => e.NumberOfTotal3ShotsMade).HasColumnName("NumberOfTotal3ShotsMade");
+                entity.Property(e => e.NumberOfTotal3ShotsAtt).HasColumnName("NumberOfTotal3ShotsAtt");
+            
+                entity.Property(e => e.NumberOfTotal4ShotsMade).HasColumnName("NumberOfTotal4ShotsMade");
+                entity.Property(e => e.NumberOfTotal4ShotsAtt).HasColumnName("NumberOfTotal4ShotsAtt");
+
+                entity.Property(e => e.NumberOfTotal7ShotsMade).HasColumnName("NumberOfTotal7ShotsMade");
+                entity.Property(e => e.NumberOfTotal7ShotsAtt).HasColumnName("NumberOfTotal7ShotsAtt");
+
+                entity.Property(e => e.NumberOfTotalMoneyShotsMade).HasColumnName("NumberOfTotalMoneyShotsMade");
+                entity.Property(e => e.NumberOfTotalMoneyShotsAtt).HasColumnName("NumberOfTotalMoneyShotsAtt");
+
+                entity.Property(e => e.NumberOfTotalShotsMade).HasColumnName("NumberOfTotalTotalShotsMade");
+                entity.Property(e => e.NumberOfTotalShotsAtt).HasColumnName("NumberOfTotalTotalShotsAtt");
+                entity.Property(e => e.NumberOfTotalPointsScored).HasColumnName("NumberOfTotalTotalPointsScored");
+                entity.Property(e => e.NumberOfTotalEnemiesKilled).HasColumnName("NumberOfTotalEnemiesKilled");
+                entity.Property(e => e.MostPlayedCharacter).HasColumnName("MostPlayedCharacter");
+                entity.Property(e => e.MostPlayedLevel).HasColumnName("MostPlayedLevel");
+                entity.Property(e => e.MostConsecutiveShots).HasColumnName("MostConsecutiveShots");
+                entity.Property(e => e.MostConsecutiveShotsUsername).HasColumnName("MostConsecutiveShotsUsername");
+                entity.Property(e => e.LongestShot).HasColumnName("LongestShot");
+                entity.Property(e => e.LongestShotUsername).HasColumnName("LongestShotUsername");
+            });
+
+                OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

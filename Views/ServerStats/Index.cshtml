@@ -1,11 +1,60 @@
-﻿@{
-    ViewData["Title"] = "Links";
+﻿@model IEnumerable<mysql_scaffold_dbcontext_test.Models.ServerStats>
+
+@{
+    ViewData["Title"] = "Server Stats";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <h3>server stats</h3>
+
 <div>
-    nothing here yet. im working on it. it's in the backlog.
+    <br/>
+    number of users : @Model.Last().NumberOfUsers
+    <br/>
+    @{
+        Decimal hours = Convert.ToDecimal(@Model.Last().NumberOfTotalTimePlayed / 3600);
+    }
+    number of time played : @hours hours
+    <br>
+    number of games played : @Model.Last().NumberOfGamesPlayed
+    <br>
+    number of games played with hardcore : @Model.Last().NumberOfGamesPlayedHardcore
+    <br>
+    number of games played with traffic : @Model.Last().NumberofGamesPlayedTraffic
+    <br>
+    number of games played with enemies : @Model.Last().NumberofGamesPlayedEnemies
+    <br>
+    number of games played with sniper: @Model.Last().NumberofGamesPlayedSniper
+    @{
+        Double twoAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotal2ShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotal2ShotsAtt) * 100, 2);
+        Double threeAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotal3ShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotal3ShotsAtt) * 100, 2);
+        Double fourAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotal4ShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotal4ShotsAtt) * 100, 2);
+        Double sevenAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotal7ShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotal7ShotsAtt) * 100, 2);
+        Double moneyAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotalMoneyShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotalMoneyShotsAtt) * 100, 2);
+        Double totalAcc = Math.Round(Convert.ToDouble(@Model.Last().NumberOfTotalShotsMade) / Convert.ToDouble(@Model.Last().NumberOfTotalShotsAtt) * 100, 2);
+    }
+    <br>
+    total 2 pointers : @Model.Last().NumberOfTotal2ShotsMade / @Model.Last().NumberOfTotal2ShotsAtt         accuracy : @twoAcc %
+    <br>
+    total 3 pointers : @Model.Last().NumberOfTotal3ShotsMade / @Model.Last().NumberOfTotal3ShotsAtt  accuracy : @threeAcc %
+    <br>
+    total 4 pointers : @Model.Last().NumberOfTotal4ShotsMade / @Model.Last().NumberOfTotal4ShotsAtt  accuracy : @fourAcc %
+    <br>
+    total 7 pointers : @Model.Last().NumberOfTotal7ShotsMade / @Model.Last().NumberOfTotal7ShotsAtt  accuracy : @sevenAcc %
+    <br>
+    total moenyballs : @Model.Last().NumberOfTotalMoneyShotsMade / @Model.Last().NumberOfTotalMoneyShotsAtt  accuracy : @moneyAcc %
+    <br>
+    total shots : @Model.Last().NumberOfTotalShotsMade / @Model.Last().NumberOfTotalShotsAtt  accuracy : @totalAcc %
+    <br>
+    total points scored : @Model.Last().NumberOfTotalPointsScored
+    <br>
+    total enemies killed : @Model.Last().NumberOfTotalEnemiesKilled
+    <br />
+    most played character : @Model.Last().MostPlayedCharacter
+    <br />
+    most played level : @Model.Last().MostPlayedLevel
+    <br />
+    most consecutive shots : @Model.Last().MostConsecutiveShots by @Model.Last().MostConsecutiveShotsUsername
+    <br />
+    longest shot : @Model.Last().LongestShot by @Model.Last().LongestShotUsername
 </div>
-<br>

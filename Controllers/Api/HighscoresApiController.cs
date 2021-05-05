@@ -561,6 +561,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 _context.Highscores.Add(highscores);
                 await _context.SaveChangesAsync();
 
+                // update serverstats
+                ServerStatsController server = new ServerStatsController(_context);
+                server.getServerStats();
+
                 return CreatedAtAction(nameof(GetAllHighscores), new { id = highscores.Id }, highscores);
             }
         }

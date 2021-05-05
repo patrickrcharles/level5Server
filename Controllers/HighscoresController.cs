@@ -95,7 +95,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             //        || s.Character.Contains(previousSearchString) || s.Level.Contains(previousSearchString)
             //        || s.Version.Contains(previousSearchString));
             //}
-
+            System.Diagnostics.Debug.WriteLine("sortOrder : " + sortOrder);
             highscores = sortHighscores(sortOrder, highscores);
 
             return View(await highscores.ToListAsync());
@@ -439,7 +439,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     highscores = highscores.OrderByDescending(s => s.SniperShots);
                     break;
                 default:
-                    highscores = highscores.OrderBy(x => x.Id).Skip(0).Take(50);
+                    highscores = highscores.OrderByDescending(x => x.Id).Skip(0).Take(50);
                     break;
             }
 

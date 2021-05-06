@@ -77,6 +77,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             return View(await _context.ServerStats.ToListAsync());
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public void getServerStats()
         {
 

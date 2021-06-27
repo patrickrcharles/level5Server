@@ -53,6 +53,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         /// Add new application version
         /// </summary>
         [Route("version")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         public async Task<ActionResult<Application>> PostHighscore(Application application)
         {

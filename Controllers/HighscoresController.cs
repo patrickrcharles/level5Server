@@ -48,6 +48,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             ViewData["LongestShotSortParm"] = sortOrder == "longestShot_asc" ? "longestShot_desc" : "longestShot_asc";
             ViewData["TotalDistanceSortParm"] = sortOrder == "totalDistance_asc" ? "totalDistance_desc" : "totalDistance_asc";
             ViewData["MaxShotMadeSortParm"] = sortOrder == "maxShotMade_asc" ? "maxShotMade_desc" : "maxShotMade_asc";
+            ViewData["MaxShotAttSortParm"] = sortOrder == "maxShotAtt_asc" ? "maxShotAtt_desc" : "maxShotAtt_asc";
             ViewData["ConsecutiveShotsSortParm"] = sortOrder == "consecutiveShots_asc" ? "consecutiveShots_desc" : "consecutiveShots_asc";
 
             ViewData["TwoMadeSortParm"] = sortOrder == "twoMade_asc" ? "twoMade_desc" : "twoMade_asc";
@@ -317,6 +318,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     break;
                 case "maxShotMade_asc":
                     highscores = highscores.OrderByDescending(s => s.MaxShotMade);
+                    break;
+                case "maxShotAtt_desc":
+                    highscores = highscores.OrderBy(s => s.MaxShotAtt);
+                    break;
+                case "maxShotAtt_asc":
+                    highscores = highscores.OrderByDescending(s => s.MaxShotAtt);
                     break;
                 case "consecutiveShots_desc":
                     highscores = highscores.OrderBy(s => s.ConsecutiveShots);

@@ -11,6 +11,7 @@ using mysql_scaffold_dbcontext_test.Models;
 using System.Linq.Dynamic;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
+using System.Net;
 
 namespace mysql_scaffold_dbcontext_test.Controllers
 {
@@ -549,6 +550,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpPost]
         public async Task<ActionResult<Highscores>> PostHighscore(Highscores highscores)
         {
+            // check if unique scoreid already exists in database
+            if (_context.Highscores.Where(e => e.Scoreid == highscores.Scoreid).Any())
+            {
+                //System.Diagnostics.Debug.WriteLine("-------------------scoreid already exists in database");
+                return Conflict();
+                //thrownewHttpResponseException(HttpStatusCode.NotFound);
+                //return Content(codeNotDefined, "message to be sent in response body");
+            }
             //_context.Users.Where(e => e.Userid == highscores.Userid).Any();
             // if empty username  or userid NOT in user table
             if (string.IsNullOrEmpty(highscores.UserName) || !_context.Users.Where(e => e.Userid == highscores.Userid).Any())

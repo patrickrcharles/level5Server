@@ -79,7 +79,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         /// <summary>
         /// Get user by username
         /// </summary>
-        //[Authorize]
+        [Authorize]
         [HttpGet("username/{username}")]
         // GET: Users by userid
         // get user by user id

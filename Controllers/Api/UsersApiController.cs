@@ -79,7 +79,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         /// <summary>
         /// Get user by username
         /// </summary>
-        [Authorize]
+        //[Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("username/{username}")]
         // GET: Users by userid
         // get user by user id
@@ -99,7 +100,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
                 {
                     var user = await _context.Users
                         .FirstOrDefaultAsync(m => m.Username == username);
-
                     //HideUserDetails(user);
 
                     return user;
@@ -118,6 +118,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Api
         /// Get username by user id
         /// </summary>
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("email/{email}")]
         public async Task<ActionResult<Users>> GetUserByEmail(string email)
         {

@@ -11,7 +11,7 @@
 <div>
     @using (Html.BeginForm())
     {
-    <span>
+    <div class="form-group">
         find by username, platform, character, level, mode name or version:
         &nbsp;
         @*@Html.DropDownList("filter", new List<SelectListItem>
@@ -29,7 +29,7 @@
         &nbsp;*@
         @Html.TextBox("SearchString")
         <input type="submit" value="Search"/>
-    </span>
+    </div>
     }
 </div>
 

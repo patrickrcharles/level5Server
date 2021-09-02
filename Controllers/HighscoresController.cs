@@ -61,8 +61,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             ViewData["BonusPointsSortParm"] = sortOrder == "bonusPoints_asc" ? "bonusPoints_desc" : "bonusPoints_asc";
             ViewData["MoneyBallMadeSortParm"] = sortOrder == "moneyBallMade_asc" ? "moneyBallMade_desc" : "moneyBallMade_asc";
             ViewData["MoneyBallAttSortParm"] = sortOrder == "moneyBallAtt_asc" ? "moneyBallAtt_desc" : "moneyBallAtt_asc";
-            ViewData["TrafficSortParm"] = sortOrder == "trafficShots_asc" ? "trafficShots_desc" : "trafficShots_asc";
-            ViewData["EnemiesSortParm"] = sortOrder == "enemiesShots_asc" ? "enemiesShots_desc" : "enemiesShots_asc";
+            ViewData["TrafficSortParm"] = sortOrder == "traffic_asc" ? "traffic_desc" : "traffic_asc";
+            ViewData["EnemiesSortParm"] = sortOrder == "enemies_asc" ? "enemies_desc" : "enemies_asc";
             ViewData["EnemiesKilledSortParm"] = sortOrder == "enemiesKilledShots_asc" ? "enemiesKilledShots_desc" : "enemiesKilledShots_asc";
             ViewData["SniperSortParm"] = sortOrder == "sniper_asc" ? "sniper_desc" : "sniper_asc";
             ViewData["SniperModeSortParm"] = sortOrder == "sniperMode_asc" ? "sniperMode_desc" : "sniperMode_asc";

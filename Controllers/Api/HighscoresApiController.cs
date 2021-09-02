@@ -36,9 +36,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Highscores>>> GetAllHighscores()
         {
+
             //ModePlayedCount(16);
-            return await _context.Highscores.OrderByDescending(x => x.Id)
+            //return await _context.Highscores.OrderByDescending(x => x.Id)
+            //    .ToListAsync();
+           var highscores = await _context.Highscores.OrderByDescending(x => x.Id)
                 .ToListAsync();
+            HideHighScoreDetails(highscores);
+
+            return highscores;
         }
 
         //--------------------- HTTP GET  Platform ---------------------------------------------------
@@ -52,6 +58,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             var highscores = await _context.Highscores.Where(x => x.Platform == platform)
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();
+            HideHighScoreDetails(highscores);
 
             if (highscores == null)
             {
@@ -73,6 +80,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();
 
+            HideHighScoreDetails(highscores);
+
             if (highscores == null)
             {
                 return NotFound();
@@ -92,10 +101,13 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                 .OrderByDescending(x => x.Id)
                 .ToListAsync();
 
+            HideHighScoreDetails(highscores);
+
             if (highscores == null)
             {
                 return NotFound();
             }
+
 
             return highscores;
         }
@@ -744,6 +756,17 @@ namespace mysql_scaffold_dbcontext_test.Controllers
                     System.Diagnostics.Debug.WriteLine("highscores.ModeName : " + highscores.ModeName);
                 }
                 _context.SaveChanges();
+            }
+        }
+
+        private static void HideHighScoreDetails(List<Highscores> highscores)
+        {
+            foreach (Highscores h in highscores)
+            {
+                h.Os = "*************";
+                h.Scoreid = "*************";
+                h.Device = "*************";
+                h.Ipaddress = "*************";
             }
         }
     }

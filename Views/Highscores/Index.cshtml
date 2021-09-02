@@ -11,25 +11,25 @@
 <div>
     @using (Html.BeginForm())
     {
-    <div class="form-group">
-        find by username, platform, character, level, mode name or version:
-        &nbsp;
-        @*@Html.DropDownList("filter", new List<SelectListItem>
-                 {
-                 new SelectListItem{ Text="...",Value="filter"},
-                 new SelectListItem{ Text="username",Value = "username" },
-                 new SelectListItem{ Text="platform", Value = "platform" },
-                 //new SelectListItem{ Text="hardcore", Value = "hardcore" },
-                 //new SelectListItem{ Text="modeid", Value = "modeid" },
-                 new SelectListItem{ Text="character", Value = "character" },
-                 new SelectListItem{ Text="level", Value = "level" },
-                 new SelectListItem{ Text="version", Value = "version" }
-                 },
-                 new { @class = "filters" })
-        &nbsp;*@
-        @Html.TextBox("SearchString")
-        <input type="submit" value="Search"/>
-    </div>
+        <div class="form-group">
+            find by username, platform, character, level, mode name or version:
+            &nbsp;
+            @*@Html.DropDownList("filter", new List<SelectListItem>
+                         {
+                         new SelectListItem{ Text="...",Value="filter"},
+                         new SelectListItem{ Text="username",Value = "username" },
+                         new SelectListItem{ Text="platform", Value = "platform" },
+                         //new SelectListItem{ Text="hardcore", Value = "hardcore" },
+                         //new SelectListItem{ Text="modeid", Value = "modeid" },
+                         new SelectListItem{ Text="character", Value = "character" },
+                         new SelectListItem{ Text="level", Value = "level" },
+                         new SelectListItem{ Text="version", Value = "version" }
+                         },
+                         new { @class = "filters" })
+                &nbsp;*@
+            @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </div>
     }
 </div>
 
@@ -52,7 +52,7 @@
                 @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })
             </th>
             <th>
-                @Html.ActionLink("HardcoreEnabled", "Index", new { sortOrder = ViewBag.HardcoreSortParm })
+                @Html.ActionLink("Hardcore", "Index", new { sortOrder = ViewBag.HardcoreSortParm })
             </th>
             <th>
                 @Html.ActionLink("UserName", "Index", new { sortOrder = ViewBag.UsernameSortParm })
@@ -61,7 +61,7 @@
                 @Html.ActionLink("Platform", "Index", new { sortOrder = ViewBag.PlatformSortParm })
             </th>
             <th>
-                @Html.ActionLink("ModeName", "Index", new { sortOrder = ViewBag.ModeSortParm })
+                @Html.ActionLink("Mode Name", "Index", new { sortOrder = ViewBag.ModeSortParm })
             </th>
             <th>
                 @Html.ActionLink("Character", "Index", new { sortOrder = ViewBag.CharacterSortParm })
@@ -76,79 +76,79 @@
                 @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSortParm })
             </th>
             <th>
-                @Html.ActionLink("TotalPoints", "Index", new { sortOrder = ViewBag.TotalPointsSortParm })
+                @Html.ActionLink("Total Points", "Index", new { sortOrder = ViewBag.TotalPointsSortParm })
             </th>
             <th>
-                @Html.ActionLink("LongestShot", "Index", new { sortOrder = ViewBag.LongestShotSortParm })
+                @Html.ActionLink("Longest Shot", "Index", new { sortOrder = ViewBag.LongestShotSortParm })
             </th>
             <th>
-                @Html.ActionLink("TotalDistance", "Index", new { sortOrder = ViewBag.TotalDistanceSortParm })
+                @Html.ActionLink("Total Distance", "Index", new { sortOrder = ViewBag.TotalDistanceSortParm })
             </th>
             <th>
-                @Html.ActionLink("MaxShotMade", "Index", new { sortOrder = ViewBag.MaxShotMadeSortParm })
+                @Html.ActionLink("Shots Made", "Index", new { sortOrder = ViewBag.MaxShotMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("MaxShotAtt", "Index", new { sortOrder = ViewBag.MaxShotAttSortParm })
+                @Html.ActionLink("Shots Att", "Index", new { sortOrder = ViewBag.MaxShotAttSortParm })
             </th>
             <th>
-                @Html.ActionLink("ConsecutiveShots", "Index", new { sortOrder = ViewBag.ConsecutiveShotsSortParm })
+                @Html.ActionLink("Consecutive Shots", "Index", new { sortOrder = ViewBag.ConsecutiveShotsSortParm })
             </th>
             <th>
-                @Html.ActionLink("TwoMade", "Index", new { sortOrder = ViewBag.TwoMadeSortParm })
+                @Html.ActionLink("Two Made", "Index", new { sortOrder = ViewBag.TwoMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("TwoAtt", "Index", new { sortOrder = ViewBag.TwoAttSortParm })
+                @Html.ActionLink("Two Att", "Index", new { sortOrder = ViewBag.TwoAttSortParm })
             </th>
             <th>
-                @Html.ActionLink("ThreeMade", "Index", new { sortOrder = ViewBag.ThreeMadeSortParm })
+                @Html.ActionLink("Three Made", "Index", new { sortOrder = ViewBag.ThreeMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("ThreeAtt", "Index", new { sortOrder = ViewBag.ThreeAttMadeSortParm })
+                @Html.ActionLink("Three Att", "Index", new { sortOrder = ViewBag.ThreeAttMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("FourMade", "Index", new { sortOrder = ViewBag.FourMadeSortParm })
+                @Html.ActionLink("Four Made", "Index", new { sortOrder = ViewBag.FourMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("FourAtt", "Index", new { sortOrder = ViewBag.FourAttSortParm })
+                @Html.ActionLink("Four Att", "Index", new { sortOrder = ViewBag.FourAttSortParm })
             </th>
             <th>
-                @Html.ActionLink("SevenMade", "Index", new { sortOrder = ViewBag.SevenMadeSortParm })
+                @Html.ActionLink("Seven Made", "Index", new { sortOrder = ViewBag.SevenMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("SevenAtt", "Index", new { sortOrder = ViewBag.SevenAttSortParm })
+                @Html.ActionLink("Seven Att", "Index", new { sortOrder = ViewBag.SevenAttSortParm })
             </th>
             <th>
-                @Html.ActionLink("BonusPoints", "Index", new { sortOrder = ViewBag.BonusPointsSortParm })
+                @Html.ActionLink("Bonus Points", "Index", new { sortOrder = ViewBag.BonusPointsSortParm })
             </th>
             <th>
-                @Html.ActionLink("MoneyBallMade", "Index", new { sortOrder = ViewBag.MoneyBallMadeSortParm })
+                @Html.ActionLink("MoneyBall Made", "Index", new { sortOrder = ViewBag.MoneyBallMadeSortParm })
             </th>
             <th>
-                @Html.ActionLink("MoneyBallAtt", "Index", new { sortOrder = ViewBag.MoneyBallAttSortParm })
+                @Html.ActionLink("MoneyBall Att", "Index", new { sortOrder = ViewBag.MoneyBallAttSortParm })
             </th>
             <th>
-                @Html.ActionLink("Traffic", "Index", new { sortOrder = ViewBag.TrafficSortParm })
+                @Html.ActionLink("Traffic Enabled", "Index", new { sortOrder = ViewBag.TrafficSortParm })
             </th>
             <th>
-                @Html.ActionLink("EnemiesEnabled", "Index", new { sortOrder = ViewBag.EnemiesSortParm })
+                @Html.ActionLink("Enemies Enabled", "Index", new { sortOrder = ViewBag.EnemiesSortParm })
             </th>
             <th>
-                @Html.ActionLink("EnemiesKilled", "Index", new { sortOrder = ViewBag.EnemieskilledSortParm })
+                @Html.ActionLink("Enemies Killed", "Index", new { sortOrder = ViewBag.EnemieskilledSortParm })
             </th>
             <th>
-                @Html.ActionLink("SniperEnabled", "Index", new { sortOrder = ViewBag.SniperSortParm })
+                @Html.ActionLink("Sniper Enabled", "Index", new { sortOrder = ViewBag.SniperSortParm })
             </th>
             <th>
-                @Html.ActionLink("SniperMode", "Index", new { sortOrder = ViewBag.SniperModeSortParm })
+                @Html.ActionLink("Sniper Mode", "Index", new { sortOrder = ViewBag.SniperModeSortParm })
             </th>
             <th>
-                @Html.ActionLink("SniperModeName", "Index", new { sortOrder = ViewBag.SniperModeNameSortParm })
+                @Html.ActionLink("SniperMode Name", "Index", new { sortOrder = ViewBag.SniperModeNameSortParm })
             </th>
             <th>
-                @Html.ActionLink("SniperHits", "Index", new { sortOrder = ViewBag.SniperHitsSortParm })
+                @Html.ActionLink("Sniper Hits", "Index", new { sortOrder = ViewBag.SniperHitsSortParm })
             </th>
             <th>
-                @Html.ActionLink("SniperShots", "Index", new { sortOrder = ViewBag.SniperShotsSortParm })
+                @Html.ActionLink("Sniper Shots", "Index", new { sortOrder = ViewBag.SniperShotsSortParm })
             </th>
             <th></th>
         </tr>
@@ -156,110 +156,131 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HardcoreEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Platform)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Character)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Level)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Version)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPoints)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LongestShot)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalDistance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxShotMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxShotAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConsecutiveShots)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThreeMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThreeAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FourMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FourAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SevenMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SevenAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BonusPoints)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MoneyBallMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MoneyBallAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TrafficEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnemiesEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnemiesKilled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperMode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperModeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperHits)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperShots)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+
+            @if (item.HardcoreEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Platform)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Character)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LongestShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxShotMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxShotAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsecutiveShots)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SevenMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SevenAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BonusPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoneyBallMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoneyBallAtt)
+            </td>
+            @if (item.TrafficEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            @if (item.EnemiesEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.EnemiesKilled)
+            </td>
+            @if (item.SniperEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperModeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperHits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperShots)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

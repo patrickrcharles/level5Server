@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.Api
+namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     [Route("api/application")]
     [ApiController]

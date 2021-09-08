@@ -1,5 +1,4 @@
 ﻿
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.Api
+namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     [Route("api/token")]
     [ApiController]

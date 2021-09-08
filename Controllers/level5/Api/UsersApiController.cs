@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.Api
+namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     [Route("api/users")]
     [ApiController]

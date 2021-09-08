@@ -12,6 +12,8 @@ using System;
 using System.Reflection;
 using System.IO;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace mysql_scaffold_dbcontext_test
 {
@@ -71,6 +73,22 @@ namespace mysql_scaffold_dbcontext_test
                     ValidIssuer = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
+            });
+
+            services.AddControllersWithViews();
+
+            // add custom locations for views
+            // {1} = folder/controller name 
+            // {0} = file returned, ex. index.cshtml
+            services.Configure<RazorViewEngineOptions>(o =>
+            {
+                o.ViewLocationFormats.Clear();
+                o.ViewLocationFormats.Add
+                ("/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/level5/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/level5/Shared/{0}" + RazorViewEngine.ViewExtension);
             });
         }
 

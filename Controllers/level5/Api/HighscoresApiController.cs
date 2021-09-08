@@ -15,9 +15,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
     [ApiController]
     public class HighscoresApiController : Controller
     {
-        private readonly DatabaseContext _context;
+        private readonly database1Context _context;
 
-        public HighscoresApiController(DatabaseContext context)
+        public HighscoresApiController(database1Context context)
         {
             _context = context;
         }

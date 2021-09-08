@@ -58,8 +58,12 @@ namespace mysql_scaffold_dbcontext_test
             });
 
             services.AddRazorPages();
-            services.AddDbContext<DatabaseContext>(options =>
+
+            services.AddDbContext<database1Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<database2Context>(options =>
+            options.UseMySql(Configuration.GetConnectionString("DefaultConnection2")));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -93,6 +97,8 @@ namespace mysql_scaffold_dbcontext_test
                 ("/Views/serialkiller/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
                 ("/Views/level5/Shared/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/serialkiller/Shared/{0}" + RazorViewEngine.ViewExtension);
             });
         }
 

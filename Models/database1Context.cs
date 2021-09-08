@@ -1,9 +1,5 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -11,13 +7,13 @@ using Microsoft.IdentityModel.Protocols;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class DatabaseContext : DbContext
+    public partial class database1Context : DbContext
     {
-        public DatabaseContext()
+        public database1Context()
         {
         }
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public database1Context(DbContextOptions<database1Context> options)
             : base(options)
         {
         }
@@ -303,7 +299,7 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.LongestShotUsername).HasColumnName("LongestShotUsername");
             });
 
-                OnModelCreatingPartial(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

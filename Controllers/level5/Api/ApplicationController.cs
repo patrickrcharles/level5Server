@@ -11,8 +11,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
     [ApiController]
     public class ApplicationController : Controller
     {
-        private readonly DatabaseContext _context;
-        public ApplicationController(DatabaseContext context)
+        private readonly database1Context _context;
+        public ApplicationController(database1Context context)
         {
             _context = context;
         }

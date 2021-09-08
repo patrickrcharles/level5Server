@@ -53,8 +53,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers
             }
         }
 
-        private readonly DatabaseContext _context;
-        public ServerStatsController(DatabaseContext context)
+        private readonly database1Context _context;
+        public ServerStatsController(database1Context context)
         {
             _context = context;
         }

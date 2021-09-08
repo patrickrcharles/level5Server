@@ -17,9 +17,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
     public class TokenController : Controller
     {
         public IConfiguration _configuration;
-        private readonly DatabaseContext _context;
+        private readonly database1Context _context;
 
-        public TokenController(IConfiguration config, DatabaseContext context)
+        public TokenController(IConfiguration config, database1Context context)
         {
             _configuration = config;
             _context = context;

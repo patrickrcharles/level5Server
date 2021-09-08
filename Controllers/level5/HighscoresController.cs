@@ -11,10 +11,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers
 {
     public class HighscoresController : Controller
     {
-        private readonly DatabaseContext _context;
+        private readonly database1Context _context;
         private string previousSearchString;
 
-        public HighscoresController(DatabaseContext context)
+        public HighscoresController(database1Context context)
         {
             _context = context;
         }

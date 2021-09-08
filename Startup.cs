@@ -86,7 +86,11 @@ namespace mysql_scaffold_dbcontext_test
                 o.ViewLocationFormats.Add
                 ("/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
+                ("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
                 ("/Views/level5/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/serialkiller/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
                 ("/Views/level5/Shared/{0}" + RazorViewEngine.ViewExtension);
             });

@@ -20,7 +20,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         {
         }
 
-        public virtual DbSet<KillerModel> Killers { get; set; }
+        public virtual DbSet<Killers> Killers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,7 +37,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         {
             System.Diagnostics.Debug.WriteLine("create model db2");
 
-            modelBuilder.Entity<KillerModel>(entity =>
+            modelBuilder.Entity<Killers>(entity =>
             {
                 entity.HasKey(e => e.KillerId)
                 .HasName("PRIMARY");

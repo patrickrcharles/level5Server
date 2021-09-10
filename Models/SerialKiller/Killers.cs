@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Models.SerialKiller
 {
-    public partial class KillerModel
+    public partial class Killers
     {
         public int KillerId { get; set; }
         public string FirstName { get; set; }

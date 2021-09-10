@@ -14,6 +14,13 @@ using System.IO;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.Linq;
+using Microsoft.OpenApi.Any;
 
 namespace mysql_scaffold_dbcontext_test
 {
@@ -29,42 +36,55 @@ namespace mysql_scaffold_dbcontext_test
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
+
+            services.AddApiVersioning(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Level 5 API",
-                    Description = "Level 5 web api",
-                    //TermsOfService = new Uri("https://example.com/terms"),
-                    //Contact = new OpenApiContact
-                    //{
-                    //    Name = "Shayne Boyer",
-                    //    Email = string.Empty,
-                    //    Url = new Uri("https://twitter.com/spboyer"),
-                    //},
-                    //License = new OpenApiLicense
-                    //{
-                    //    Name = "Use under LICX",
-                    //    Url = new Uri("https://example.com/license"),
-                    //}
-                });
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                options.DefaultApiVersion = new ApiVersion(2, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+                options.ApiVersionReader = ApiVersionReader.Combine(
+                    new QueryStringApiVersionReader("api-version"),
+                    new HeaderApiVersionReader("api-version"));
             });
 
-            services.AddRazorPages();
+            services.AddVersionedApiExplorer(options =>
+            {
+                // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+                // note: the specified format code will format the version as "'v'major[.minor][-status]"
+                options.GroupNameFormat = "'v'VVV";
 
+                // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+                // can also be used to control the format of the API version in route templates
+                options.SubstituteApiVersionInUrl = true;
+            });
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
+
+            //// Register the Swagger generator, defining 1 or more Swagger documents
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Version = "v1",
+            //        Title = "Level 5 API",
+            //        Description = "Level 5 web api",
+            //    });
+            //    // Set the comments path for the Swagger JSON and UI.
+            //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //    c.IncludeXmlComments(xmlPath);
+            //});
+
+            services.AddRazorPages();
+            // level5 dbcontext
             services.AddDbContext<database1Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
+            // serialkiller dbcontext
             services.AddDbContext<database2Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection2")));
-
+            // jwt token config
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
@@ -103,37 +123,109 @@ namespace mysql_scaffold_dbcontext_test
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("v1/swagger.json", "Level 5 v1");
-                //c.RoutePrefix = "swagger/ui";
-            });
-
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                options =>
+                {
+                // build a swagger endpoint for each discovered API version
+                foreach (var description in provider.ApiVersionDescriptions)
+                    {
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                    }
+                });
+
+
+            //// Enable middleware to serve generated Swagger as a JSON endpoint.
+            //app.UseSwagger();
+            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            //// specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("v1/swagger.json", "Level 5 v1");
+            //    //c.RoutePrefix = "swagger/ui";
+            //});
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+        }
+
+
+        public class SwaggerDefaultValues : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                var apiDescription = context.ApiDescription;
+                operation.Deprecated |= apiDescription.IsDeprecated();
+
+                if (operation.Parameters == null)
+                    return;
+
+                // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
+                // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413
+                foreach (var parameter in operation.Parameters)
+                {
+                    var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
+                    if (parameter.Description == null)
+                    {
+                        parameter.Description = description.ModelMetadata?.Description;
+                    }
+
+                    if (parameter.Schema.Default == null && description.DefaultValue != null)
+                    {
+                        parameter.Schema.Default = new OpenApiString(description.DefaultValue.ToString());
+                    }
+
+                    parameter.Required |= description.IsRequired;
+                }
+            }
+        }
+
+        public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+        {
+            private readonly IApiVersionDescriptionProvider _provider;
+
+            public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) => _provider = provider;
+
+            public void Configure(SwaggerGenOptions options)
+            {
+                // add a swagger document for each discovered API version
+                // note: you might choose to skip or document deprecated API versions differently
+                foreach (var description in _provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+                }
+            }
+
+            private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
+            {
+                var info = new OpenApiInfo()
+                {
+                    Title = "Skeleton District API",
+                    Version = description.ApiVersion.ToString(),
+                };
+
+                if (description.IsDeprecated)
+                {
+                    info.Description += " This API version has been deprecated.";
+                }
+
+                return info;
+            }
         }
     }
 }

@@ -39,14 +39,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         public async Task<ActionResult<IEnumerable<KillerModel>>> GetAllVersions()
         {
             System.Diagnostics.Debug.WriteLine("/api/serialkiller/killer");
-            return await _context.Killers.OrderByDescending(x => x.KillerId).ToListAsync();
+            return await _context.Killers.OrderBy(x => x.KillerId).ToListAsync();
         }
 
         // GET: /api/serialkiller/{killerId}
         /// <summary>
         /// get killer details by id
         /// </summary>
-        [HttpGet("killer/{killerid}")]
+        [HttpGet("killers/{killerid}")]
         public async Task<ActionResult<KillerModel>> GetByKillerId(int killerId)
         {
             System.Diagnostics.Debug.WriteLine("/api/serialkiller/killer/{killerid}");

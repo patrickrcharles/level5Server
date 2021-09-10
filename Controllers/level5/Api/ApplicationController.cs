@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
+    [ApiVersion("1")]
     [Route("api/application")]
     [ApiController]
     public class ApplicationController : Controller

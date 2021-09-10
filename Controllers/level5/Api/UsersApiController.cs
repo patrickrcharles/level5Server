@@ -9,6 +9,7 @@ using mysql_scaffold_dbcontext_test.Models;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
+    [ApiVersion("1")]
     [Route("api/users")]
     [ApiController]
     public class UsersApiController : Controller

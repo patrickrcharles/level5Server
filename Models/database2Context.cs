@@ -39,25 +39,26 @@ namespace mysql_scaffold_dbcontext_test.Models
 
             modelBuilder.Entity<KillerModel>(entity =>
             {
-                //entity.HasKey(e => e.id)
-                //   .HasName("PRIMARY");
-
-                //entity.ToTable("ServerStats");
-
-                //entity.Property(e => e.id).HasColumnName("id");
-                //entity.Property(e => e.NumberOfUsers).HasColumnName("NumberOfUsers");
-                //entity.Property(e => e.NumberOfTotalTimePlayed).HasColumnName("NumberOfTotalTimePlayed");
+                entity.HasKey(e => e.KillerId)
+                .HasName("PRIMARY");
 
                 entity.ToTable("killers");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("PRIMARY");
+                entity.HasIndex(e => e.KillerId)
+                    .HasName("killerId_UNIQUE")
+                    .IsUnique();
 
-                entity.Property(e => e.KillerId)
-                .HasColumnName("killerId");
+                entity.Property(e => e.KillerId).HasColumnName("killerId");
+                //entity.HasKey(e => e.KillerId)
+                //   .HasName("PRIMARY");
 
                 entity.Property(e => e.FirstName)
                     .HasColumnName("firstName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.MiddleName)
+                    .HasColumnName("middleName")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
@@ -70,6 +71,9 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.NumberOfVictims)
                     .HasColumnName("numberOfVictims");
 
+                entity.Property(e => e.BirthDate)
+                    .HasColumnName("birthDate")
+                    .HasColumnType("Date");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -41,7 +41,7 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
                 entity.HasKey(e => e.KillerId)
                 .HasName("PRIMARY");
 
-                entity.ToTable("killers");
+                entity.ToTable("Killers");
                 entity.HasIndex(e => e.KillerId)
                     .HasName("killerId_UNIQUE")
                     .IsUnique();
@@ -61,10 +61,11 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-                entity.Property(e => e.NumberOfVictims)
-                    .HasColumnName("numberOfVictims");
-                entity.Property(e => e.BirthDate)
-                    .HasColumnName("birthDate")
+                entity.Property(e => e.Born)
+                    .HasColumnName("born")
+                    .HasColumnType("Date");
+                entity.Property(e => e.Died)
+                    .HasColumnName("died")
                     .HasColumnType("Date");
             });
 
@@ -73,7 +74,7 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
                 entity.HasKey(e => e.VictimId)
                 .HasName("PRIMARY");
 
-                entity.ToTable("victims");
+                entity.ToTable("Victims");
                 entity.HasIndex(e => e.VictimId)
                     .HasName("victimId_UNIQUE")
                     .IsUnique();
@@ -94,29 +95,18 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-                entity.Property(e => e.BirthDate)
+                entity.Property(e => e.Born)
                     .HasColumnName("born")
                     .HasColumnType("Date");
-                entity.Property(e => e.DateMurdered)
-                    .HasColumnName("dateMurdered")
+                entity.Property(e => e.Died)
+                    .HasColumnName("died")
                     .HasColumnType("Date");
-                entity.Property(e => e.City)
-                    .HasColumnName("city")
+                entity.Property(e => e.CauseOfDeath)
+                    .HasColumnName("causeOfDeath")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
-                entity.Property(e => e.State)
-                    .HasColumnName("state")
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-                entity.Property(e => e.note)
-                    .HasColumnName("notes")
-                    .HasColumnType("varchar(45)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-                entity.Property(e => e.AgeAtDeath)
-                    .HasColumnName("ageAtDeath");
+             
             });
 
             //            public int VictimId { get; set; }

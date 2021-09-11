@@ -11,7 +11,7 @@ namespace mysql_scaffold_dbcontext_test.Models.SerialKiller
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public int NumberOfVictims { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime Born { get; set; }
+        public DateTime Died { get; set; }
     }
 }

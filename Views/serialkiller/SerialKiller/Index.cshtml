@@ -1,8 +1,108 @@
-﻿@{
+﻿
+@using mysql_scaffold_dbcontext_test.Models.SerialKiller;
+@using mysql_scaffold_dbcontext_test.Models.serialkiller;
+@model dynamic
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
     ViewData["Title"] = "Serial Killer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>this is where serial killer app will be</h3>
+<style type="text/css">
+    html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    #mapDiv {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
 
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Name</th>
+    </tr>
+    @foreach (Killers k in Model.Killers)
+    {
+        <tr>
+            <td>@k.FirstName</td>
+            <td>@k.MiddleName</td>
+            <td>@k.LastName</td>
+        </tr>
+    }
+</table>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Name</th>
+    </tr>
+    @foreach (Victims v in Model.Victims)
+    {
+        <tr>
+            <td>@v.FirstName</td>
+            <td>@v.MiddleName</td>
+            <td>@v.LastName</td>
+        </tr>
+    }
+</table>
+
+<!--<form action="http://www.foo.com" method="POST">
+    <div>
+        <label for="say">What greeting do you want to say?</label>
+        <input name="say" id="say" value="Hi">
+    </div>
+    <div>
+        <label for="to">Who do you want to say it to?</label>
+        <input name="to" id="to" value="Mom">
+    </div>
+    <div>
+        <button>Send my greetings</button>
+    </div>
+</form>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Map</title>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="./index.js"></script>
+</head>
+<body>-->
+@*<iframe src="https://www.google.com/maps/embed?pb =!…" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+<!--<form action="http://www.foo.com" method="POST">
+        <table>
+            <tr>
+                <td>Enter ID: </td>
+                <td><input type="text" name="txtId" /></td>
+            </tr>
+            <tr>
+                <td>Enter Name: </td>
+                <td><input type="text" name="txtName" /></td>
+            </tr>
+            <tr>
+                <td>Addon: </td>
+                <td><input type="checkbox" name="chkAddon" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>-->

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using mysql_scaffold_dbcontext_test.Models;
+using mysql_scaffold_dbcontext_test.Models.serialkiller;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,10 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
         [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Index()
         {
-            return View();
+            dynamic mymodel = new ExpandoObject();
+            mymodel.Killers = _context.Killers;
+            mymodel.Victims = _context.Victims;
+            return View(mymodel);
         }
 
     }

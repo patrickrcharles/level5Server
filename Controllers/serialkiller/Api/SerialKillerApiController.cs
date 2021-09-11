@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
+using mysql_scaffold_dbcontext_test.Models.serialkiller;
 using mysql_scaffold_dbcontext_test.Models.SerialKiller;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +19,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
             _context = context;
         }
 
-        //--------------------- HTTP GET ---------------------------------------------------
+        //--------------------- HTTP GET Killers ---------------------------------------------------
         // GET: /api/serialkiller
         /// <summary>
         /// get all killers
         /// </summary>
         [MapToApiVersion("2")]
         [HttpGet("killers")]
-        public async Task<ActionResult<IEnumerable<Killers>>> GetAllVersions()
+        public async Task<ActionResult<IEnumerable<Killers>>> GetAllKillers()
         {
             //System.Diagnostics.Debug.WriteLine("/api/serialkiller/killer");
             return await _context.Killers.OrderBy(x => x.KillerId).ToListAsync();
@@ -37,7 +37,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         /// get killer details by id
         /// </summary>
         [MapToApiVersion("2")]
-        [HttpGet("killers/id/{killerId}")]
+        [HttpGet("killers/kid/{killerId}")]
         public async Task<ActionResult<Killers>> GetByKillerId(int killerId)
         {
             return await _context.Killers.FirstOrDefaultAsync(x => x.KillerId == killerId);
@@ -55,6 +55,30 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
                 .FirstOrDefaultAsync(x => x.FirstName == killerName 
                 || x.MiddleName == killerName 
                 || x.LastName == killerName);
+        }
+
+        //--------------------- HTTP GET Victims ---------------------------------------------------
+        [MapToApiVersion("2")]
+        [HttpGet("victims")]
+        public async Task<ActionResult<IEnumerable<Victims>>> GetAllVictims()
+        {
+            //System.Diagnostics.Debug.WriteLine("/api/serialkiller/killer");
+            return await _context.Victims.OrderBy(x => x.VictimId).ToListAsync();
+        }
+
+        [MapToApiVersion("2")]
+        [HttpGet("victims/kid/{killerId}")]
+        public async Task<ActionResult<IEnumerable<Victims>>> GetVictmsByKillerId(int killerId)
+        {
+            return await _context.Victims.Where(x => x.KillerId == killerId).ToListAsync();
+        }
+
+        [MapToApiVersion("2")]
+        [HttpGet("victims/vid/{victimId}")]
+        public async Task<ActionResult<Victims>> GetVictimById(int victimId)
+        {
+            return await _context.Victims
+                .FirstOrDefaultAsync(x => x.VictimId == victimId);
         }
     }
 }

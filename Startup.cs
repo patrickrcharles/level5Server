@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Linq;
 using Microsoft.OpenApi.Any;
+using mysql_scaffold_dbcontext_test.Models.serialkiller;
 
 namespace mysql_scaffold_dbcontext_test
 {
@@ -145,7 +146,6 @@ namespace mysql_scaffold_dbcontext_test
                     }
                 });
 
-
             //// Enable middleware to serve generated Swagger as a JSON endpoint.
             //app.UseSwagger();
             //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
@@ -155,15 +155,14 @@ namespace mysql_scaffold_dbcontext_test
             //    c.SwaggerEndpoint("v1/swagger.json", "Level 5 v1");
             //    //c.RoutePrefix = "swagger/ui";
             //});
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
         }
-
 
         public class SwaggerDefaultValues : IOperationFilter
         {

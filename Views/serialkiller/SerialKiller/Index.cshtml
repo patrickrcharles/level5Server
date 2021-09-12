@@ -26,65 +26,155 @@
         width: 100%;
         height: 100%;
     }
+
+    table {
+        float: left;
+        margin-right: 20px;
+    }
 </style>
 
-
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Code</th>
-        <th>Name</th>
-    </tr>
-    @foreach (Killers k in Model.Killers)
-    {
-        <tr>
-            <td>@k.FirstName</td>
-            <td>@k.MiddleName</td>
-            <td>@k.LastName</td>
-        </tr>
-    }
-</table>
-
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Code</th>
-        <th>Name</th>
-    </tr>
-    @foreach (Victims v in Model.Victims)
-    {
-        <tr>
-            <td>@v.FirstName</td>
-            <td>@v.MiddleName</td>
-            <td>@v.LastName</td>
-        </tr>
-    }
-</table>
-
-<!--<form action="http://www.foo.com" method="POST">
-    <div>
-        <label for="say">What greeting do you want to say?</label>
-        <input name="say" id="say" value="Hi">
-    </div>
-    <div>
-        <label for="to">Who do you want to say it to?</label>
-        <input name="to" id="to" value="Mom">
-    </div>
-    <div>
-        <button>Send my greetings</button>
-    </div>
-</form>
-
 <!DOCTYPE html>
+
 <html>
 <head>
-    <title>Add Map</title>
-
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script src="./index.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
 </head>
-<body>-->
-@*<iframe src="https://www.google.com/maps/embed?pb =!…" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Person Details</th>
+            </tr>
+            <tr>
+                <td>PersonId: </td>
+                <td>
+                    @*@Html.TextBox("Victim", Model.Victim)*@
+                </td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>
+                    @*@Html.TextBoxFor(m => m.Name)*@
+                </td>
+            </tr>
+            <tr>
+                <td>Gender: </td>
+                <td>
+                    @*@Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+                   { new SelectListItem{Text="Male", Value="M"},
+                     new SelectListItem{Text="Female", Value="F"}}, "Please select")*@
+                </td>
+            </tr>
+            <tr>
+                <td>City: </td>
+                <td>
+                    @*@Html.TextBoxFor(m => m.City)*@
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    }
+</body>
+</html>
+
+
+@*<table>
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+        @foreach (Killers k in Model.Killers)
+        {
+            <tr>
+                <td>@k.FirstName</td>
+                <td>@k.MiddleName</td>
+                <td>@k.LastName</td>
+            </tr>
+        }
+    </table>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+        @foreach (Victims v in Model.Victims)
+        {
+            <tr>
+                <td>@v.FirstName</td>
+                <td>@v.MiddleName</td>
+                <td>@v.LastName</td>
+            </tr>
+        }
+    </table>*@
+
+@*<form action="http://www.foo.com" method="POST">
+        <div>
+            <label for="say">What greeting do you want to say?</label>
+            <input name="say" id="say" value="Hi">
+        </div>
+        <div>
+            <label for="to">Who do you want to say it to?</label>
+            <input name="to" id="to" value="Mom">
+        </div>
+        <div>
+            <button>Send my greetings</button>
+        </div>
+    </form>*@
+
+@*<p></p>
+    <div>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+            @foreach (Killers k in Model.Killers)
+            {
+                <tr>
+                    <td>@k.FirstName</td>
+                    <td>@k.MiddleName</td>
+                    <td>@k.LastName</td>
+                </tr>
+            }
+        </table>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+            @foreach (Victims v in Model.Victims)
+            {
+                <tr>
+                    <td>@v.FirstName</td>
+                    <td>@v.MiddleName</td>
+                    <td>@v.LastName</td>
+                </tr>
+            }
+        </table>
+    </div>*@
+@*</form>*@
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Add Map</title>
+
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <script src="./index.js"></script>
+    </head>
+    <body>
+    @*<iframe src="https://www.google.com/maps/embed?pb =!…" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
 <!--<form action="http://www.foo.com" method="POST">
         <table>
             <tr>

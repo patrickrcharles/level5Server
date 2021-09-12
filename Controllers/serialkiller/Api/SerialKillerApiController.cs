@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
-using mysql_scaffold_dbcontext_test.Models.SerialKiller;
+using mysql_scaffold_dbcontext_test.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +12,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
     [Route("api/serialkiller")]
     public class SerialKillerApiController : Controller
     {
-        private readonly database2Context _context;
-        public SerialKillerApiController(database2Context context)
+        private readonly serialkillerContext _context;
+        public SerialKillerApiController(serialkillerContext context)
         {
             _context = context;
         }

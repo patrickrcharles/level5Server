@@ -21,7 +21,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Linq;
 using Microsoft.OpenApi.Any;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
 
 namespace mysql_scaffold_dbcontext_test
 {
@@ -83,7 +82,7 @@ namespace mysql_scaffold_dbcontext_test
             services.AddDbContext<database1Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             // serialkiller dbcontext
-            services.AddDbContext<database2Context>(options =>
+            services.AddDbContext<serialkillerContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection2")));
             // jwt token config
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

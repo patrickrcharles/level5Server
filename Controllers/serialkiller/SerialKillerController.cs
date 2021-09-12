@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
+using mysql_scaffold_dbcontext_test.Models;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -11,9 +11,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
     [Route("[controller]")]
     public class SerialKillerController : Controller
     {
-        private readonly database2Context _context;
+        private readonly serialkillerContext _context;
 
-        public SerialKillerController(database2Context context)
+        public SerialKillerController(serialkillerContext context)
         {
             _context = context;
         }

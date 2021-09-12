@@ -17,9 +17,9 @@ namespace mysql_scaffold_dbcontext_test.Models
 
         public virtual DbSet<Crime> Crime { get; set; }
         public virtual DbSet<KillerLocation> KillerLocation { get; set; }
-        public virtual DbSet<Killers> Killers { get; set; }
+        public virtual DbSet<Killer> Killers { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
-        public virtual DbSet<Victims> Victims { get; set; }
+        public virtual DbSet<Victim> Victims { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,6 +37,10 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.HasKey(e => e.KillerId)
                     .HasName("PRIMARY");
 
+                entity.HasIndex(e => e.CrimeId)
+                    .HasName("crimeid_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.KillerId)
                     .HasColumnName("killerId")
                     .ValueGeneratedNever();
@@ -48,12 +52,16 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.Crime1)
+                entity.Property(e => e.CrimeType)
                     .IsRequired()
-                    .HasColumnName("crime")
+                    .HasColumnName("crimeType")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.CrimeId)
+                    .HasColumnName("crimeid")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -97,7 +105,7 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCollation("utf8mb4_0900_ai_ci");
             });
 
-            modelBuilder.Entity<Killers>(entity =>
+            modelBuilder.Entity<Killer>(entity =>
             {
                 entity.HasKey(e => e.KillerId)
                     .HasName("PRIMARY");
@@ -164,20 +172,21 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.VictimId).HasColumnName("victimId");
             });
 
-            modelBuilder.Entity<Victims>(entity =>
+            modelBuilder.Entity<Victim>(entity =>
             {
                 entity.HasKey(e => e.VictimId)
                     .HasName("PRIMARY");
 
                 entity.Property(e => e.VictimId).HasColumnName("victimId");
+                entity.Property(e => e.CrimeId).HasColumnName("crimeId");
 
                 entity.Property(e => e.Born)
                     .HasColumnName("born")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.CauseOfDeath)
+                entity.Property(e => e.CrimeType)
                     .IsRequired()
-                    .HasColumnName("causeOfDeath")
+                    .HasColumnName("crimeType")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");

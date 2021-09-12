@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class Killers
+    public partial class Killer
     {
         public int KillerId { get; set; }
         public string FirstName { get; set; }

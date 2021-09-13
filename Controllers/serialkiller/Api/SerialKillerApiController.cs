@@ -93,9 +93,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         [HttpPost("crimes")]
         public async Task<ActionResult<Crime>> PostCrime(Crime crime)
         {
-            //bool continueNextMethod = false;
             try
             {
+
                 _context.Crime.Add(crime);
                 await _context.SaveChangesAsync();
 
@@ -130,15 +130,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         public async Task<ActionResult<IEnumerable<Crime>>> GetAllNotes()
         {
             return await _context.Crime.OrderBy(x => x.KillerId).ToListAsync();
-        }
-
-        private async Task<IEnumerator> SaveCrimeAsync(Crime crime)
-        {
-            _context.Crime.Add(crime);
-            await _context.SaveChangesAsync();
-
-            //await _context.SaveChangesAsync() > 0;
-
         }
     }
 }

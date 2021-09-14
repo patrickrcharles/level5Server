@@ -1,6 +1,7 @@
-﻿
-@using mysql_scaffold_dbcontext_test.Models
-@model dynamic
+﻿@model mysql_scaffold_dbcontext_test.Models.serialkiller.CrimeViewModel
+@*@using mysql_scaffold_dbcontext_test.Models.serialkiller.Killer*@
+@*@using mysql_scaffold_dbcontext_test.Models.serialkiller;*@
+@*@model dynamic*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -11,6 +12,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <style type="text/css">
     html {
         height: 100%
@@ -18,7 +20,7 @@
 
     body {
         height: 100%;
-        margin: 0;
+        margin: 5px;
     }
 
     #mapDiv {
@@ -27,8 +29,8 @@
     }
 
     table {
-        float: left;
-        margin-right: 20px;
+        /*float: left;*/
+        margin-right: 25px;
     }
 </style>
 
@@ -40,158 +42,119 @@
     <title>Index</title>
 </head>
 <body>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-    {
-        <table cellpadding="0" cellspacing="0">
+    @*<input id="searchTextField" type="text" size="50">
+    <input id="address" name="address" value='' type="hidden" placeholder="">*@
+    @*<label for="locationTextField">Location</label>
+        <input id="locationTextField" type="text" size="50">
+
+        <script>
+            function init() {
+                var input = document.getElementById('locationTextField');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+            google.maps.event.addDomListener(window, 'load', init);
+        </script>*@
+
+    @*<select name="listbox" id="listbox">
+            @foreach (var k in Model.Killers)
+            {
+
+            <option value="@k.FirstName">@k.FirstName @k.MiddleName @k.LastName  </option>
+            }
+        </select>*@
+    <form action="~/serialkiller" method="post">
+        <label cellpadding="5" cellspacing="5">Serial Killer: </label>
+        <select name="killerSelected" id="killerSelected">
+            @foreach (var k in Model.Killers)
+            {
+                <option value="@k.Id">@k.FirstName @k.MiddleName @k.LastName</option>
+            }
+        </select>
+        <br>
+        <table cellpadding="5" cellspacing="5">
             <tr>
                 <th colspan="2" align="center">Person Details</th>
             </tr>
             <tr>
-                <td>PersonId: </td>
+                <td>first name: </td>
                 <td>
-                    @*@Html.TextBox("Victim", Model.Victim)*@
+                    @Html.TextBoxFor(m => Model.Crime.FirstName)
+                </td>
+            </tr>
+
+            <tr>
+                <td>middle name: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Crime.MiddleName)
                 </td>
             </tr>
             <tr>
-                <td>Name: </td>
+                <td>last name: </td>
                 <td>
-                    @*@Html.TextBoxFor(m => m.Name)*@
+                    @Html.TextBoxFor(m => Model.Crime.LastName)
                 </td>
             </tr>
             <tr>
-                <td>Gender: </td>
+                <td>city: </td>
                 <td>
-                    @*@Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
-                   { new SelectListItem{Text="Male", Value="M"},
-                     new SelectListItem{Text="Female", Value="F"}}, "Please select")*@
+                    @Html.TextBoxFor(m => Model.Crime.City)
+                </td>
+            </tr>
+            <tr>
+                <td>state: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Crime.State)
                 </td>
             </tr>
             <tr>
                 <td>City: </td>
                 <td>
-                    @*@Html.TextBoxFor(m => m.City)*@
+                    @Html.TextBoxFor(m => Model.Crime.City)
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Submit" /></td>
+                <td>date: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Crime.Date)
+                </td>
             </tr>
         </table>
-    }
+        @*date *@
+        <label cellpadding="5" cellspacing="5">month: </label>
+        <select name="month" id="month">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <label cellpadding="5" cellspacing="5">day: </label>
+        <select name="day" id="day">
+            @for (int i = 1; i <= 31; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <label cellpadding="5" cellspacing="5">year: </label>
+        <select name="year" id="year">
+            @for (int i = 1900; i <= 2000; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <br />
+
+        @*crime type*@
+        <label cellpadding="5" cellspacing="5">crime type: </label>
+        <select name="crimeType" id="crimeType">
+            <option value="murder">murder</option>
+            <option value="kidnapping">kidnapping</option>
+            <option value="rape">rape</option>
+            <option value="auto theft">auto theft</option>
+        </select>
+        <br />
+        <input type="submit" value="Submit" />
+    </form>
+
 </body>
 </html>
 
-
-@*<table>
-        <tr>
-            <th>Id</th>
-            <th>Code</th>
-            <th>Name</th>
-        </tr>
-        @foreach (Killers k in Model.Killers)
-        {
-            <tr>
-                <td>@k.FirstName</td>
-                <td>@k.MiddleName</td>
-                <td>@k.LastName</td>
-            </tr>
-        }
-    </table>
-
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Code</th>
-            <th>Name</th>
-        </tr>
-        @foreach (Victims v in Model.Victims)
-        {
-            <tr>
-                <td>@v.FirstName</td>
-                <td>@v.MiddleName</td>
-                <td>@v.LastName</td>
-            </tr>
-        }
-    </table>*@
-
-@*<form action="http://www.foo.com" method="POST">
-        <div>
-            <label for="say">What greeting do you want to say?</label>
-            <input name="say" id="say" value="Hi">
-        </div>
-        <div>
-            <label for="to">Who do you want to say it to?</label>
-            <input name="to" id="to" value="Mom">
-        </div>
-        <div>
-            <button>Send my greetings</button>
-        </div>
-    </form>*@
-
-@*<p></p>
-    <div>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Name</th>
-            </tr>
-            @foreach (Killers k in Model.Killers)
-            {
-                <tr>
-                    <td>@k.FirstName</td>
-                    <td>@k.MiddleName</td>
-                    <td>@k.LastName</td>
-                </tr>
-            }
-        </table>
-
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Name</th>
-            </tr>
-            @foreach (Victims v in Model.Victims)
-            {
-                <tr>
-                    <td>@v.FirstName</td>
-                    <td>@v.MiddleName</td>
-                    <td>@v.LastName</td>
-                </tr>
-            }
-        </table>
-    </div>*@
-@*</form>*@
-
-@*<!DOCTYPE html>
-    <html>
-    <head>
-        <title>Add Map</title>
-
-        <link rel="stylesheet" type="text/css" href="./style.css" />
-        <script src="./index.js"></script>
-    </head>
-    <body>
-    @*<iframe src="https://www.google.com/maps/embed?pb =!…" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
-<!--<form action="http://www.foo.com" method="POST">
-        <table>
-            <tr>
-                <td>Enter ID: </td>
-                <td><input type="text" name="txtId" /></td>
-            </tr>
-            <tr>
-                <td>Enter Name: </td>
-                <td><input type="text" name="txtName" /></td>
-            </tr>
-            <tr>
-                <td>Addon: </td>
-                <td><input type="checkbox" name="chkAddon" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Submit Form" /></td>
-            </tr>
-        </table>
-    </form>
-</body>
-</html>-->

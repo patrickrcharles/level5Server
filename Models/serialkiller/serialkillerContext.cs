@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace mysql_scaffold_dbcontext_test.Models
+namespace mysql_scaffold_dbcontext_test.Models.serialkiller
 {
     public partial class serialkillerContext : DbContext
     {
@@ -15,8 +15,8 @@ namespace mysql_scaffold_dbcontext_test.Models
         {
         }
 
-        public virtual DbSet<Crime> Crime { get; set; }
-        public virtual DbSet<KillerLocation> KillerLocation { get; set; }
+        public virtual DbSet<Crime> Crimes { get; set; }
+        public virtual DbSet<KillerLocation> KillerLocations { get; set; }
         public virtual DbSet<Killer> Killers { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
         public virtual DbSet<Victim> Victims { get; set; }
@@ -34,16 +34,11 @@ namespace mysql_scaffold_dbcontext_test.Models
         {
             modelBuilder.Entity<Crime>(entity =>
             {
-                entity.HasKey(e => e.KillerId)
-                    .HasName("PRIMARY");
-
-                entity.HasIndex(e => e.CrimeId)
-                    .HasName("crimeid_UNIQUE")
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.KillerId)
-                    .HasColumnName("killerId")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -59,13 +54,44 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CrimeId)
+                entity.Property(e => e.Crimeid)
+                    .IsRequired()
                     .HasColumnName("crimeid")
-                    .ValueGeneratedOnAdd();
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasColumnName("firstName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.KillerId)
+                    .IsRequired()
+                    .HasColumnName("killerId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasColumnName("lastName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.MiddleName)
+                    .IsRequired()
+                    .HasColumnName("middleName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.State)
                     .IsRequired()
@@ -74,17 +100,21 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.VictimId).HasColumnName("victimId");
+                entity.Property(e => e.VictimId)
+                    .IsRequired()
+                    .HasColumnName("victimId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<KillerLocation>(entity =>
             {
-                entity.HasKey(e => e.KillerId)
-                    .HasName("PRIMARY");
+                entity.HasIndex(e => e.LocationId)
+                    .HasName("locationId_UNIQUE")
+                    .IsUnique();
 
-                entity.Property(e => e.KillerId)
-                    .HasColumnName("killerId")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -97,6 +127,19 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasColumnName("date")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.KillerId)
+                    .IsRequired()
+                    .HasColumnName("killerId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.LocationId)
+                    .HasColumnName("locationId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasColumnName("state")
@@ -107,14 +150,7 @@ namespace mysql_scaffold_dbcontext_test.Models
 
             modelBuilder.Entity<Killer>(entity =>
             {
-                entity.HasKey(e => e.KillerId)
-                    .HasName("PRIMARY");
-
-                entity.HasIndex(e => e.KillerId)
-                    .HasName("killerId_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.KillerId).HasColumnName("killerId");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Born)
                     .HasColumnName("born")
@@ -127,6 +163,12 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasColumnName("firstName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.KillerId)
+                    .HasColumnName("killerId")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
@@ -148,15 +190,25 @@ namespace mysql_scaffold_dbcontext_test.Models
 
             modelBuilder.Entity<Notes>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.HasIndex(e => e.NoteId)
                     .HasName("noteId_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.CrimeId).HasColumnName("crimeId");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.KillerId).HasColumnName("killerId");
+                entity.Property(e => e.CrimeId)
+                    .IsRequired()
+                    .HasColumnName("crimeId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.KillerId)
+                    .IsRequired()
+                    .HasColumnName("killerId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Note)
                     .IsRequired()
@@ -167,22 +219,33 @@ namespace mysql_scaffold_dbcontext_test.Models
 
                 entity.Property(e => e.NoteId)
                     .HasColumnName("noteId")
-                    .ValueGeneratedOnAdd();
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.VictimId).HasColumnName("victimId");
+                entity.Property(e => e.VictimId)
+                    .IsRequired()
+                    .HasColumnName("victimId")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<Victim>(entity =>
             {
-                entity.HasKey(e => e.VictimId)
-                    .HasName("PRIMARY");
-
-                entity.Property(e => e.VictimId).HasColumnName("victimId");
-                entity.Property(e => e.CrimeId).HasColumnName("crimeId");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Born)
                     .HasColumnName("born")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.CrimeId)
+                    .IsRequired()
+                    .HasColumnName("crimeId")
+                    .HasColumnType("varchar(45)")
+                    .HasDefaultValueSql("'0'")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.CrimeType)
                     .IsRequired()
@@ -191,8 +254,8 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.Died)
-                    .HasColumnName("died")
+                entity.Property(e => e.CrimeDate)
+                    .HasColumnName("crimeDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.FirstName)
@@ -202,7 +265,13 @@ namespace mysql_scaffold_dbcontext_test.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.KillerId).HasColumnName("killerId");
+                entity.Property(e => e.KillerId)
+                    .IsRequired()
+                    .HasColumnName("killerId")
+                    .HasColumnType("varchar(45)")
+                    .HasDefaultValueSql("'0'")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
@@ -214,6 +283,13 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.MiddleName)
                     .IsRequired()
                     .HasColumnName("middleName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.VictimId)
+                    .IsRequired()
+                    .HasColumnName("victimId")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");

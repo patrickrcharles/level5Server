@@ -11,5 +11,6 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
         public IEnumerable<Victim> Victims { get; set; }
         public IEnumerable<Crime> Crimes { get; set; }
         public Crime Crime { get; set; }
+        public Killer Killer { get; set; }
     }
 }

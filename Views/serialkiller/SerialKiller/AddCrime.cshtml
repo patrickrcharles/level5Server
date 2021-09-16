@@ -8,10 +8,9 @@
 }
 
 @{
-    ViewData["Title"] = "Serial Killer";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Add Crime";
+    Layout = "~/Views/Shared/_Layout_serialKiller.cshtml";
 }
-
 
 <style type="text/css">
     html {
@@ -42,32 +41,12 @@
     <title>Index</title>
 </head>
 <body>
-    @*<input id="searchTextField" type="text" size="50">
-    <input id="address" name="address" value='' type="hidden" placeholder="">*@
-    @*<label for="locationTextField">Location</label>
-        <input id="locationTextField" type="text" size="50">
-
-        <script>
-            function init() {
-                var input = document.getElementById('locationTextField');
-                var autocomplete = new google.maps.places.Autocomplete(input);
-            }
-            google.maps.event.addDomListener(window, 'load', init);
-        </script>*@
-
-    @*<select name="listbox" id="listbox">
-            @foreach (var k in Model.Killers)
-            {
-
-            <option value="@k.FirstName">@k.FirstName @k.MiddleName @k.LastName  </option>
-            }
-        </select>*@
-    <form action="~/serialkiller" method="post">
+    <form action="~/serialkiller/crime" method="post">
         <label cellpadding="5" cellspacing="5">Serial Killer: </label>
         <select name="killerSelected" id="killerSelected">
             @foreach (var k in Model.Killers)
             {
-                <option value="@k.Id">@k.FirstName @k.MiddleName @k.LastName</option>
+                <option value="@k.KillerId">@k.FirstName @k.MiddleName @k.LastName</option>
             }
         </select>
         <br>
@@ -106,7 +85,7 @@
                     @Html.TextBoxFor(m => Model.Crime.State)
                 </td>
             </tr>
-            <tr>
+            @*<tr>
                 <td>City: </td>
                 <td>
                     @Html.TextBoxFor(m => Model.Crime.City)
@@ -117,24 +96,26 @@
                 <td>
                     @Html.TextBoxFor(m => Model.Crime.Date)
                 </td>
-            </tr>
+            </tr>*@
         </table>
         @*date *@
-        <label cellpadding="5" cellspacing="5">month: </label>
+        <label cellpadding="5" cellspacing="5">Date of crime: </label>
+        <br/>
+        <label cellpadding="5" cellspacing="5">month </label>
         <select name="month" id="month">
             @for (int i = 1; i <= 12; i++)
             {
                 <option value=@i>@i</option>
             }
         </select>
-        <label cellpadding="5" cellspacing="5">day: </label>
+        <label cellpadding="5" cellspacing="5">day </label>
         <select name="day" id="day">
             @for (int i = 1; i <= 31; i++)
             {
                 <option value=@i>@i</option>
             }
         </select>
-        <label cellpadding="5" cellspacing="5">year: </label>
+        <label cellpadding="5" cellspacing="5">year </label>
         <select name="year" id="year">
             @for (int i = 1900; i <= 2000; i++)
             {

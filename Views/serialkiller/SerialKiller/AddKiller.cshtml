@@ -1,0 +1,128 @@
+﻿@model mysql_scaffold_dbcontext_test.Models.serialkiller.CrimeViewModel
+@*@using mysql_scaffold_dbcontext_test.Models.serialkiller.Killer*@
+@*@using mysql_scaffold_dbcontext_test.Models.serialkiller;*@
+@*@model dynamic*@
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "Add Killer";
+    Layout = "~/Views/Shared/_Layout_serialKiller.cshtml";
+}
+
+<style type="text/css">
+    html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 5px;
+    }
+
+    #mapDiv {
+        width: 100%;
+        height: 100%;
+    }
+
+    table {
+        /*float: left;*/
+        margin-right: 25px;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*<input id="searchTextField" type="text" size="50">
+    <input id="address" name="address" value='' type="hidden" placeholder="">*@
+    @*<label for="locationTextField">Location</label>
+        <input id="locationTextField" type="text" size="50">
+
+        <script>
+            function init() {
+                var input = document.getElementById('locationTextField');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+            google.maps.event.addDomListener(window, 'load', init);
+        </script>*@
+
+    @*<select name="listbox" id="listbox">
+            @foreach (var k in Model.Killers)
+            {
+
+            <option value="@k.FirstName">@k.FirstName @k.MiddleName @k.LastName  </option>
+            }
+        </select>*@
+    <form action="~/serialkiller/killer" method="post">
+        <label cellpadding="5" cellspacing="5">Serial Killer: </label>
+        @*<select name="killerSelected" id="killerSelected">
+            @foreach (var k in Model.Killers)
+            {
+                <option value="@k.Id">@k.FirstName @k.MiddleName @k.LastName</option>
+            }
+        </select>*@
+        <br>
+        <table cellpadding="5" cellspacing="5">
+            <tr>
+                <th colspan="2" align="center">Person Details</th>
+            </tr>
+            <tr>
+                <td>first name: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Killer.FirstName)
+                </td>
+            </tr>
+
+            <tr>
+                <td>middle name: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Killer.MiddleName)
+                </td>
+            </tr>
+            <tr>
+                <td>last name: </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Killer.LastName)
+                </td>
+            </tr>          
+        </table>
+        @*date *@
+        <label cellpadding="5" cellspacing="5">birth date: </label>
+        <br/>
+        <label cellpadding="5" cellspacing="5">month </label>
+        <select name="month" id="month">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <label cellpadding="5" cellspacing="5">day </label>
+        <select name="day" id="day">
+            @for (int i = 1; i <= 31; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <label cellpadding="5" cellspacing="5">year </label>
+        <select name="year" id="year">
+            @for (int i = 1900; i <= 2000; i++)
+            {
+                <option value=@i>@i</option>
+            }
+        </select>
+        <br />
+        <br />
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+</html>
+

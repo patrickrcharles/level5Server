@@ -80,7 +80,7 @@ namespace mysql_scaffold_dbcontext_test
 
             services.AddRazorPages();
             // level5 dbcontext
-            services.AddDbContext<database1Context>(options =>
+            services.AddDbContext<Level5Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             // serialkiller dbcontext
             services.AddDbContext<serialkillerContext>(options =>

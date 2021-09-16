@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Linq;
 using Microsoft.OpenApi.Any;
+using mysql_scaffold_dbcontext_test.Models.serialkiller;
 
 namespace mysql_scaffold_dbcontext_test
 {
@@ -114,9 +115,9 @@ namespace mysql_scaffold_dbcontext_test
                 o.ViewLocationFormats.Add
                 ("/Views/level5/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
-                ("/Views/serialkiller/{1}/{0}" + RazorViewEngine.ViewExtension);
-                o.ViewLocationFormats.Add
                 ("/Views/level5/Shared/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/serialkiller/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
                 ("/Views/serialkiller/Shared/{0}" + RazorViewEngine.ViewExtension);
             });

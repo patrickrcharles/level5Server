@@ -60,7 +60,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
 
         //--------------------- Victims ---------------------------------------------------
         [MapToApiVersion("2")]
-        [HttpGet("Victims")]
+        [HttpGet("victims")]
         public async Task<ActionResult<IEnumerable<Victim>>> GetAllVictims()
         {
             //System.Diagnostics.Debug.WriteLine("/api/serialkiller/killer");
@@ -68,18 +68,18 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         }
 
         [MapToApiVersion("2")]
-        [HttpGet("Victims/kid/{killerId}")]
+        [HttpGet("victims/kid/{killerId}")]
         public async Task<ActionResult<IEnumerable<Victim>>> GetVictmsByKillerId(string killerId)
         {
             return await _context.Victims.Where(x => x.KillerId == killerId).ToListAsync();
         }
 
         [MapToApiVersion("2")]
-        [HttpGet("Victims/vid/{VictimsId}")]
-        public async Task<ActionResult<Victim>> GetVictimsById(string VictimsId)
+        [HttpGet("victims/vid/{victimsId}")]
+        public async Task<ActionResult<Victim>> GetVictimsById(string victimsId)
         {
             return await _context.Victims
-                .FirstOrDefaultAsync(x => x.VictimId == VictimsId);
+                .FirstOrDefaultAsync(x => x.VictimId == victimsId);
         }
 
 
@@ -90,38 +90,39 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         {
             return await _context.Crimes.OrderBy(x => x.KillerId).ToListAsync();
         }
+
+        // *NOTE API POST is not needed. going to use forms
         // post
+        //[MapToApiVersion("2")]
+        //[HttpPost("crimes")]
+        //public async Task<ActionResult<Crime>> PostCrime( Crime crime)
+        //{
+        //    System.Diagnostics.Debug.WriteLine("-----  name : " + crime.FirstName);
+        //    System.Diagnostics.Debug.WriteLine("-----  name : " + crime.MiddleName);
+        //    System.Diagnostics.Debug.WriteLine("-----  name : " + crime.LastName);
 
-        [MapToApiVersion("2")]
-        [HttpPost("crimes")]
-        public async Task<ActionResult<Crime>> PostCrime( Crime crime)
-        {
-            System.Diagnostics.Debug.WriteLine("-----  name : " + crime.FirstName);
-            System.Diagnostics.Debug.WriteLine("-----  name : " + crime.MiddleName);
-            System.Diagnostics.Debug.WriteLine("-----  name : " + crime.LastName);
+        //    try
+        //    {
+        //        // max description is 15 characters
+        //        string crimeId = Utility.KeyGenerator.GetUniqueKey(30, "crime");
+        //        string victimId = Utility.KeyGenerator.GetUniqueKey(30, "victim"); ;
+        //        string noteId = Utility.KeyGenerator.GetUniqueKey(30, "note");
+        //        string locationId = Utility.KeyGenerator.GetUniqueKey(30, "location");
 
-            try
-            {
-                // max description is 15 characters
-                string crimeId = Utility.KeyGenerator.GetUniqueKey(30, "crime");
-                string victimId = Utility.KeyGenerator.GetUniqueKey(30, "victim"); ;
-                string noteId = Utility.KeyGenerator.GetUniqueKey(30, "note");
-                string locationId = Utility.KeyGenerator.GetUniqueKey(30, "location");
+        //        crime.Crimeid = crimeId;
+        //        crime.VictimId = victimId;
 
-                crime.Crimeid = crimeId;
-                crime.VictimId = victimId;
+        //        _context.Crimes.Add(crime);
+        //        await _context.SaveChangesAsync();
 
-                _context.Crimes.Add(crime);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetAllCrimes), new { vid = crime.VictimId }, crime);
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
-                return BadRequest();
-            }
-        }
+        //        return CreatedAtAction(nameof(GetAllCrimes), new { vid = crime.VictimId }, crime);
+        //    }
+        //    catch (DbUpdateConcurrencyException e)
+        //    {
+        //        System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
+        //        return BadRequest();
+        //    }
+        //}
 
         //--------------------- Killer location ---------------------------------------------------
         [MapToApiVersion("2")]

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
 {
-    [ApiVersion("2")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/serialkiller")]
     public class SerialKillerApiController : Controller
     {
@@ -25,7 +25,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         /// <summary>
         /// get all killers
         /// </summary>
-        [MapToApiVersion("2")]
         [HttpGet("killers")]
         public async Task<ActionResult<IEnumerable<Killer>>> GetAllKillers()
         {
@@ -37,7 +36,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         /// <summary>
         /// get killer details by id
         /// </summary>
-        [MapToApiVersion("2")]
         [HttpGet("killers/kid/{killerId}")]
         public async Task<ActionResult<Killer>> GetByKillerId(string killerId)
         {
@@ -48,7 +46,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         /// <summary>
         /// get killer details by id
         /// </summary>
-        [MapToApiVersion("2")]
         [HttpGet("killers/name/{killerName}")]
         public async Task<ActionResult<Killer>> GetByKillerName(string killerName)
         {
@@ -59,7 +56,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         }
 
         //--------------------- Victims ---------------------------------------------------
-        [MapToApiVersion("2")]
         [HttpGet("victims")]
         public async Task<ActionResult<IEnumerable<Victim>>> GetAllVictims()
         {
@@ -67,14 +63,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
             return await _context.Victims.OrderBy(x => x.VictimId).ToListAsync();
         }
 
-        [MapToApiVersion("2")]
         [HttpGet("victims/kid/{killerId}")]
         public async Task<ActionResult<IEnumerable<Victim>>> GetVictmsByKillerId(string killerId)
         {
             return await _context.Victims.Where(x => x.KillerId == killerId).ToListAsync();
         }
 
-        [MapToApiVersion("2")]
         [HttpGet("victims/vid/{victimsId}")]
         public async Task<ActionResult<Victim>> GetVictimsById(string victimsId)
         {
@@ -84,7 +78,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
 
 
         //--------------------- Crime ---------------------------------------------------
-        [MapToApiVersion("2")]
         [HttpGet("crimes")]
         public async Task<ActionResult<IEnumerable<Crime>>> GetAllCrimes()
         {
@@ -125,14 +118,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
         //}
 
         //--------------------- Killer location ---------------------------------------------------
-        [MapToApiVersion("2")]
         [HttpGet("locations")]
         public async Task<ActionResult<IEnumerable<Crime>>> GetAllLocations()
         {
             return await _context.Crimes.OrderBy(x => x.KillerId).ToListAsync();
         }
         //--------------------- notes ---------------------------------------------------
-        [MapToApiVersion("2")]
         [HttpGet("notes")]
         public async Task<ActionResult<IEnumerable<Crime>>> GetAllNotes()
         {

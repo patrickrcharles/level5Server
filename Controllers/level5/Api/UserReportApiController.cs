@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     //[ApiVersion("1")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/userreport")]
     [ApiController]
     public class UserReportApiController : Controller
@@ -27,14 +28,12 @@ namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
         /// Get all users in database
         /// </summary>
         //[Authorize]
-        [MapToApiVersion("1")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserReport>>> GetAllReports()
         {
             return await _context.UserReports.ToListAsync();
         }
 
-        [MapToApiVersion("1")]
         [HttpPost]
         public async Task<ActionResult<Users>> PostUserReport(UserReport userReport)
         {

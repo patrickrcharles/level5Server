@@ -11,7 +11,7 @@ using System.Linq.Dynamic.Core;
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     //[Authorize]
-    [ApiVersion("1")]
+    //[ApiVersion("1")]
     [Route("api/highscores")]
     [ApiController]
     public class HighscoresApiController : Controller

@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     [Route("api/token")]
-    [ApiVersion("1")]
+    //[ApiVersion("1")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     public class TokenController : Controller
     {

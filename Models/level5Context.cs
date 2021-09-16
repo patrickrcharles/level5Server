@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using mysql_scaffold_dbcontext_test.Controllers.level5;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -7,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace mysql_scaffold_dbcontext_test.Models
 {
-    public partial class database1Context : DbContext
+    public partial class Level5Context : DbContext
     {
-        public database1Context()
+        public Level5Context()
         {
         }
 
-        public database1Context(DbContextOptions<database1Context> options)
+        public Level5Context(DbContextOptions<Level5Context> options)
             : base(options)
         {
         }
@@ -22,6 +23,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<ServerStats> ServerStats { get; set; }
+        public virtual DbSet<UserReport> UserReports { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -297,6 +299,32 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.MostConsecutiveShotsUsername).HasColumnName("MostConsecutiveShotsUsername");
                 entity.Property(e => e.LongestShot).HasColumnName("LongestShot");
                 entity.Property(e => e.LongestShotUsername).HasColumnName("LongestShotUsername");
+            });
+
+            modelBuilder.Entity<UserReport>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PRIMARY");
+                entity.ToTable("UserReport");
+                entity.Property(e => e.UserId).HasColumnName("userid");
+                entity.Property(e => e.UserName)
+                    .HasColumnName("userName")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.Report)
+                    .HasColumnName("report")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.IpAddress)
+                    .HasColumnName("ipaddress")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

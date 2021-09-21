@@ -1,7 +1,4 @@
 ﻿@model mysql_scaffold_dbcontext_test.Models.serialkiller.CrimeViewModel
-@*@using mysql_scaffold_dbcontext_test.Models.serialkiller.Killer*@
-@*@using mysql_scaffold_dbcontext_test.Models.serialkiller;*@
-@*@model dynamic*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -27,8 +24,8 @@
         height: 100%;
     }
 
-    table {
-        /*float: left;*/
+    module {
+        float: left;
         margin-right: 25px;
     }
 </style>
@@ -41,101 +38,130 @@
     <title>Index</title>
 </head>
 <body>
-    <form action="~/serialkiller/crime" method="post">
-        <label cellpadding="5" cellspacing="5">Serial Killer: </label>
-        <select name="killerSelected" id="killerSelected">
-            @foreach (var k in Model.Killers)
+    <module>
+        <form action="~/serialkiller/crime" method="post" cellpadding="5" cellspacing="5">
+            <br>
+            <h4>Add Crime </h4>
+            <select name="killerSelected" id="killerSelected">
+                @foreach (var k in Model.Killers)
+                {
+                    <option value="@k.KillerId">@k.FirstName @k.MiddleName @k.LastName</option>
+                }
+            </select>
+            <br>
+            <table>
+                <tr>
+                    <td>first name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Crime.FirstName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>middle name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Crime.MiddleName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>last name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Crime.LastName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>city: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Crime.City)
+                    </td>
+                </tr>
+                <tr>
+                    <td>state: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Crime.State)
+                    </td>
+                </tr>
+            </table>
+            <label>Date of crime: </label>
+            <br />
+            <label>month </label>
+            <select name="month" id="month">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <label>day </label>
+            <select name="day" id="day">
+                @for (int i = 1; i <= 31; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <label>year </label>
+            <select name="year" id="year">
+                @for (int i = 1900; i <= 2000; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <br />
+
+            @*crime type*@
+            <label>crime type: </label>
+            <select name="crimeType" id="crimeType">
+                <option value="murder">murder</option>
+                <option value="kidnapping">kidnapping</option>
+                <option value="rape">rape</option>
+                <option value="auto theft">auto theft</option>
+            </select>
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </module>
+    @*<module>
+        <h4>Crimes in database</h4>
+        @{
+            var crimesList = Model.Crimes.OrderBy(x => x.KillerId);
+            var killersList = new List<mysql_scaffold_dbcontext_test.Models.serialkiller.Killer>();
             {
-                <option value="@k.KillerId">@k.FirstName @k.MiddleName @k.LastName</option>
+                @foreach (var c in crimesList)
+                {
+                    var killer = Model.Killers.Where(x => x.KillerId == c.KillerId).FirstOrDefault();
+                    killersList.Add(killer);
+                    System.Diagnostics.Debug.WriteLine("killer name : " + killer.FirstName);
+                    System.Diagnostics.Debug.WriteLine("killer name : " + killer.MiddleName);
+                    System.Diagnostics.Debug.WriteLine("killer name : " + killer.LastName);
+                }
+                //killersList.OrderBy(x => x.KillerId);
             }
-        </select>
-        <br>
+        }
         <table cellpadding="5" cellspacing="5">
-            <tr>
-                <th colspan="2" align="center">Person Details</th>
-            </tr>
-            <tr>
-                <td>first name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.FirstName)
-                </td>
-            </tr>
-
-            <tr>
-                <td>middle name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.MiddleName)
-                </td>
-            </tr>
-            <tr>
-                <td>last name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.LastName)
-                </td>
-            </tr>
-            <tr>
-                <td>city: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.City)
-                </td>
-            </tr>
-            <tr>
-                <td>state: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.State)
-                </td>
-            </tr>
-            @*<tr>
-                <td>City: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.City)
-                </td>
-            </tr>
-            <tr>
-                <td>date: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Crime.Date)
-                </td>
-            </tr>*@
+            @{ 
+                int counter = 0;
+            }
+            @foreach (var c in crimesList)
+            {
+                //var killerName = from k in Model.Killers
+                //                 where k.KillerId == c.KillerId
+                //                 select k.FirstName;
+                //Model.Killer = from k in Model.Killers
+                //                 where k.KillerId == c.KillerId
+                //                 select k.FirstName;
+                //var killerName = Model.Killers.Where(x => x.KillerId == c.KillerId).FirstOrDefault();
+                System.Diagnostics.Debug.WriteLine("counter : " + counter);
+                <tr>
+                    <td>@killersList[counter].FirstName</td>
+                    <td>@c.FirstName @c.MiddleName @c.LastName</td>
+                    <td>@c.CrimeType</td>
+                    <td>@c.Date</td>
+                    <td>@c.City</td>
+                    <td>@c.State</td>
+                </tr>
+                counter++;
+            }
         </table>
-        @*date *@
-        <label cellpadding="5" cellspacing="5">Date of crime: </label>
-        <br/>
-        <label cellpadding="5" cellspacing="5">month </label>
-        <select name="month" id="month">
-            @for (int i = 1; i <= 12; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <label cellpadding="5" cellspacing="5">day </label>
-        <select name="day" id="day">
-            @for (int i = 1; i <= 31; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <label cellpadding="5" cellspacing="5">year </label>
-        <select name="year" id="year">
-            @for (int i = 1900; i <= 2000; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <br />
-
-        @*crime type*@
-        <label cellpadding="5" cellspacing="5">crime type: </label>
-        <select name="crimeType" id="crimeType">
-            <option value="murder">murder</option>
-            <option value="kidnapping">kidnapping</option>
-            <option value="rape">rape</option>
-            <option value="auto theft">auto theft</option>
-        </select>
-        <br />
-        <input type="submit" value="Submit" />
-    </form>
-
+    </module>*@
 </body>
 </html>
 

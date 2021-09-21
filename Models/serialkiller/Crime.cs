@@ -5,7 +5,6 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
 {
     public partial class Crime
     {
-
         public int Id { get; set; }
         public string Crimeid { get; set; }
         public string KillerId { get; set; }

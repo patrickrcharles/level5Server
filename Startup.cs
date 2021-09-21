@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.OpenApi.Any;
 using mysql_scaffold_dbcontext_test.Models.serialkiller;
 
-namespace mysql_scaffold_dbcontext_test
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
     public class Startup
     {

@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
-    //[ApiVersion("1")]
     [Route("api/users")]
     [ApiController]
     public class UsersApiController : Controller

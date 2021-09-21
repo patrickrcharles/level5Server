@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using mysql_scaffold_dbcontext_test.Models;
+using mysql_scaffold_dbcontext_test.Models.level5;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,7 +14,6 @@ using System.Threading.Tasks;
 namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
 {
     [Route("api/token")]
-    //[ApiVersion("1")]
     [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     public class TokenController : Controller

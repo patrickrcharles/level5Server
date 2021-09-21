@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
+using mysql_scaffold_dbcontext_test.Models.level5;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,24 +38,36 @@ namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
         [HttpPost]
         public async Task<ActionResult<Users>> PostUserReport(UserReport userReport)
         {
-            //if (UserNameExists(user.Username))
-            //{
-            //    return BadRequest();
-            //}
+            // empty text
+            if (String.IsNullOrEmpty(userReport.Report))
+            {
+                return BadRequest();
+            }
+            // text exists
+            if (ReportTextExists(userReport.Report))
+            {
+                return Conflict();
+            }
+
             userReport.Date = DateTime.UtcNow;
-            System.Diagnostics.Debug.WriteLine("userReport.Date : "+ userReport.Date);
+            //System.Diagnostics.Debug.WriteLine("userReport.Date : "+ userReport.Date);
             try
             {
                 _context.UserReports.Add(userReport);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetAllReports), new { id = userReport.Id }, User);
+                return CreatedAtAction(nameof(GetAllReports), new { id = userReport.Id }, userReport);
             }
             catch (DbUpdateConcurrencyException e)
             {
                 System.Diagnostics.Debug.WriteLine("----- SERVER : DbUpdateConcurrencyException : " + e);
                 return BadRequest();
             }
+        }
+
+        private bool ReportTextExists(string report)
+        {
+            return _context.UserReports.Where(e => e.Report.Equals(report)).Any();
         }
     }
 }

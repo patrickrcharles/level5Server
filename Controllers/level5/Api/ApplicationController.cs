@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
+using mysql_scaffold_dbcontext_test.Models.level5;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
+namespace mysql_scaffold_dbcontext_test.Controllers
 {
-    //[ApiVersion("1")]
     [Route("api/application")]
     [ApiController]
     public class ApplicationController : Controller

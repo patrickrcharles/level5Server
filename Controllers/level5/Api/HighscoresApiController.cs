@@ -5,13 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
 using System.Linq.Dynamic.Core;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
+namespace mysql_scaffold_dbcontext_test.Models.level5.Api
 {
     //[Authorize]
-    //[ApiVersion("1")]
     [Route("api/highscores")]
     [ApiController]
     public class HighscoresApiController : Controller

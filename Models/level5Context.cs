@@ -1,12 +1,12 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Controllers.level5;
+using mysql_scaffold_dbcontext_test.Models.level5;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace mysql_scaffold_dbcontext_test.Models
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
     public partial class Level5Context : DbContext
     {
@@ -315,6 +315,26 @@ namespace mysql_scaffold_dbcontext_test.Models
                 entity.Property(e => e.Report)
                     .HasColumnName("report")
                     .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.Os)
+                    .HasColumnName("os")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.Device)
+                    .HasColumnName("device")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.DeviceName)
+                    .HasColumnName("deviceName")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.Version)
+                    .HasColumnName("version")
+                    .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
                 entity.Property(e => e.IpAddress)

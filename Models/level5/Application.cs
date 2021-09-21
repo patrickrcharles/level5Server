@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Models
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
     public partial class Application
     {

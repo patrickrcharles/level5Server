@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using mysql_scaffold_dbcontext_test.Models.level5;
 using System;
 using System.Collections.Generic;
 using System.Linq;

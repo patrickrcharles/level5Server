@@ -1,0 +1,92 @@
+﻿
+@model IEnumerable<mysql_scaffold_dbcontext_test.Models.UserReport>
+@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Report)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Os)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Device)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.IpAddress)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Report)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Os)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Device)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Version)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IpAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
 
     [Route("[controller]")]

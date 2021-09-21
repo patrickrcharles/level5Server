@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using mysql_scaffold_dbcontext_test.Models;
 
-namespace mysql_scaffold_dbcontext_test.Controllers
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
     public class HighscoresController : Controller
     {

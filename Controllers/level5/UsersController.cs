@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
 
-namespace mysql_scaffold_dbcontext_test.Controllers
+namespace mysql_scaffold_dbcontext_test.Models.level5
 {
     //[Route("users")]
     [Controller]

@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\site.css" />
+    <None Include="wwwroot\Data\NFT\danrussell_free.png" />
   </ItemGroup>
 
   <ItemGroup>

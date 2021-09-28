@@ -4,16 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using mysql_scaffold_dbcontext_test.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System;
-using System.Reflection;
-using System.IO;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -22,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Linq;
 using Microsoft.OpenApi.Any;
 using mysql_scaffold_dbcontext_test.Models.serialkiller;
+using mysql_scaffold_dbcontext_test.Models.nftairdrop;
 
 namespace mysql_scaffold_dbcontext_test.Models.level5
 {
@@ -82,9 +78,15 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
             // level5 dbcontext
             services.AddDbContext<Level5Context>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
             // serialkiller dbcontext
             services.AddDbContext<serialkillerContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("DefaultConnection2")));
+
+            // nft dbcontext
+            services.AddDbContext<nftAirDropContext>(options =>
+            options.UseMySql(Configuration.GetConnectionString("DefaultConnection3")));
+
             // jwt token config
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -120,6 +122,10 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                 ("/Views/serialkiller/{1}/{0}" + RazorViewEngine.ViewExtension);
                 o.ViewLocationFormats.Add
                 ("/Views/serialkiller/Shared/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/nftairdrop/{1}/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add
+                ("/Views/nftairdrop/Shared/{0}" + RazorViewEngine.ViewExtension);
             });
         }
 

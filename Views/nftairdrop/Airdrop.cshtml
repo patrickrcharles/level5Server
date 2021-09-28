@@ -1,0 +1,63 @@
+﻿@model IEnumerable<mysql_scaffold_dbcontext_test.Models.nftairdrop.NFT>
+
+@{
+    ViewData["Title"] = "Level5 NFT airdrop request";
+    Layout = "~/Views/Shared/_Layout_nft.cshtml";
+}
+<h3>current Level 5 NFT airdrop</h3>
+@{
+    int? available = Model
+        .Where(x => x.TokenId.Equals("82633748948647023736526960981414569203194491936575525873358624792635437481994"))
+        .FirstOrDefault()
+        .AvailableRequests;
+}
+<div>
+    <p>
+        current # available :  @available
+    </p>
+</div>
+<div>
+    <nft-card id="nft-card" contractAddress="0x2953399124f0cbb46d2cbacd8a89cf0599974963"
+              tokenId="82633748948647023736526960981414569203194491936575525873358624792635437481994">
+    </nft-card>
+    @*<script src="https://unpkg.com/embeddable-nfts/dist/nft-card.min.js"></script>*@
+</div>
+<div>
+    <img src="~/Data/NFT/wizard_free.png" alt="Wizard">
+</div>
+<br />
+<div>
+    <form name="nftRequest" id="requestForm" method="post" action="nftairdrop"
+          enctype="application/x-www-form-urlencoded">
+
+        <input name="tokenId" id="tokenId" type="hidden" value="">
+        <div>
+            <label for="requestAddress">your eth address</label>
+        </div>
+        <div>
+            <input name="requestAddress" type="text" />
+        </div>
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+<br />
+<div>
+    <h4>Check out the rest of the collection below</h4>
+    <a href="https://opensea.io/collection/level5dudes" font-size: 25px target="_blank">
+        <img src="~/Data/NFT/level5dudes_banner.png" alt="Wizard">
+    </a>
+</div>
+
+<script type="text/javascript">
+    //get tokenId
+    var tokenId = document.getElementById("nft-card").getAttribute("tokenId");
+    //set form value
+    document.getElementById('tokenId').value = tokenId;
+</script>
+
+
+
+
+

@@ -1,5 +1,22 @@
 ﻿<!DOCTYPE html>
 <style>
+
+    iframe {
+        width: 100%;
+        height: 800px;
+    }
+
+/*    a {
+        font-size: 100px
+    }*/
+
+    fieldset, legend {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+
     table, td, th, div {
         border: 1px white;
         color: white;
@@ -13,21 +30,39 @@
     head {
         padding: 35px;
     }
+    html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 5px;
+    }
+
+    #mapDiv {
+        width: 100%;
+        height: 100%;
+    }
+
+    module {
+        float: left;
+        margin-right: 25px;
+    }
+
 </style>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @*@RenderSection("Styles", false);*@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">*@
     <link href="~/css/site.css")" rel="stylesheet" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @*<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176100366-7"></script>
@@ -40,7 +75,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">Level 5</a>
+        <a class="navbar-brand">NFT request</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,33 +84,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="~/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/highscores/">Scores<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/users/">Users<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/info/">Info<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/links/">Links<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/builds/">Builds<span class="sr-only">(current)</span></a>
-                </li>
                 @*<li class="nav-item">
-            <a class="nav-link" href="~/changelog/">Changelog<span class="sr-only">(current)</span></a>
-        </li>*@
-                <li class="nav-item">
-                    <a class="nav-link" href="~/serverstats/">Server Stats<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="~/serialkiller/add/killer/">Add Killer<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="~/nftairdrop/">NFT Airdrop<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="~/swagger/index.html" target="_blank">Swagger<span class="sr-only">(current)</span></a>
-                </li>
+                    <a class="nav-link" href="~/serialkiller/add/crime/">Add Crime<span class="sr-only">(current)</span></a>
+                </li>*@
             </ul>
         </div>
     </nav>

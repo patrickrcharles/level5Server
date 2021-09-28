@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using mysql_scaffold_dbcontext_test.Controllers.Utility;
 using mysql_scaffold_dbcontext_test.Models.nftairdrop;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +26,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers.nftairdrop
             //return View(await _context.Nft.ToListAsync());
             return View(await _context.Nft.ToListAsync());
         }
+        [Route("viewrequests")]
+        [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IActionResult> ViewRequests()
+        //public IActionResult Airdrop()
+        {
+            //return View(await _context.Nft.ToListAsync());
+            return View(await _context.Nftrequest.ToListAsync());
+        }
 
         [HttpPost]
         [Route("[controller]")]
@@ -32,10 +43,15 @@ namespace mysql_scaffold_dbcontext_test.Controllers.nftairdrop
         {
             try
             {
-
                 string tokenid = Request.Form["tokenId"].ToString() ?? "";
                 string requestAddress = Request.Form["requestAddress"].ToString() ?? "";
                 string name = "";
+
+                if (!UtilityFunctions.IsValidEthereumAddress(requestAddress))
+                {
+                    string returnString = "requestAddress : " + requestAddress + "\nis not a valid Ethereum address"; 
+                    return BadRequest(returnString);
+                }
 
                 int? available = _context.Nft.Where(x => x.TokenId == tokenid).FirstOrDefault().AvailableRequests;
                 int? max = _context.Nft.Where(x => x.TokenId == tokenid).FirstOrDefault().MaxRequests;
@@ -70,6 +86,8 @@ namespace mysql_scaffold_dbcontext_test.Controllers.nftairdrop
                     nftRequest.TokenId = tokenid;
                     nftRequest.RequestAddress = requestAddress;
                     nftRequest.Transferred = 0;
+                    nftRequest.TimeStamp = DateTime.Now;
+                    //nftRequest.IpAddress
 
                     _context.Nftrequest.Add(nftRequest);
                     await _context.SaveChangesAsync();

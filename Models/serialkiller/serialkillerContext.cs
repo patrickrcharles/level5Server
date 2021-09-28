@@ -25,8 +25,10 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
         {
             if (!optionsBuilder.IsConfigured)
             {
+#pragma warning disable CS1030 // #warning directive
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql("server=database-1.ctnfhe6sfb4k.us-east-2.rds.amazonaws.com;user id=admin;pwd=GREENelk93;database=serialkiller;persistsecurityinfo=True", x => x.ServerVersion("8.0.23-mysql"));
+#pragma warning restore CS1030 // #warning directive
             }
         }
 
@@ -211,7 +213,7 @@ namespace mysql_scaffold_dbcontext_test.Models.serialkiller
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Note)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("note")
                     .HasColumnType("varchar(255)")
                     .HasCharSet("utf8mb4")

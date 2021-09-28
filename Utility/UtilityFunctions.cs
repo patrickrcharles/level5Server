@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.Utility
@@ -28,6 +29,17 @@ namespace mysql_scaffold_dbcontext_test.Controllers.Utility
 
             System.Diagnostics.Debug.WriteLine("finalString : "+ finalString);
             return finalString;
+        }
+
+        public static bool IsValidEthereumAddress(string ethereumAddress)
+        {
+            String pattern = "^0x[0-9a-f]{40}$";
+            Match match = Regex.Match(ethereumAddress, pattern, RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -75,6 +75,16 @@ namespace mysql_scaffold_dbcontext_test.Models.nftairdrop
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
+                entity.Property(e => e.IpAddress)
+                    .HasColumnName("ipAddress")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.TimeStamp)
+                    .HasColumnName("timeStamp")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.Transferred).HasColumnName("transferred");
             });
 

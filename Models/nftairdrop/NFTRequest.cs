@@ -9,6 +9,8 @@ namespace mysql_scaffold_dbcontext_test.Models.nftairdrop
         public string Name { get; set; }
         public string TokenId { get; set; }
         public string RequestAddress { get; set; }
+        public string IpAddress { get; set; }
+        public DateTime TimeStamp { get; set; }
         public int? Transferred { get; set; }
     }
 }

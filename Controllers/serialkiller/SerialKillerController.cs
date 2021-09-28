@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
 using mysql_scaffold_dbcontext_test.Models.serialkiller;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
@@ -20,6 +16,14 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
             _context = context;
         }
 
+        [Route("home")]
+        [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         [Route("add/crime")]
         [HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
@@ -31,7 +35,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 {
                     Killers = _context.Killers,
                     Victims = _context.Victims,
-                    Crimes = _context.Crimes
+                    Crimes = _context.Crimes,
+                    KillerLocations = _context.KillerLocations,
+                    Notes = _context.Notes
                 };
                 return View(crimeViewModel);
             }
@@ -52,7 +58,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 {
                     Killers = _context.Killers,
                     Victims = _context.Victims,
-                    Crimes = _context.Crimes
+                    Crimes = _context.Crimes,
+                    KillerLocations = _context.KillerLocations,
+                    Notes = _context.Notes
                 };
                 return View(crimeViewModel);
             }
@@ -63,7 +71,6 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
             }
         }
 
-        [MapToApiVersion("2")]
         [HttpPost("crime")]
         public async Task<ActionResult> PostCrime([FromForm] Crime crime)
         {
@@ -74,27 +81,26 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 string victimId = Utility.KeyGenerator.GetUniqueKey(30, "victim"); ;
                 string noteId = Utility.KeyGenerator.GetUniqueKey(30, "note");
                 string locationId = Utility.KeyGenerator.GetUniqueKey(30, "location");
-                string killerId = Request.Form["killerSelected"];
-                string crimeType = Request.Form["crimeType"];
+                string killerId = Request.Form["killerSelected"].ToString() ?? "";
+                string crimeType = Request.Form["crimeType"].ToString() ?? "";
+                string noteText = Request.Form["note"].ToString() ?? "";
                 // create datetime
                 string month = Request.Form["month"];
                 string day = Request.Form["day"];
                 string year = Request.Form["year"];
+                string state = Request.Form["state"].ToString() ?? "state";
                 DateTime fullDate = DateTime.Parse(year + "-" + month + "-" + day);
 
-                System.Diagnostics.Debug.WriteLine("killerName from dropdown : " + killerId);
-                System.Diagnostics.Debug.WriteLine("crimeType from dropdown : " + crimeType);
-                System.Diagnostics.Debug.WriteLine("month : " + month);
-                System.Diagnostics.Debug.WriteLine("day : " + day);
-                System.Diagnostics.Debug.WriteLine("year : " + year);
-                System.Diagnostics.Debug.WriteLine("full date : " + fullDate.ToString());
-
-                crime.Crimeid = crimeId;
-                crime.VictimId = victimId;
-                crime.CrimeType = crimeType;
-                crime.KillerId = killerId;
+                crime.Crimeid = crimeId ?? "";
+                crime.VictimId = victimId ?? "";
+                crime.CrimeType = crimeType ?? "";
+                crime.KillerId = killerId ?? "";
                 crime.Date = fullDate;
-
+                if (String.IsNullOrEmpty(crime.FirstName)) { crime.FirstName = "";}
+                if (String.IsNullOrEmpty(crime.MiddleName)) { crime.MiddleName = "";}
+                if (String.IsNullOrEmpty(crime.LastName)) { crime.LastName = "";}
+                if (String.IsNullOrEmpty(crime.City)) { crime.City = "";}
+                crime.State = state ?? "state";
 
                 _context.Crimes.Add(crime);
                 await _context.SaveChangesAsync();
@@ -103,9 +109,9 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 victim.VictimId = victimId;
                 victim.CrimeId = crimeId;
                 victim.KillerId = killerId;
-                victim.FirstName = crime.FirstName;
-                victim.MiddleName = crime.MiddleName;
-                victim.LastName = crime.LastName;
+                victim.FirstName = crime.FirstName.ToString() ?? "";
+                victim.MiddleName = crime.MiddleName.ToString() ?? "";
+                victim.LastName = crime.LastName.ToString() ?? "";
                 victim.CrimeType = crimeType;
                 victim.CrimeDate = fullDate;
 
@@ -113,11 +119,30 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 await _context.SaveChangesAsync();
 
                 // add killer location
+                KillerLocation killerLocation = new KillerLocation();
+                killerLocation.LocationId = locationId;
+                killerLocation.KillerId = killerId;
+                killerLocation.Date = crime.Date;
+                killerLocation.City = crime.City;
+                killerLocation.State = state;
 
-                // add notes
+                _context.KillerLocations.Add(killerLocation);
+                await _context.SaveChangesAsync();
 
+                // add notes. null check first
+                if (!String.IsNullOrEmpty(noteText))
+                {
+                    Notes note = new Notes();
+                    note.NoteId = noteId;
+                    note.KillerId = killerId;
+                    note.Note = noteText;
 
-                return Ok("totally worked");
+                    _context.Notes.Add(note);
+                    await _context.SaveChangesAsync();
+                }
+
+                //return (ActionResult)AddCrime();
+                return Redirect("add/crime");
             }
             catch (DbUpdateConcurrencyException e)
             {
@@ -125,43 +150,46 @@ namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
                 return BadRequest();
             }
         }
-        [MapToApiVersion("2")]
         [HttpPost("killer")]
         public async Task<ActionResult> PostKiller([FromForm] Killer killer)
         {
-            //System.Diagnostics.Debug.WriteLine("-----  name : " + crime.FirstName);
-            //System.Diagnostics.Debug.WriteLine("-----  name : " + crime.MiddleName);
-            //System.Diagnostics.Debug.WriteLine("-----  name : " + crime.LastName);
-
             try
             {
-                // max description is 15 characters
-                //string crimeId = Utility.KeyGenerator.GetUniqueKey(30, "crime");
-                //string victimId = Utility.KeyGenerator.GetUniqueKey(30, "victim"); ;
-                //string noteId = Utility.KeyGenerator.GetUniqueKey(30, "note");
-                //string locationId = Utility.KeyGenerator.GetUniqueKey(30, "location");
                 string killerId = Utility.KeyGenerator.GetUniqueKey(30, "killer");
-                //string crimeType = Request.Form["crimeType"];
+                string noteId = Utility.KeyGenerator.GetUniqueKey(30, "note");
+                string locationId = Utility.KeyGenerator.GetUniqueKey(30, "location");
+                string noteText = Request.Form["note"];
+                if (string.IsNullOrEmpty(noteText)) { noteText = ""; }
                 // create datetime
                 string month = Request.Form["month"];
                 string day = Request.Form["day"];
                 string year = Request.Form["year"];
                 DateTime fullDate = DateTime.Parse(year + "-" + month + "-" + day);
 
-                System.Diagnostics.Debug.WriteLine("killerName from dropdown : " + killerId);
-                //System.Diagnostics.Debug.WriteLine("crimeType from dropdown : " + crimeType);
-                System.Diagnostics.Debug.WriteLine("month : " + month);
-                System.Diagnostics.Debug.WriteLine("day : " + day);
-                System.Diagnostics.Debug.WriteLine("year : " + year);
-                System.Diagnostics.Debug.WriteLine("full date : " + fullDate.ToString());
-
                 killer.KillerId = killerId;
                 killer.Born = fullDate;
+                if (string.IsNullOrEmpty(killer.FirstName)) { killer.FirstName = ""; }
+                if (string.IsNullOrEmpty(killer.MiddleName)) { killer.MiddleName = ""; }
+                if (string.IsNullOrEmpty(killer.LastName)) { killer.LastName = ""; }
 
                 _context.Killers.Add(killer);
                 await _context.SaveChangesAsync();
 
-                return Ok("totally worked");
+                // add notes. null check first
+                if (!string.IsNullOrEmpty(noteText))
+                {
+                    Notes note = new Notes();
+                    note.NoteId = noteId;
+                    note.KillerId = killerId;
+                    note.Note = noteText;
+
+                    _context.Notes.Add(note);
+                    await _context.SaveChangesAsync();
+                }
+
+                //return Ok("totally worked");
+                //return RedirectToAction("AddKiller");
+                return Redirect("add/killer");
             }
             catch (DbUpdateConcurrencyException e)
             {

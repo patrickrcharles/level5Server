@@ -1,37 +1,9 @@
 ﻿@model mysql_scaffold_dbcontext_test.Models.serialkiller.CrimeViewModel
-@*@using mysql_scaffold_dbcontext_test.Models.serialkiller.Killer*@
-@*@using mysql_scaffold_dbcontext_test.Models.serialkiller;*@
-@*@model dynamic*@
-
-@{
-    ViewBag.Title = "Home Page";
-}
 
 @{
     ViewData["Title"] = "Add Killer";
     Layout = "~/Views/Shared/_Layout_serialKiller.cshtml";
 }
-
-<style type="text/css">
-    html {
-        height: 100%
-    }
-
-    body {
-        height: 100%;
-        margin: 5px;
-    }
-
-    #mapDiv {
-        width: 100%;
-        height: 100%;
-    }
-
-    table {
-        float: left;
-        margin-right: 25px;
-    }
-</style>
 
 <!DOCTYPE html>
 
@@ -41,59 +13,84 @@
     <title>Index</title>
 </head>
 <body>
-    <form action="~/serialkiller/killer" method="post" cellpadding="5" cellspacing="5">
-        <br>
-        <h4>Add Killer </h4>
-        <table>
-            <tr>
-                <td>first name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Killer.FirstName)
-                </td>
-            </tr>
+    <module>
+        <form action="~/serialkiller/killer" method="post" cellpadding="5" cellspacing="5">
+            <br>
+            <h4>Add Killer </h4>
+            <table>
+                <tr>
+                    <td>first name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Killer.FirstName)
+                    </td>
+                </tr>
 
+                <tr>
+                    <td>middle name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Killer.MiddleName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>last name: </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Killer.LastName)
+                    </td>
+                </tr>
+            </table>
+            <label>birth date: </label>
+            <br />
+            <label>month </label>
+            <select name="month" id="month">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <br />
+            <label>day </label>
+            <select name="day" id="day">
+                @for (int i = 1; i <= 31; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <br />
+            <label>year </label>
+            <select name="year" id="year">
+                @for (int i = 1900; i <= 2000; i++)
+                {
+                    <option value=@i>@i</option>
+                }
+            </select>
+            <br />
+            <label for="note">note:</label>
+            <br />
+            <textarea id="note" name="note" rows="10" cols="40"></textarea>
+            <br />
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </module>
+    <module>
+        <h4>Killers in database</h4>
+        <table cellpadding="5" cellspacing="5">
             <tr>
-                <td>middle name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Killer.MiddleName)
-                </td>
+                <th>
+                    Name
+                </th>
             </tr>
-            <tr>
-                <td>last name: </td>
-                <td>
-                    @Html.TextBoxFor(m => Model.Killer.LastName)
-                </td>
-            </tr>
+            @{
+                Model.Killers = Model.Killers.OrderByDescending(x => x.Id);
+            }
+            @foreach (var c in Model.Killers)
+            {
+                <tr>
+                    <td>@c.FirstName @c.MiddleName @c.LastName</td>
+                </tr>
+            }
         </table>
-        @*date *@
-        <label>birth date: </label>
-        <br />
-        <label>month </label>
-        <select name="month" id="month">
-            @for (int i = 1; i <= 12; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <label>day </label>
-        <select name="day" id="day">
-            @for (int i = 1; i <= 31; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <label>year </label>
-        <select name="year" id="year">
-            @for (int i = 1900; i <= 2000; i++)
-            {
-                <option value=@i>@i</option>
-            }
-        </select>
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-    </form>
-
+    </module>
 </body>
 </html>
 

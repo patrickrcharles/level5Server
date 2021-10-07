@@ -737,6 +737,9 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
                         case 20:
                             highscores.ModeName = "Bash up some Nerds";
                             break;
+                        case 21:
+                            highscores.ModeName = "Cage Match";
+                            break;
                         case 98:
                             highscores.ModeName = "Arcade";
                             break;

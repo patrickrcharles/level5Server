@@ -63,7 +63,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
             ViewData["MoneyBallAttSortParm"] = sortOrder == "moneyBallAtt_asc" ? "moneyBallAtt_desc" : "moneyBallAtt_asc";
             ViewData["TrafficSortParm"] = sortOrder == "traffic_asc" ? "traffic_desc" : "traffic_asc";
             ViewData["EnemiesSortParm"] = sortOrder == "enemies_asc" ? "enemies_desc" : "enemies_asc";
-            ViewData["EnemiesKilledSortParm"] = sortOrder == "enemiesKilledShots_asc" ? "enemiesKilledShots_desc" : "enemiesKilledShots_asc";
+            ViewData["EnemiesKilledSortParm"] = sortOrder == "enemiesKilled_asc" ? "enemiesKilled_desc" : "enemiesKilled_asc";
             ViewData["SniperSortParm"] = sortOrder == "sniper_asc" ? "sniper_desc" : "sniper_asc";
             ViewData["SniperModeSortParm"] = sortOrder == "sniperMode_asc" ? "sniperMode_desc" : "sniperMode_asc";
             ViewData["SniperModeNameSortParm"] = sortOrder == "sniperModeName_asc" ? "sniperModeName_desc" : "sniperModeName_asc";

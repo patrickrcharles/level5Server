@@ -279,7 +279,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
             }
 
             // enemies killed highscore
-            if (modeid == 20)
+            if (modeid == 20 || modeid == 21 || modeid == 22)
             {
                 var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
 

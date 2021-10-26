@@ -24,6 +24,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<ServerStats> ServerStats { get; set; }
         public virtual DbSet<UserReport> UserReports { get; set; }
+        public virtual DbSet<ServerMessage> ServerMessages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -345,6 +346,20 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
                     .HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<ServerMessage>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PRIMARY");
+                entity.ToTable("ServerMessages");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id");
+                entity.Property(e => e.Message)
+                    .HasColumnName("message")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             OnModelCreatingPartial(modelBuilder);

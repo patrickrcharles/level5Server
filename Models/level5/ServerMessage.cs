@@ -9,5 +9,6 @@ namespace mysql_scaffold_dbcontext_test.Models
     {
         public int Id { get; set; }
         public string Message { get; set; }
+        public string Date { get; set; }
     }
 }

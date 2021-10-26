@@ -23,7 +23,7 @@ namespace mysql_scaffold_dbcontext_test.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<IEnumerable<ServerMessage>>> GetAllVersions()
         {
-            return await _context.ServerMessages.OrderByDescending(x => x.Id).ToListAsync();
+            return await _context.ServerMessages.OrderByDescending(x => x.Id).Take(5).ToListAsync();
         }  
     }
 }

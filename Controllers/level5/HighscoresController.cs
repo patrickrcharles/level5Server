@@ -42,6 +42,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
             ViewData["CharacterSortParm"] = sortOrder == "character_asc" ? "character_desc" : "character_asc";
             ViewData["LevelSortParm"] = sortOrder == "level_asc" ? "level_desc" : "level_asc";
             ViewData["VersionSortParm"] = sortOrder == "version_asc" ? "version_desc" : "version_asc";
+            ViewData["DifficultySortParm"] = sortOrder == "difficulty_asc" ? "difficulty_desc" : "difficulty_asc";
             ViewData["TimeSortParm"] = sortOrder == "time_asc" ? "time_desc" : "time_asc";
             ViewData["TotalPointsSortParm"] = sortOrder == "totalPoints_asc" ? "totalPoints_desc" : "totalPoints_asc";
             ViewData["LongestShotSortParm"] = sortOrder == "longestShot_asc" ? "longestShot_desc" : "longestShot_asc";
@@ -274,6 +275,9 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                     case "time_desc":
                         highscores = highscores.OrderBy(s => s.Time).Take(50);
                         break;
+                    case "difficulty_desc":
+                        highscores = highscores.OrderBy(s => s.Difficulty).Take(50);
+                        break;
                     case "totalPoints_desc":
                         highscores = highscores.OrderBy(s => s.TotalPoints).Take(50);
                         break;
@@ -331,7 +335,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                     case "enemies_desc":
                         highscores = highscores.OrderBy(s => s.EnemiesEnabled).Take(50);
                         break;
-                    case "enemieskilled_desc":
+                    case "enemiesKilled_desc":
                         highscores = highscores.OrderBy(s => s.EnemiesKilled).Take(50);
                         break;
                     case "sniper_desc":
@@ -384,6 +388,9 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                         break;
                     case "time_asc":
                         highscores = highscores.OrderByDescending(s => s.Time).Take(50);
+                        break;
+                    case "difficulty_asc":
+                        highscores = highscores.OrderByDescending(s => s.Difficulty).Take(50);
                         break;
                     case "totalPoints_asc":
                         highscores = highscores.OrderByDescending(s => s.TotalPoints).Take(50);
@@ -442,7 +449,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                     case "enemies_asc":
                         highscores = highscores.OrderByDescending(s => s.EnemiesEnabled).Take(50);
                         break;
-                    case "enemieskilled_asc":
+                    case "enemiesKilled_asc":
                         highscores = highscores.OrderByDescending(s => s.EnemiesKilled).Take(50);
                         break;
                     case "sniper_asc":

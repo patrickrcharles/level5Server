@@ -51,6 +51,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
                 entity.Property(e => e.Characterid).HasColumnName("characterid");
+                entity.Property(e => e.Difficulty).HasColumnName("difficulty");
                 entity.Property(e => e.ConsecutiveShots).HasColumnName("consecutiveShots");
                 entity.Property(e => e.Date)
                     .IsRequired()

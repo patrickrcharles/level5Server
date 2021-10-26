@@ -22,6 +22,7 @@ namespace mysql_scaffold_dbcontext_test.Models
         public string Version { get; set; }
         public String Date { get; set; }
         public float Time { get; set; }
+        public int Difficulty { get; set; }
         public int TotalPoints { get; set; }
         public float LongestShot { get; set; }
         public float TotalDistance { get; set; }

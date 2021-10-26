@@ -76,6 +76,9 @@
                 @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSortParm })
             </th>
             <th>
+                @Html.ActionLink("Enemies Killed", "Index", new { sortOrder = ViewBag.EnemieskilledSortParm })
+            </th>
+            <th>
                 @Html.ActionLink("Total Points", "Index", new { sortOrder = ViewBag.TotalPointsSortParm })
             </th>
             <th>
@@ -133,9 +136,6 @@
                 @Html.ActionLink("Enemies Enabled", "Index", new { sortOrder = ViewBag.EnemiesSortParm })
             </th>
             <th>
-                @Html.ActionLink("Enemies Killed", "Index", new { sortOrder = ViewBag.EnemieskilledSortParm })
-            </th>
-            <th>
                 @Html.ActionLink("Sniper Enabled", "Index", new { sortOrder = ViewBag.SniperSortParm })
             </th>
             <th>
@@ -189,6 +189,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnemiesKilled)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPoints)
@@ -257,9 +260,6 @@
             {
                 <td>no</td>
             }
-            <td>
-                @Html.DisplayFor(modelItem => item.EnemiesKilled)
-            </td>
             @if (item.SniperEnabled == 1)
             {
                 <td>yes</td>

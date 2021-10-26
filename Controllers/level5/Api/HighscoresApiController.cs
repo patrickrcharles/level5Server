@@ -467,7 +467,7 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
             }
 
             // enemies killed highscore
-            if (modeid == 20)
+            if (modeid == 20 || modeid == 21 || modeid == 22)
             {
                 var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
 
@@ -738,6 +738,9 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
                             highscores.ModeName = "Bash up some Nerds";
                             break;
                         case 21:
+                            highscores.ModeName = "Battle Royal";
+                            break;
+                        case 22:
                             highscores.ModeName = "Cage Match";
                             break;
                         case 98:

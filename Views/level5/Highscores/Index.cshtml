@@ -7,26 +7,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>scores</h3>
+<h3>Recent scores</h3>
 <div>
     @using (Html.BeginForm())
     {
         <div class="form-group">
             find by username, platform, character, level, mode name or version:
             &nbsp;
-            @*@Html.DropDownList("filter", new List<SelectListItem>
-                         {
-                         new SelectListItem{ Text="...",Value="filter"},
-                         new SelectListItem{ Text="username",Value = "username" },
-                         new SelectListItem{ Text="platform", Value = "platform" },
-                         //new SelectListItem{ Text="hardcore", Value = "hardcore" },
-                         //new SelectListItem{ Text="modeid", Value = "modeid" },
-                         new SelectListItem{ Text="character", Value = "character" },
-                         new SelectListItem{ Text="level", Value = "level" },
-                         new SelectListItem{ Text="version", Value = "version" }
-                         },
-                         new { @class = "filters" })
-                &nbsp;*@
             @Html.TextBox("SearchString")
             <input type="submit" value="Search" />
         </div>
@@ -35,18 +22,6 @@
 
 <table class="table">
     <thead>
-        @*<tr>
-                <th>
-                    @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.ModeSortParm })
-                </th>
-                <th>
-                    First Name
-                </th>
-                <th>
-                    @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.PlatformSortParm })
-                </th>
-                <th></th>
-            </tr>*@
         <tr>
             <th>
                 @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })

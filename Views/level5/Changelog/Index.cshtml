@@ -4,255 +4,383 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    p {
+        font-size: 1rem;
+        font-family: sans-serif;
+        margin: 20px;
+    }
+</style>
+
 <h3>level 5 changelog </h3>
 <div>
     <p>
-        <h5>1.0</h5>
-        work in progress demo
+        <h5>3.3.7</h5>
+        soon
     </p>
     <p>
-        <h5>2.0</h5>
-        - added start screen menu
-        - added player select screen with player image and shooting stats
-        - added 4 new characters :
-        Ian, Woody, Marion, and Flash
-        - added quit to start menu command. press left or right shift + P
-        - changed quit game command to left or right sift + Q
+        <h5>3.3.6.1</h5>
+        - fix for game not connecting to serve for log in, posting scores, <br />
+        etc. had an issue where aws changed the server IP.<br />
+        - add links to level 5 NFT collection and NFT airdrop request<br />
+        - new character - Kamille<br />
+        - new character - [fighting only mode] Powerman<br />
     </p>
     <p>
-        <h5>2.1.0</h5>
-        - added new game mode: make most 7 pointers
-        - added new character: Hollywood
-        - Jessica now take a photo on each ctiical roll as a notifier
-        - added new Free play mode no time limit, no conditions
-        - added new level, Snow area
+        <h5>3.3.6</h5>
+        - new character : Rob<br />
+        - new level : Boner Mountain<br />
+        - add SPACE BAR to controls for shoot. now you can do all shooting with just space bar<br />
+        - change mac osx build from .NET 4.xx -> .NET 2.0<br />
+        - remove code stripping<br />
+        - minor animation fix. main controller -> jump<br />
+        - fix issue with links menu redirecting on open in clicked too fast on touch screen<br />
+        - remove addressables<br />
+        - reduce time out for no users created and internet connection check<br />
+        - fix shot clock glitching display above goal<br />
+        - fixed issue where player single projectiles would not instantiate<br />
+        - added attack, block, special animation to Pony<br />
+        - updated or sped up animations and changed damage values for a lot of players<br />
+        - enemies dont damage while knocked down<br />
+        - add Special meter. can only use special meter when full. takes 4 seconds to recharge<br />
+        - added game tips display to start up. i forgot i did that months ago and had it disabled<br />
+        - added bug/suggestion report to links screen<br />
+        - only characters with full set of fighting moves can be selected if enemies<br />
+        enabled or game mode is 'Bash Up Some Nerds<br />
+        - added diffculty options EASY : max stats on any game mode but only receive half experience<br />
+        NORMAl is current level player stats and full experience<br />
+        - added obstacle option. when ON, rakes are instantiated in level that players + enemies can<br />
+        both step on<br />
+        - reworked start screen a little<br />
 
-        - fixed marion animation
-        - fixed woody animation
-        - fixed drop shadow position
-        - fixed issue with basketball going over the fence on the scrapyard
-        - updated Circle K level boundaries
-        - added stat summary of all shots on game end
-        - repositioned pause screen buttons
-        - added 7 point shots for shots greater than 100ft
-        - updated start UI with more stats display
-        - minor attempts at player balancing
+        known issues :
+        - if character already selected that doesnt have fighting moves and mode is switched, character will still spawn in fighting mode
+        - lots of issues with fighting. send a report in links-> submit report if you find anything
+    </p>
+    <p>
+        <h5>3.3.5.3.dev</h5>
+        - new character : Donut. existing cheerleader named 'Skidmark' but renamed and playable.<br />
+        - new character : J.C. Leger. Call Leger today.<br />
+        - rename cheerleader [Skidmark] to Donut<br />
+        - fix : issue [database] with certain database tables being dropped causing errors in leveling up players<br />
+        - fix : issue [xbox controller] with xbox controller pausing game on every shot attempt.removed input mapping for ui nav 'cancel'<br />
+        - fix : issue [start screen] down input on enemies option did not change option value<br />
+        - update : [animation] johnny dracula - shoot side<br />
+        - update : separate create account/login to existing account/ login local account into seprate scenes<br />
+    </p>
+    <p>
+        <h5>3.3.5.2</h5>
 
-        - added toggle run ON/OFF switch (Left shift + 1) Default : ON
-        - added toggle accuracy modifer (Left shift + 2)  Default : ON
-        (disables high score saving)
-        - added toggle pull ball to player during game (Left shift + 3, to use : press shoot button)
-        (disables high score saving) Default : OFF
-        - added toggle stats display during game (Left shift + 4) Default : OFF
+        - added 4 new attacks to character : ???<br />
+        - add server stats and high scores to website<br />
+        - ISSUE : game doesnt end unless ball touches ground<br />
+        - fix : if ball bounces on ground and hit bottom of rim, it is counted as made shot<br />
+        - fix : some stats can be negative or greater than max<br />
+        - fix : streamline database<br />
+        - fix : if not logged in, username in local scores is empty.<br />
+        - fix : if no internet, cant log in.<br />
+        - fix : time out on detecting internet is too long for login + start screen<br />
+        - not taking damage from certain enemy projectiles<br />
+        - new level, Cocaine Island<br />
+        - shitload of bug fixes and optimizations. i lost track because this isnt in active development anymore<br />
     </p>
     <p>
-        <h5>3.0</h5>
-        - added 6 new game mode:
-        make 5 shot from 5 different positons ( 3 point / 4 point / 3 + 4 point )
-        make 5 shot from 5 different positons but collect $1 for each shot made from marker.
-        every $5 you can buy a moneyball which will clear any marker entirely
-        ( 3 point / 4 point / 3 + 4 point )
-        - added ghost character
-        - added robot character
-        - new level Avenue B
-        - new level The Slab
-        - attempt at character leveling
-        - new shot meter system to determine shot accuracy
-        - added call ball on by default for every mode
-        - removed toggle call ball/ toggle accuracy modifier
-        - tons of ui fixes for readability
-        - new data saving for future online leaderboard
-        - xbox controller works for most. cant change start screen options but can play game and access pause screen options
-        - tons of shit in general. cant remember everything
+        <h5>3.3.5</h5>
+        =========================================================<br />
+        - added online leaderboard accessible in game or at<br />
+        http://skeletondistrict.com/highscores<br />
+        website has links for info and latest builds and more. work in prgress.<br />
+        online leaderboard will be hooked up to dev server until next game update<br />
+        =========================================================<br />
+
+        Known issues:<br />
+        11 new player do not have attacks/special attacks/ or block animations<br />
+        new characters only added for shooting only<br />
+
+        Changes:<br />
+        - add 11 new characters : (available in fighting modes but do not have attacks and special move animations)<br />
+        Wizard, Ashley, Sarah, Werewolf, Hector, Harry Charles, Old Real, Dallas, Dirty Ike, Pony, and Dan Russell<br />
+
+        - fixed swipe up on mobile not displaying high scores on stats page<br />
+        - fixed issue with shot clock timers not working on some levels<br />
+        - fixed issue if accuracy + release maxed out [100] player could not use upgrade point to increase range<br />
+        - fixed issue with infinite block on mobile<br />
+        - fixed issue with ball bouncing up through rim and counting as a made shot<br />
+        - added Falcons/Patriots scoreboard to Dome level<br />
+        - removed unused navmeshs and unused code for old achievement system from all scenes<br />
+        - player has chance to evade attack by enemies/vehicles/obstacles based on Luck value<br />
+        - on mobile platform, max number of enemies that can attack at once is half of standalone<br />
+        standalone : regular = 2, only harcore = 4, bash up nerds mode = 4, bash up nerds mode + hardcore = 6<br />
+        mobile : regular = 1, only harcore = 2, bash up nerds mode = 2, bash up nerds mode + hardcore = 3<br />
+        - added moneyball stats(3/4/all point contest) + most consecutive shot (any mode) to all time stats display<br />
+        - added 2 new tracks by Instagram username:stustumaru<br />
+        - updated database to add more stats to high scores to be used with online leaderboard<br />
+        - reduced time for 3/4/all point contest from 80/80/160 to 70/75/140. remaining time added as bonus points.<br />
+        - added database upgrade script. will upgrade database to current version regardless of currently installed version.<br />
+        will not erase player leveling progress<br />
+
+        - added traffic option back to game. work in progress<br />
+        - shit ton of fixes<br />
+
+        -added Sniper option for all game modes. A sniper will randomly shoot at you every 0-4 seconds. <br />
+        damage = 15, health regenerates.<br />
+        there is a 0.4 second delay between hearing the shot and getting hit.<br />
+
+        - added account screen for use with online leaderboard<br />
+        you can create a max of 5 users<br />
+        enter info to create a user and click 'create user' button<br />
+        clicking 'login' will take you to the 1 click login screen for existing users or you can just login with a guest account<br />
+        or you can enter a username and password for an existing user and click login. if successful you will be redirected to start<br />
+        screen and the top left will indicate the user is logged in<br />
+        - stats screen - added pagination to local and online scores<br />
+        - stats screen scores can be filtered by hardcore, enemies enabled, and traffic enabled or any combo of the three as well as by game mode<br />
+        - stats screen contains a button to submit scores to leaderboard if they havent been sent. such as in the case of no internet<br />
+        connectivity or if the request fails<br />
+
+        - credits page has clickable links that will open an external browser<br />
     </p>
     <p>
-        <h5>3.0.1</h5>
-        - fixed issue with flash npc in level when flash was selected as player
-        - character stat tweaks
-        - new character: Meggadeth
-        - Woody select screen change image, change idle animation
-        - fixed shot meter issue : value shown was not actual value used in caclulating basketball launch
-        - swapped shoot from left control to right control
+        <h5>3.3.4</h5>
+        - added dunk system. most players should have a basic dunk. get close to goal and jump, dunking is automatic<br />
+        for two pointers.<br />
+        - added new banging track by ig:stustumaru. one of 2 tracks randonly chosen by sound manager to play.<br />
+        tracks play on a list. on pc, press [left shift + 0] to manually go to next track<br />
+        - smaller timer and current score tracker placed above basketball goal<br />
+        - high scores now display a separate category of high scores based on hardcore mode enabled<br />
+        - enabled call ball to player for 3/4/all point contest on hardcore mode<br />
+        - remove cheerleader drop shadows to reduce draw calls<br />
+        - added Npcs : Evelyn Skeleton, Gremlins (Cooter and Sticky)<br />
+        - added Enemies :<br />
+        ??? : long range attack + 4 random close attacks<br />
+        Doctor Blood : long range attack + 3 close attacks<br />
+        black ninja : sword attack + long range attack<br />
+        white ninja : sword attack<br />
+        robot : hatchet attack<br />
+
+        - added new Player : Evelyn Skeleton<br />
+        - added Player/Enemy health system + Player block stamina<br />
+        Player health = 100, block = 25<br />
+        health regenrates +1 every second if not fighting, shooting, knocked down or taking damage<br />
+        block regenrates +1 every 2 second if not fighting, shooting, knocked down or taking damage<br />
+        Kill enemy +10% of their max health. +5 minion, +15 boss<br />
+        Enemy Health - minions = 50 | boss = 150. only 1 boss is allowed at a time.<br />
+
+        - added Enemy disintegrations and death (no health, you dead)<br />
+        - added multiple enemy attack system and long range attacks<br />
+        if enemy has more than one attack, animation is randomized<br />
+
+        - added Player attack queue.<br />
+        Default : max 2 enemies attacking<br />
+        Hardcore mode : max 4 enemies attacking<br />
+        - New Level - Rusty's<br />
+        - New Level - The Dome<br />
+        - added new game modes :<br />
+
+        Points By distance : Very unbalanced and pretty hard. especially on mobile right now<br />
+        1 point per every 10 feet example 84 ft shoot is worth 8 points. max range is 1000 feet worth 100 points.<br />
+        pretty much impossible to make a shot over 1200 feet without widening the rim and<br />
+        throwing off basic 3/4/7 point shot physics and accuracy stats<br />
+
+        Bash Up Some Nerds :<br />
+        fight enemies, no basketball. 4 enemies at a time on desktop, 4 mobile<br />
+        kill an enemy, another one spawns until your heal is depleted. receive 10% of enemy's max health on kill<br />
+
+        - note : in all game modes with enemies EXCEPT 'Bash Up Some Berds', you receive 10% of the enemy you kills starting help<br />
+        ex. ninja starts with 50 health, on kill you receive +5 health<br />
+        wizard starts with 100, on kill, + 10 health<br />
+        - game ends if Enemies enabled and player runs out of health<br />
+        - fix :  issue with database lock on load new character in database helper class<br />
+        - fix : start screen swipe/up down on options deselected current option.<br />
+        - fix : disabled adding progression points to players that reach max stat level<br />
+        100 max for all except max luck = 10<br />
+        - performance increases ~15%<br />
+
+        - change touch controls<br />
+        hold top left screen : block<br />
+        bottom left screen : move<br />
+        top right : hold top left + tap top right --> special attack<br />
+        bottom right : hold top left + tap bottom right --> regular attack<br />
     </p>
     <p>
-        <h5>3.0.2</h5>
-        - Fixed a bug that would cause application quit on end game screen or pause screen if mouse clicked
+        <h5>3.3.3</h5>
+        - added sunglasses to some levels that enable you to see through the lies of the jedi!<br />
+        added vignette to effect, peformance reduced by roughly 7-9fps. this is too high of a<br />
+        performance hit--<br />
+        - change sprite mesh to full rect reduced verts + tris count by roughly 80-90%<br />
+        - new player : Baby, my neighbor's cat<br />
+        - added 8 enemies ninja, james, ian, executioner, werewolf, nza, old real, wizard<br />
+        - added 20 player attacks, player special attacks, and blocking<br />
+        - added fan section. currently 12 set npcs<br />
+        - disabled traffic, currently reworking<br />
+        - disabled lighting for performance<br />
+        - disabled particle simulators (snow, fog, etc)<br />
+        - moved 4 point line back to 40 feet<br />
+        - added hardcore option : disables shot, range meter, and call ball to player<br />
+        implemented selectable option and highscore displays if hardcore mode enabled on high score<br />
+
+        - available dev options:<br />
+        toggle run : left shift + 1<br />
+        toggle ui display : left shift + 2<br />
+        max player stats : left shift + 3<br />
+        toggle fps display : left shift + 5<br />
+        instantiate rob : (lightning strike knocks down all enemies) left shift + 6<br />
+    </p>
+    <p>
+        <h5>3.3.2</h5>
+        - fixed issue where long shots on level 1 were blocked by boundaries causing the shot to not reach the goal<br />
+        I believe this is a corrupted database issue and and am working on a fix<br />
+        - minor player fixes.<br />
+        ball release position was off by a little on a few characters<br />
+        player drops ball on knockdown<br />
+        ui stats not displaying some percentages correctly<br />
+        - added mouse droid on levels 'slab' and 'time jail'<br />
+        - added lawyer billboards and Skeleton and Son, Federal Breast Inspector, PI to relevant levels<br />
+        - player leveling system<br />
+        note : you can level all players in free play even if they are not unlocked for game modes<br />
+        - new characters<br />
+        Executioner<br />
+        Wizards of Boat (when chosen one of the two is randomly chosen to spawn. working on a tag in system)<br />
+        - new level - Nexus<br />
+        - new vehicle - Dr Blood with a jetpack<br />
+        - new cheerleaders : Skidmark and Dan Russell<br />
+        - tons of npc for background use<br />
+        - new accuracy variables; Range and Release plus a UI range meter that gives current range %<br />
+        : Range affects shot distance. Default value = 25 ft, on level up + 5 ft<br />
+        example -- range = 40 ft, shot distance = 50 ft give you a 40/50 = 80% chance to reach the rim<br />
+        : Release affects shot height, Default value = 70, on level up + 1<br />
+        example -- release = 70 gives a 70% chance of removing accuracy modifer<br />
+        ELSE modifer = add to Y launch +-(100-70)*0.5<br />
+        - crapload of refactors and optimizations<br />
+        - animated basketball finally. it looks like crap<br />
+        - Free play allows player leveling of unlocked players<br />
+        - new arcade mode - Free play but with no player leveling and max stats.<br />
+        - changed some game modes length from 2 minutes to 3 minutes<br />
+        - added Moneyball game modes to PC, MAC, LINUX buids<br />
+        - upgraded UI to full HD (1920 x 1080)<br />
+        - disabled unlock players and achievements for this build. not working well with player leveling.<br />
+        - added music to levels. 1 track only. if you dont like, tough shit. it's a banger.<br />
+        - boosted overall game performance by approximately 40%<br />
+        - available dev options:<br />
+        max player stats : left shift + 4<br />
+        toggle fps display : left shift + 5<br />
+    </p>
+    <p>
+        <h5>3.3.1</h5>
+        - tons performance optimizations. (texture compressions, memory management, etc) idk im getting 1500 fps on my computer<br />
+        - gamepad support for usb gamepads, Xbox, PS3 + PS4 controllers<br />
+        - touch screen support for mobile builds<br />
+        - first android build build<br />
+        - removed moneyball game modes for Android build for now<br />
+        - in general, a shitload of refactoring and fixes you wouldnt notice<br />
+    </p>
+    <p>
+        <h5>3.3.0</h5>
+        - new 'vehicle' : Rad Tony on horse, marching squad of robots<br />
+        - added Stats page with top 10 scores for each game mode and all time stats played (total points, time played, shots made/ attempted, etc)<br />
+        - 3 new game modes, 3 point Contest, 4 point Contest, All point contest (3s and 4s)<br />
+        - 2 new levels : Party Mansion, Time Jail<br />
+        - 2 new characters : Christy and Johnny Dracula<br />
+        - 2 new Friend : Ricky the probe droid, Wyld Stallyns<br />
+        - unlocked all players on free play<br />
+    </p>
+    <p>
+        <h5>3.2.0</h5>
+        - new game modes : most consecutive shots. game will not end if Player has a streak of at least 2 consecutive made<br />
+        - new game modes : In the pocket. make 5 consecutive shots and gain bonus points for each shot made.
+        3 pointer + 1, 4 pointer + 2, 7 pointer + 3<br />
+        - player knockdowns and traffic on street levels<br />
+        - cheerleader unlock and select system<br />
+        - player unlock system<br />
+        - new character : Jimmy Ford<br />
+        - new level : Tammy's<br />
+        - 17 new vehicles<br />
+        - achievement system framework<br />
     </p>
     <p>
         <h5>3.1.0</h5>
         - 5 new characters : AK-47, Rad Tony, Unnamed Character, Johnny Dracula, Sam
-        - 4 new 'cheerleaders' : Worker and Parasite, Woman with airhorn, Toups struck by lightning, Dallas with rimshot
-        - 2 new levels : caffe and sudan (from that scene in white men cant jump)
-        - database for storing high scores and all time stats
-        - system to record 'most consecutive shots made
-        - new camera views to switch between
-        - camera now stops moving to allow goal visible on corner 3/4 shots
-        - added toggle for second smaller camera to show a static view off goal when goal is offscreen.
-        OFF by default
-        enable with left shift + 4
-        - clean up doctor blood animations and others
-        - implemented locked player system. Most Players will need to be unlocked on next build.
-        - fixed issue where run animation wouldnt activate (if player has one) if toggle run was enabled
-        - lots of bug fixes and issues clean up
+        - 4 new 'cheerleaders' : Worker and Parasite, Woman with airhorn, Toups struck by lightning, Dallas with rimshot<br />
+        - 2 new levels : caffe and sudan (from that scene in white men cant jump)<br />
+        - database for storing high scores and all time stats<br />
+        - system to record 'most consecutive shots made<br />
+        - new camera views to switch between<br />
+        - camera now stops moving to allow goal visible on corner 3/4 shots<br />
+        - added toggle for second smaller camera to show a static view off goal when goal is offscreen.<br />
+        OFF by default<br />
+        enable with left shift + 4<br />
+        - clean up doctor blood animations and others<br />
+        - implemented locked player system. Most Players will need to be unlocked on next build.<br />
+        - fixed issue where run animation wouldnt activate (if player has one) if toggle run was enabled<br />
+        - lots of bug fixes and issues clean up<br />
     </p>
     <p>
-        <h5>3.2.0</h5>
-        - new game modes : most consecutive shots. game will not end if Player has a streak of at least 2 consecutive made
-        - new game modes : In the pocket. make 5 consecutive shots and gain bonus points for each shot made.
-        3 pointer + 1, 4 pointer + 2, 7 pointer + 3
-        - player knockdowns and traffic on street levels
-        - cheerleader unlock and select system
-        - player unlock system
-        - new character : Jimmy Ford
-        - new level : Tammy's
-        - 17 new vehicles
-        - achievement system framework
+        <h5>3.0.2</h5>
+        - Fixed a bug that would cause application quit on end game screen or pause screen if mouse clicked<br />
     </p>
     <p>
-        - new 'vehicle' : Rad Tony on horse, marching squad of robots
-        - added Stats page with top 10 scores for each game mode and all time stats played (total points, time played, shots made/ attempted, etc)
-        - 3 new game modes, 3 point Contest, 4 point Contest, All point contest (3s and 4s)
-        - 2 new levels : Party Mansion, Time Jail
-        - 2 new characters : Christy and Johnny Dracula
-        - 2 new Friend : Ricky the probe droid, Wyld Stallyns
-        - unlocked all players on free play
+        <h5>3.0.1</h5>
+        - fixed issue with flash npc in level when flash was selected as player<br />
+        - character stat tweaks<br />
+        - new character: Meggadeth<br />
+        - Woody select screen change image, change idle animation<br />
+        - fixed shot meter issue : value shown was not actual value used in caclulating basketball launch<br />
+        - swapped shoot from left control to right control<br />
     </p>
     <p>
-        <h5>3.3.1</h5>
-        - tons performance optimizations. (texture compressions, memory management, etc) idk im getting 1500 fps on my computer
-        - gamepad support for usb gamepads, Xbox, PS3 + PS4 controllers
-        - touch screen support for mobile builds
-        - first android build build
-        - removed moneyball game modes for Android build for now
-        - in general, a shitload of refactoring and fixes you wouldnt notice
+        <h5>3.0</h5>
+        - added 6 new game mode:<br />
+        make 5 shot from 5 different positons ( 3 point / 4 point / 3 + 4 point )<br />
+        make 5 shot from 5 different positons but collect $1 for each shot made from marker.<br />
+        every $5 you can buy a moneyball which will clear any marker entirely<br />
+        ( 3 point / 4 point / 3 + 4 point )<br />
+        - added ghost character<br />
+        - added robot character<br />
+        - new level Avenue B<br />
+        - new level The Slab<br />
+        - attempt at character leveling<br />
+        - new shot meter system to determine shot accuracy<br />
+        - added call ball on by default for every mode<br />
+        - removed toggle call ball/ toggle accuracy modifier<br />
+        - tons of ui fixes for readability<br />
+        - new data saving for future online leaderboard<br />
+        - xbox controller works for most. cant change start screen options but can play game and access pause screen options<br />
+        - tons of shit in general. cant remember everything<br />
     </p>
     <p>
-        <h5>3.3.2</h5>
-        - fixed issue where long shots on level 1 were blocked by boundaries causing the shot to not reach the goal
-        I believe this is a corrupted database issue and and am working on a fix
-        - minor player fixes.
-        ball release position was off by a little on a few characters
-        player drops ball on knockdown
-        ui stats not displaying some percentages correctly
-        - added mouse droid on levels 'slab' and 'time jail'
-        - added lawyer billboards and Skeleton and Son, Federal Breast Inspector, PI to relevant levels
-        - player leveling system
-        note : you can level all players in free play even if they are not unlocked for game modes
-        - new characters
-        Executioner
-        Wizards of Boat (when chosen one of the two is randomly chosen to spawn. working on a tag in system)
-        - new level - Nexus
-        - new vehicle - Dr Blood with a jetpack
-        - new cheerleaders : Skidmark and Dan Russell
-        - tons of npc for background use
-        - new accuracy variables; Range and Release plus a UI range meter that gives current range %
-        : Range affects shot distance. Default value = 25 ft, on level up + 5 ft
-        example -- range = 40 ft, shot distance = 50 ft give you a 40/50 = 80% chance to reach the rim
-        : Release affects shot height, Default value = 70, on level up + 1
-        example -- release = 70 gives a 70% chance of removing accuracy modifer
-        ELSE modifer = add to Y launch +-(100-70)*0.5
-        - crapload of refactors and optimizations
-        - animated basketball finally. it looks like crap
-        - Free play allows player leveling of unlocked players
-        - new arcade mode - Free play but with no player leveling and max stats.
-        - changed some game modes length from 2 minutes to 3 minutes
-        - added Moneyball game modes to PC, MAC, LINUX buids
-        - upgraded UI to full HD (1920 x 1080)
-        - disabled unlock players and achievements for this build. not working well with player leveling.
-        - added music to levels. 1 track only. if you dont like, tough shit. it's a banger.
-        - boosted overall game performance by approximately 40%
-        - available dev options:
-        max player stats : left shift + 4
-        toggle fps display : left shift + 5
+        <h5>2.1.0</h5>
+        - added new game mode: make most 7 pointers <br />
+        - added new character: Hollywood<br />
+        - Jessica now take a photo on each ctiical roll as a notifier<br />
+        - added new Free play mode no time limit, no conditions<br />
+        - added new level, Snow area<br />
+        - fixed marion animation<br />
+        - fixed woody animation<br />
+        - fixed drop shadow position<br />
+        - fixed issue with basketball going over the fence on the scrapyard<br />
+        - updated Circle K level boundaries<br />
+        - added stat summary of all shots on game end<br />
+        - repositioned pause screen buttons<br />
+        - added 7 point shots for shots greater than 100ft<br />
+        - updated start UI with more stats display<br />
+        - minor attempts at player balancing<br />
+
+        - added toggle run ON/OFF switch (Left shift + 1) Default : ON<br />
+        - added toggle accuracy modifer (Left shift + 2)  Default : ON<br />
+        (disables high score saving)<br />
+        - added toggle pull ball to player during game (Left shift + 3, to use : press shoot button)<br />
+        (disables high score saving) Default : OFF<br />
+        - added toggle stats display during game (Left shift + 4) Default : OFF<br />
     </p>
     <p>
-        <h5>3.3.3</h5>
-        - added sunglasses to some levels that enable you to see through the lies of the jedi!
-        added vignette to effect, peformance reduced by roughly 7-9fps. this is too high of a
-        performance hit--
-        - change sprite mesh to full rect reduced verts + tris count by roughly 80-90%
-        - new player : Baby, my neighbor's cat
-        - added 8 enemies ninja, james, ian, executioner, werewolf, nza, old real, wizard
-        - added 20 player attacks, player special attacks, and blocking
-        - added fan section. currently 12 set npcs
-        - disabled traffic, currently reworking
-        - disabled lighting for performance
-        - disabled particle simulators (snow, fog, etc)
-        - moved 4 point line back to 40 feet
-        - added hardcore option : disables shot, range meter, and call ball to player
-        implemented selectable option and highscore displays if hardcore mode enabled on high score
-
-        - available dev options:
-        toggle run : left shift + 1
-        toggle ui display : left shift + 2
-        max player stats : left shift + 3
-        toggle fps display : left shift + 5
-        instantiate rob : (lightning strike knocks down all enemies) left shift + 6
+        <h5>2.0</h5>
+        - added start screen menu <br />
+        - added player select screen with player image and shooting stats<br />
+        - added 4 new characters : Ian, Woody, Marion, and Flash <br />
+        - added quit to start menu command. press left or right shift + P <br />
+        - changed quit game command to left or right sift + Q <br />
     </p>
     <p>
-        <h5>3.3.4</h5>
-        - added dunk system. most players should have a basic dunk. get close to goal and jump, dunking is automatic
-        for two pointers.
-        - added new banging track by ig:stustumaru. one of 2 tracks randonly chosen by sound manager to play.
-        tracks play on a list. on pc, press [left shift + 0] to manually go to next track
-        - smaller timer and current score tracker placed above basketball goal
-        - high scores now display a separate category of high scores based on hardcore mode enabled
-        - enabled call ball to player for 3/4/all point contest on hardcore mode
-        - remove cheerleader drop shadows to reduce draw calls
-        - added Npcs : Evelyn Skeleton, Gremlins (Cooter and Sticky)
-        - added Enemies :
-        ??? : long range attack + 4 random close attacks
-        Doctor Blood : long range attack + 3 close attacks
-        black ninja : sword attack + long range attack
-        white ninja : sword attack
-        robot : hatchet attack
-
-        - added new Player : Evelyn Skeleton
-        - added Player/Enemy health system + Player block stamina
-        Player health = 100, block = 25
-        health regenrates +1 every second if not fighting, shooting, knocked down or taking damage
-        block regenrates +1 every 2 second if not fighting, shooting, knocked down or taking damage
-        Kill enemy +10% of their max health. +5 minion, +15 boss
-        Enemy Health - minions = 50 | boss = 150. only 1 boss is allowed at a time.
-
-        - added Enemy disintegrations and death (no health, you dead)
-        - added multiple enemy attack system and long range attacks
-        if enemy has more than one attack, animation is randomized
-
-        - added Player attack queue.
-        Default : max 2 enemies attacking
-        Hardcore mode : max 4 enemies attacking
-        - New Level - Rusty's
-        - New Level - The Dome
-        - added new game modes :
-
-        Points By distance : Very unbalanced and pretty hard. especially on mobile right now
-        1 point per every 10 feet example 84 ft shoot is worth 8 points. max range is 1000 feet worth 100 points.
-        pretty much impossible to make a shot over 1200 feet without widening the rim and
-        throwing off basic 3/4/7 point shot physics and accuracy stats
-
-        Bash Up Some Nerds :
-        fight enemies, no basketball. 4 enemies at a time on desktop, 4 mobile
-        kill an enemy, another one spawns until your heal is depleted. receive 10% of enemy's max health on kill
-
-        - note : in all game modes with enemies EXCEPT 'Bash Up Some Berds', you receive 10% of the enemy you kills starting help
-        ex. ninja starts with 50 health, on kill you receive +5 health
-        wizard starts with 100, on kill, + 10 health
-        - game ends if Enemies enabled and player runs out of health
-        - fix :  issue with database lock on load new character in database helper class
-        - fix : start screen swipe/up down on options deselected current option.
-        - fix : disabled adding progression points to players that reach max stat level
-        100 max for all except max luck = 10
-        - performance increases ~15%
-
-        - change touch controls
-        hold top left screen : block
-        bottom left screen : move
-        top right : hold top left + tap top right --> special attack
-        bottom right : hold top left + tap bottom right --> regular attack
-    </p>
-    <p>
-        <h5>3.3.5</h5>
+        <h5>1.0</h5>
         work in progress demo
     </p>
 </div>

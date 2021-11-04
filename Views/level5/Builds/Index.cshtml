@@ -3,12 +3,26 @@
     ViewData["Title"] = "Builds";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script>
+    /**
+    * Function that captures a click on an outbound link in Analytics.
+    * This function takes a valid URL string as an argument, and uses that URL string
+    * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+    * using 'navigator.sendBeacon' in browser that support it.
+    */
+    var captureOutboundLink = function (url) {
+        ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+        });
+    }
+</script>
 <div>
     <h3>builds</h3>
     <p></p><p></p>
     <h6>mac</h6>
-    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_macosx_64bit_silicon.zip">level5_v3.3.6.1_macosx_64bit_silicon.zip</a>
+    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_macosx_64bit_silicon.zip"
+       onclick="captureOutboundLink('mac download'); return false;">level5_v3.3.6.1_macosx_64bit_silicon.zip</a>
     <p></p>
     <h8>mac osx install</h8>
     <p></p>
@@ -18,18 +32,22 @@
     <p></p>
     <p></p>
     <h6>windows</h6>
-    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_windows_x86_64.exe">level5_v3.3.6.1_windows_x86_64.exe</a>
+    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_windows_x86_64.exe"
+       onclick="captureOutboundLink('win exe download'); return false;">level5_v3.3.6.1_windows_x86_64.exe</a>
     <h8> [self extracting installer]</h8>
     <p></p>
-    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_windows_x86_64.zip">level5_v3.3.6.1_windows_x86_64.zip</a>
+    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_windows_x86_64.zip"
+       onclick="captureOutboundLink('win zip download'); return false;">level5_v3.3.6.1_windows_x86_64.zip</a>
     <p></p>
     <h6>android</h6>
-    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_arm7_arm64.apk">level5_v3.3.6.1_ARM7_ARM64.apk</a>
+    <a href="https://level5builds.s3.us-east-2.amazonaws.com/level5_v3.3.6.1_arm7_arm64.apk"
+       onclick="captureOutboundLink('android apk download'); return false;">level5_v3.3.6.1_ARM7_ARM64.apk</a>
     <h8> [debug build]</h8>
     <p></p>
     <h8>
         For release version, get it here on the Google Play store -->
-        <a href="https://play.google.com/store/apps/details?id=com.level5.level5"> Level5 on Google Play </a>
+        <a href="https://play.google.com/store/apps/details?id=com.level5.level5"
+           onclick="captureOutboundLink('to to google play store'); return false;"> Level5 on Google Play </a>
     </h8>
 </div>
 <br>

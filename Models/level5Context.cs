@@ -1,12 +1,12 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models.level5;
+using level5Server.Models.level5;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace mysql_scaffold_dbcontext_test.Models.level5
+namespace level5Server.Models.level5
 {
     public partial class Level5Context : DbContext
     {

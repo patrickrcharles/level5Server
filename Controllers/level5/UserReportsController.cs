@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 
-namespace mysql_scaffold_dbcontext_test.Models.level5
+namespace level5Server.Models.level5
 {
     [Route("[controller]")]
     public class UserReportsController : Controller

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace mysql_scaffold_dbcontext_test.Models
+namespace level5Server.Models
 {
     public partial class ServerStats
     {

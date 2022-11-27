@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Models.serialkiller
+namespace level5Server.Models.serialkiller
 {
     public class CrimeViewModel
     {

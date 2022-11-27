@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace mysql_scaffold_dbcontext_test.Models.level5
+namespace level5Server.Models.level5
 {
     //[Route("users")]
     [Controller]

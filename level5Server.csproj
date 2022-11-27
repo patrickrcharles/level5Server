@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>mysql_scaffold_dbcontext_test</RootNamespace>
+    <RootNamespace>level5Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -60,5 +60,9 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <AssemblyName>level5Server</AssemblyName>
+    <Authors>Patrick Charles</Authors>
+    <Company>Skeleton District</Company>
+    <Product>level5</Product>
   </PropertyGroup>
 </Project>

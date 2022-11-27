@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "mysql_scaffold_dbcontext_test": {
+    "level5Server": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.Utility
+namespace level5Server.Controllers.Utility
 {
     public static class UtilityFunctions
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace mysql_scaffold_dbcontext_test.Models.serialkiller
+namespace level5Server.Models.serialkiller
 {
     public partial class serialkillerContext : DbContext
     {

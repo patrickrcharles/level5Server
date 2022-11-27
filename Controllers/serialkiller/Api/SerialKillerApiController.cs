@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
+using level5Server.Models.serialkiller;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller.Api
+namespace level5Server.Controllers.serialkiller.Api
 {
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]

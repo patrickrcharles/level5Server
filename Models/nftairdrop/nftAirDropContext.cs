@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace mysql_scaffold_dbcontext_test.Models.nftairdrop
+namespace level5Server.Models.nftairdrop
 {
     public partial class nftAirDropContext : DbContext
     {

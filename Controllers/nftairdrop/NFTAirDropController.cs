@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Controllers.Utility;
-using mysql_scaffold_dbcontext_test.Models.nftairdrop;
+using level5Server.Controllers.Utility;
+using level5Server.Models.nftairdrop;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.nftairdrop
+namespace level5Server.Controllers.nftairdrop
 {
     [Route("[controller]")]
     public class NFTAirDropController : Controller

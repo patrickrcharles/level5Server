@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
+using level5Server.Models.serialkiller;
 using System;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.serialkiller
+namespace level5Server.Controllers.serialkiller
 {
     [Route("[controller]")]
     public class SerialKillerController : Controller

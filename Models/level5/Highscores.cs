@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace mysql_scaffold_dbcontext_test.Models
+namespace level5Server.Models
 {
     public partial class Highscores
     {

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using mysql_scaffold_dbcontext_test.Models;
-using mysql_scaffold_dbcontext_test.Models.level5;
+using level5Server.Models;
+using level5Server.Models.level5;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.level5.Api
+namespace level5Server.Controllers.level5.Api
 {
     //[ApiVersion("1")]
     [ApiExplorerSettings(IgnoreApi = true)]

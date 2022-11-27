@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace mysql_scaffold_dbcontext_test.Controllers.Utility
+namespace level5Server.Controllers.Utility
 {
     public static class KeyGenerator
     {

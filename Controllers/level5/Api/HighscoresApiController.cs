@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 
-namespace mysql_scaffold_dbcontext_test.Models.level5.Api
+namespace level5Server.Models.level5.Api
 {
     //[Authorize]
     [Route("api/highscores")]
@@ -34,8 +34,8 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
             //ModePlayedCount(16);
             //return await _context.Highscores.OrderByDescending(x => x.Id)
             //    .ToListAsync();
-           var highscores = await _context.Highscores.OrderByDescending(x => x.Id)
-                .ToListAsync();
+            var highscores = await _context.Highscores.OrderByDescending(x => x.Id)
+                 .ToListAsync();
             HideHighScoreDetails(highscores);
 
             return highscores;
@@ -282,8 +282,36 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
             if (modeid == 20 || modeid == 21 || modeid == 22)
             {
                 var usernames = await _context.Users.Select(x => new { x.Userid, x.Username }).ToListAsync();
+                var highscores = (dynamic)null;
+                if (hardcore == 0)
+                {
+                    highscores = await _context.Highscores
+                        .Where(x => x.Modeid == modeid)
+                        .Select(x => new
+                        {
+                            Score = x.EnemiesKilled.ToString(),
+                            x.Character,
+                            x.Level,
+                            x.Date,
+                            Time = x.Time.ToString(),
+                            UserId = x.Userid.ToString(),
+                            x.UserName,
+                            x.HardcoreEnabled,
+                            x.EnemiesEnabled,
+                            x.TrafficEnabled,
+                            x.EnemiesKilled,
+                            x.Platform
+                        })
+                        .OrderByDescending(x => x.EnemiesKilled)
+                        .Skip(page * 10)
+                        .Take(results)
+                        .ToListAsync();
 
-                var highscores = await _context.Highscores
+                    list = highscores;
+                }
+                else
+                {
+                    highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid
                     && x.HardcoreEnabled == hardcore
                     && x.TrafficEnabled == traffic
@@ -309,7 +337,8 @@ namespace mysql_scaffold_dbcontext_test.Models.level5.Api
                     .Take(results)
                     .ToListAsync();
 
-                list = highscores;
+                    list = highscores;
+                }
             }
             if (list == null)
             {

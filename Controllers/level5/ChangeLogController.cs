@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace mysql_scaffold_dbcontext_test.Controllers
+namespace level5Server.Controllers
 {
     public class ChangeLogController : Controller
     {

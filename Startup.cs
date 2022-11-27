@@ -16,10 +16,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Linq;
 using Microsoft.OpenApi.Any;
-using mysql_scaffold_dbcontext_test.Models.serialkiller;
-using mysql_scaffold_dbcontext_test.Models.nftairdrop;
+using level5Server.Models.serialkiller;
+using level5Server.Models.nftairdrop;
 
-namespace mysql_scaffold_dbcontext_test.Models.level5
+namespace level5Server.Models.level5
 {
     public class Startup
     {

@@ -772,6 +772,9 @@ namespace level5Server.Models.level5.Api
                         case 22:
                             highscores.ModeName = "Cage Match";
                             break;
+                        case 23:
+                            highscores.ModeName = "Versus";
+                            break;
                         case 98:
                             highscores.ModeName = "Arcade";
                             break;

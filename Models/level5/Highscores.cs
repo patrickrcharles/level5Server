@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+#nullable disable
 
 namespace level5Server.Models
 {
@@ -53,5 +53,18 @@ namespace level5Server.Models
         public string SniperModeName { get; set; }
         public int SniperHits { get; set; }
         public int SniperShots { get; set; }
+        public int P1TotalPoints { get; set; }
+        public int P2TotalPoints { get; set; }
+        public int P3TotalPoints { get; set; }
+        public int P4TotalPoints { get; set; }
+        public string FirstPlace { get; set; }
+        public string SecondPlace { get; set; }
+        public string ThirdPlace { get; set; }
+        public string FourthPlace { get; set; }
+        public int P1IsCpu { get; set; }
+        public int P2IsCpu { get; set; }
+        public int P3IsCpu { get; set; }
+        public int P4IsCpu { get; set; }
+        public int NumPlayers { get; set; }
     }
 }

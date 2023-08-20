@@ -128,143 +128,227 @@
             <th>
                 @Html.ActionLink("Sniper Shots", "Index", new { sortOrder = ViewBag.SniperShotsSortParm })
             </th>
+            <th>
+                P1 Total Points
+            </th>
+            <th>
+                P2 Total Points
+            </th>
+            <th>
+                P3 Total Points
+            </th>
+            <th>
+                P4 Total Points
+            </th>
+            <th>
+                1st
+            </th>
+            <th>
+                2nd
+            </th>
+            <th>
+                3rd
+            </th>
+            <th>
+                4th
+            </th>
+            <th>
+                P1 isCpu
+            </th>
+            <th>
+                P2 isCpu
+            </th>
+            <th>
+                P3 isCpu
+            </th>
+            <th>
+                P4 isCpu
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
 
-                @if (item.HardcoreEnabled == 1)
+            @if (item.HardcoreEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Platform)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Character)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            @if (item.Difficulty >= 0)
+            {
+                if (item.Difficulty == 0)
                 {
-                    <td>yes</td>
+                    <td>easy</td>
                 }
-                else
+                if (item.Difficulty == 1)
                 {
-                    <td>no</td>
+                    <td>normal</td>
                 }
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Platform)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Character)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Level)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Version)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                @if (item.Difficulty >= 0)
+                if (item.Difficulty == 2)
                 {
-                    if(item.Difficulty == 0) { <td>easy</td>}
-                    if(item.Difficulty == 1) { <td>normal</td>}
-                    if(item.Difficulty == 2) { <td>hardcore</td>}
+                    <td>hardcore</td>
                 }
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnemiesKilled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPoints)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LongestShot)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalDistance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxShotMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxShotAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConsecutiveShots)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThreeMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThreeAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FourMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FourAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SevenMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SevenAtt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BonusPoints)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MoneyBallMade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MoneyBallAtt)
-                </td>
-                @if (item.TrafficEnabled == 1)
-                {
-                    <td>yes</td>
-                }
-                else
-                {
-                    <td>no</td>
-                }
-                @if (item.EnemiesEnabled == 1)
-                {
-                    <td>yes</td>
-                }
-                else
-                {
-                    <td>no</td>
-                }
-                @if (item.SniperEnabled == 1)
-                {
-                    <td>yes</td>
-                }
-                else
-                {
-                    <td>no</td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperMode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperModeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperHits)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SniperShots)
-                </td>
-            </tr>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.EnemiesKilled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LongestShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxShotMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxShotAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsecutiveShots)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SevenMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SevenAtt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BonusPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoneyBallMade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoneyBallAtt)
+            </td>
+            @if (item.TrafficEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            @if (item.EnemiesEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            @if (item.SniperEnabled == 1)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperModeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperHits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SniperShots)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4TotalPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThirdPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourthPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P1IsCpu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P2IsCpu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P3IsCpu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P4IsCpu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPlayers)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -71,9 +71,29 @@ namespace level5Server.Models.level5
             ViewData["SniperHitsSortParm"] = sortOrder == "sniperHits_asc" ? "sniperHits_desc" : "sniperHits_asc";
             ViewData["SniperShotsSortParm"] = sortOrder == "sniperShots_asc" ? "sniperShots_desc" : "sniperShots_asc";
 
+            //ViewData["P1TotalPointsSortParm"] = sortOrder == "p1TotalPoints_asc" ? "p1TotalPoints_desc" : "p1TotalPoints_asc";
+            //ViewData["P2TotalPointsSortParm"] = sortOrder == "p2TotalPoints_asc" ? "p2TotalPoints_desc" : "p2TotalPoints_asc";
+            //ViewData["P3TotalPointsSortParm"] = sortOrder == "p3TotalPoints_asc" ? "p3TotalPoints_desc" : "p3TotalPoints_asc";
+            //ViewData["P4TotalPointsSortParm"] = sortOrder == "p4TotalPoints_asc" ? "p4TotalPoints_desc" : "p4TotalPoints_asc";
+
+            ViewData["FirstPlaceSortParm"] = sortOrder == "firstPlace_asc" ? "firstPlace_desc" : "firstPlace_asc";
+            ViewData["SecondPlaceSortParm"] = sortOrder == "secondPlace_asc" ? "secondPlace_desc" : "secondPlace_asc";
+            ViewData["ThirdPaceSortParm"] = sortOrder == "thirdPlace_asc" ? "thirdPlace_desc" : "thirdPlace_asc";
+            ViewData["FourthPlaceSortParm"] = sortOrder == "fourthPlace_asc" ? "fourthPlace_desc" : "fourthPlace_asc";
+
+            //ViewData["P1IsCpuSortParm"] = sortOrder == "p1IsCpu_asc" ? "p1IsCpu_desc" : "p1IsCpu_asc";
+            //ViewData["P2IsCpuSortParm"] = sortOrder == "p2IsCpu_asc" ? "p2IsCpu_desc" : "p2IsCpu_asc";
+            //ViewData["P3IsCpuSortParm"] = sortOrder == "p3IsCpu_asc" ? "p3IsCpu_desc" : "p3IsCpu_asc";
+            //ViewData["P4IsCpuSortParm"] = sortOrder == "p4IsCpu_asc" ? "p4IsCpu_desc" : "p4IsCpu_asc";
+
+            //ViewData["NumPlayerSortParm"] = sortOrder == "numPlayers_asc" ? "numPlayers_desc" : "numPlayers_asc";
+
 
             var highscores = from h in _context.Highscores
                              select h;
+
+            System.Diagnostics.Debug.WriteLine(highscores.Count());
+            System.Diagnostics.Debug.WriteLine("searchString : "+ searchString);
             // if no search is submitted
             //if (String.IsNullOrEmpty(searchString))
             //{
@@ -96,9 +116,7 @@ namespace level5Server.Models.level5
             //        || s.Character.Contains(previousSearchString) || s.Level.Contains(previousSearchString)
             //        || s.Version.Contains(previousSearchString));
             //}
-            System.Diagnostics.Debug.WriteLine("sortOrder : " + sortOrder);
             highscores = sortHighscores(sortOrder, highscores);
-
             return View(await highscores.ToListAsync());
         }
 
@@ -246,116 +264,119 @@ namespace level5Server.Models.level5
             }
             if (sortOrder.Contains("desc"))
             {
-                switch (sortOrder)
+                if (String.IsNullOrEmpty(sortOrder))
                 {
-                    case "date_desc":
-                        highscores = highscores.OrderBy(s => s.Id).Take(50);
-                        break;
-                    case "hardcore_desc":
-                        highscores = highscores.OrderBy(s => s.HardcoreEnabled).Take(50);
-                        break;
-                    case "username_desc":
-                        highscores = highscores.OrderBy(s => s.UserName).Take(50);
-                        break;
-                    case "platform_desc":
-                        highscores = highscores.OrderBy(s => s.Platform).Take(50);
-                        break;
-                    case "mode_desc":
-                        highscores = highscores.OrderBy(s => s.ModeName).Take(50);
-                        break;
-                    case "character_desc":
-                        highscores = highscores.OrderBy(s => s.Character).Take(50);
-                        break;
-                    case "level_desc":
-                        highscores = highscores.OrderBy(s => s.Level).Take(50);
-                        break;
-                    case "version_desc":
-                        highscores = highscores.OrderBy(s => s.Version).Take(50);
-                        break;
-                    case "time_desc":
-                        highscores = highscores.OrderBy(s => s.Time).Take(50);
-                        break;
-                    case "difficulty_desc":
-                        highscores = highscores.OrderBy(s => s.Difficulty).Take(50);
-                        break;
-                    case "totalPoints_desc":
-                        highscores = highscores.OrderBy(s => s.TotalPoints).Take(50);
-                        break;
-                    case "longestShot_desc":
-                        highscores = highscores.OrderBy(s => s.LongestShot).Take(50);
-                        break;
-                    case "totalDistance_desc":
-                        highscores = highscores.OrderBy(s => s.TotalDistance).Take(50);
-                        break;
-                    case "maxShotMade_desc":
-                        highscores = highscores.OrderBy(s => s.MaxShotMade).Take(50);
-                        break;
-                    case "maxShotAtt_desc":
-                        highscores = highscores.OrderBy(s => s.MaxShotAtt).Take(50);
-                        break;
-                    case "consecutiveShots_desc":
-                        highscores = highscores.OrderBy(s => s.ConsecutiveShots).Take(50);
-                        break;
-                    case "twoMade_desc":
-                        highscores = highscores.OrderBy(s => s.TwoMade).Take(50);
-                        break;
-                    case "twoAtt_desc":
-                        highscores = highscores.OrderBy(s => s.TwoAtt).Take(50);
-                        break;
-                    case "threeMade_desc":
-                        highscores = highscores.OrderBy(s => s.ThreeMade).Take(50);
-                        break;
-                    case "threeAtt_desc":
-                        highscores = highscores.OrderBy(s => s.ThreeAtt).Take(50);
-                        break;
-                    case "fourMade_desc":
-                        highscores = highscores.OrderBy(s => s.FourMade).Take(50);
-                        break;
-                    case "fourAtt_desc":
-                        highscores = highscores.OrderBy(s => s.FourAtt).Take(50);
-                        break;
-                    case "sevenMade_desc":
-                        highscores = highscores.OrderBy(s => s.SevenMade).Take(50);
-                        break;
-                    case "sevenAtt_desc":
-                        highscores = highscores.OrderBy(s => s.FourAtt).Take(50);
-                        break;
-                    case "bonusPoints_desc":
-                        highscores = highscores.OrderBy(s => s.BonusPoints).Take(50);
-                        break;
-                    case "moneyBallMade_desc":
-                        highscores = highscores.OrderBy(s => s.MoneyBallMade).Take(50);
-                        break;
-                    case "moneyBallAtt_desc":
-                        highscores = highscores.OrderBy(s => s.MoneyBallAtt).Take(50);
-                        break;
-                    case "traffic_desc":
-                        highscores = highscores.OrderBy(s => s.TrafficEnabled).Take(50);
-                        break;
-                    case "enemies_desc":
-                        highscores = highscores.OrderBy(s => s.EnemiesEnabled).Take(50);
-                        break;
-                    case "enemiesKilled_desc":
-                        highscores = highscores.OrderBy(s => s.EnemiesKilled).Take(50);
-                        break;
-                    case "sniper_desc":
-                        highscores = highscores.OrderBy(s => s.SniperEnabled).Take(50);
-                        break;
-                    case "sniperMode_desc":
-                        highscores = highscores.OrderBy(s => s.SniperMode).Take(50);
-                        break;
-                    case "sniperModeName_desc":
-                        highscores = highscores.OrderBy(s => s.SniperModeName).Take(50);
-                        break;
-                    case "sniperHits_desc":
-                        highscores = highscores.OrderBy(s => s.SniperHits).Take(50);
-                        break;
-                    case "sniperShots_desc":
-                        highscores = highscores.OrderBy(s => s.SniperShots).Take(50);
-                        break;
-                    default:
-                        highscores = highscores.OrderByDescending(x => x.Id).Skip(0).Take(50);
-                        break;
+                    switch (sortOrder)
+                    {
+                        case "date_desc":
+                            highscores = highscores.OrderBy(s => s.Id).Take(50);
+                            break;
+                        case "hardcore_desc":
+                            highscores = highscores.OrderBy(s => s.HardcoreEnabled).Take(50);
+                            break;
+                        case "username_desc":
+                            highscores = highscores.OrderBy(s => s.UserName).Take(50);
+                            break;
+                        case "platform_desc":
+                            highscores = highscores.OrderBy(s => s.Platform).Take(50);
+                            break;
+                        case "mode_desc":
+                            highscores = highscores.OrderBy(s => s.ModeName).Take(50);
+                            break;
+                        case "character_desc":
+                            highscores = highscores.OrderBy(s => s.Character).Take(50);
+                            break;
+                        case "level_desc":
+                            highscores = highscores.OrderBy(s => s.Level).Take(50);
+                            break;
+                        case "version_desc":
+                            highscores = highscores.OrderBy(s => s.Version).Take(50);
+                            break;
+                        case "time_desc":
+                            highscores = highscores.OrderBy(s => s.Time).Take(50);
+                            break;
+                        case "difficulty_desc":
+                            highscores = highscores.OrderBy(s => s.Difficulty).Take(50);
+                            break;
+                        case "totalPoints_desc":
+                            highscores = highscores.OrderBy(s => s.TotalPoints).Take(50);
+                            break;
+                        case "longestShot_desc":
+                            highscores = highscores.OrderBy(s => s.LongestShot).Take(50);
+                            break;
+                        case "totalDistance_desc":
+                            highscores = highscores.OrderBy(s => s.TotalDistance).Take(50);
+                            break;
+                        case "maxShotMade_desc":
+                            highscores = highscores.OrderBy(s => s.MaxShotMade).Take(50);
+                            break;
+                        case "maxShotAtt_desc":
+                            highscores = highscores.OrderBy(s => s.MaxShotAtt).Take(50);
+                            break;
+                        case "consecutiveShots_desc":
+                            highscores = highscores.OrderBy(s => s.ConsecutiveShots).Take(50);
+                            break;
+                        case "twoMade_desc":
+                            highscores = highscores.OrderBy(s => s.TwoMade).Take(50);
+                            break;
+                        case "twoAtt_desc":
+                            highscores = highscores.OrderBy(s => s.TwoAtt).Take(50);
+                            break;
+                        case "threeMade_desc":
+                            highscores = highscores.OrderBy(s => s.ThreeMade).Take(50);
+                            break;
+                        case "threeAtt_desc":
+                            highscores = highscores.OrderBy(s => s.ThreeAtt).Take(50);
+                            break;
+                        case "fourMade_desc":
+                            highscores = highscores.OrderBy(s => s.FourMade).Take(50);
+                            break;
+                        case "fourAtt_desc":
+                            highscores = highscores.OrderBy(s => s.FourAtt).Take(50);
+                            break;
+                        case "sevenMade_desc":
+                            highscores = highscores.OrderBy(s => s.SevenMade).Take(50);
+                            break;
+                        case "sevenAtt_desc":
+                            highscores = highscores.OrderBy(s => s.FourAtt).Take(50);
+                            break;
+                        case "bonusPoints_desc":
+                            highscores = highscores.OrderBy(s => s.BonusPoints).Take(50);
+                            break;
+                        case "moneyBallMade_desc":
+                            highscores = highscores.OrderBy(s => s.MoneyBallMade).Take(50);
+                            break;
+                        case "moneyBallAtt_desc":
+                            highscores = highscores.OrderBy(s => s.MoneyBallAtt).Take(50);
+                            break;
+                        case "traffic_desc":
+                            highscores = highscores.OrderBy(s => s.TrafficEnabled).Take(50);
+                            break;
+                        case "enemies_desc":
+                            highscores = highscores.OrderBy(s => s.EnemiesEnabled).Take(50);
+                            break;
+                        case "enemiesKilled_desc":
+                            highscores = highscores.OrderBy(s => s.EnemiesKilled).Take(50);
+                            break;
+                        case "sniper_desc":
+                            highscores = highscores.OrderBy(s => s.SniperEnabled).Take(50);
+                            break;
+                        case "sniperMode_desc":
+                            highscores = highscores.OrderBy(s => s.SniperMode).Take(50);
+                            break;
+                        case "sniperModeName_desc":
+                            highscores = highscores.OrderBy(s => s.SniperModeName).Take(50);
+                            break;
+                        case "sniperHits_desc":
+                            highscores = highscores.OrderBy(s => s.SniperHits).Take(50);
+                            break;
+                        case "sniperShots_desc":
+                            highscores = highscores.OrderBy(s => s.SniperShots).Take(50);
+                            break;
+                        default:
+                            highscores = highscores.OrderByDescending(x => x.Id).Skip(0).Take(50);
+                            break;
+                    }
                 }
             }
             if (sortOrder.Contains("asc"))

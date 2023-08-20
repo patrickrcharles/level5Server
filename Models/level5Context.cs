@@ -168,12 +168,46 @@ namespace level5Server.Models.level5
 
                 entity.Property(e => e.SniperShots).HasColumnName("sniperShots");
 
+
                 entity.Property(e => e.Version)
                     .IsRequired()
                     .HasColumnName("version")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.P1TotalPoints)
+                    .HasColumnName("p1TotalPoints");
+                entity.Property(e => e.P2TotalPoints).HasColumnName("p2TotalPoints");
+                entity.Property(e => e.P3TotalPoints).HasColumnName("p3TotalPoints");
+                entity.Property(e => e.P4TotalPoints).HasColumnName("p4TotalPoints");
+                entity.Property(e => e.FirstPlace)
+                    .HasColumnName("firstPlace")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.SecondPlace)
+                    .HasColumnName("secondPlace")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.ThirdPlace)
+                    .HasColumnName("thirdPlace")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+                entity.Property(e => e.FourthPlace)
+                    .HasColumnName("fourthPlace")
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.P1IsCpu).HasColumnName("p1IsCpu");
+                entity.Property(e => e.P2IsCpu).HasColumnName("p2IsCpu");
+                entity.Property(e => e.P3IsCpu).HasColumnName("p3IsCpu");
+                entity.Property(e => e.P4IsCpu).HasColumnName("p4IsCpu");
+
+                entity.Property(e => e.NumPlayers).HasColumnName("numPlayers");
             });
 
             modelBuilder.Entity<Users>(entity =>

@@ -601,7 +601,7 @@ namespace level5Server.Models.level5.Api
             }
             else
             {
-                upDateModeName(highscores);
+                updateModeName(highscores);
                 _context.Highscores.Add(highscores);
                 await _context.SaveChangesAsync();
 
@@ -700,7 +700,7 @@ namespace level5Server.Models.level5.Api
             return count;
         }
 
-        private void upDateModeName(Highscores highscores)
+        private void updateModeName(Highscores highscores)
         {
             System.Diagnostics.Debug.WriteLine("upDateModeName()");
             //foreach (Highscores h in highscores)
@@ -709,7 +709,7 @@ namespace level5Server.Models.level5.Api
             if (String.IsNullOrEmpty(highscores.ModeName))
             {
                 {
-                    System.Diagnostics.Debug.WriteLine("highscores.Modeid : " + highscores.Modeid);
+                    //System.Diagnostics.Debug.WriteLine("highscores.Modeid : " + highscores.Modeid);
                     switch (highscores.Modeid)
                     {
                         case 1:
@@ -774,6 +774,15 @@ namespace level5Server.Models.level5.Api
                             break;
                         case 23:
                             highscores.ModeName = "Versus";
+                            break;
+                        case 24:
+                            highscores.ModeName = "7 point Contest";
+                            break;
+                        case 25:
+                            highscores.ModeName = "Spot up some 7s";
+                            break;
+                        case 26:
+                            highscores.ModeName = "Beat tha Computahs";
                             break;
                         case 98:
                             highscores.ModeName = "Arcade";

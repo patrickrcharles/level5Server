@@ -122,7 +122,7 @@ namespace level5Server.Models.level5.Api
         {
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
-            if (modeid == 1 || (modeid > 14 && modeid < 20))
+            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid ==23 || modeid == 24 || modeid == 26)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid
@@ -216,7 +216,7 @@ namespace level5Server.Models.level5.Api
                 list = highscores;
             }
             // time highscore
-            if ((modeid > 6 && modeid < 10))
+            if ((modeid > 6 && modeid < 10) || modeid == 25)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid
@@ -359,7 +359,7 @@ namespace level5Server.Models.level5.Api
         {
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
-            if (modeid == 1 || (modeid > 14 && modeid < 20))
+            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid == 23 || modeid == 24 || modeid == 26)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
@@ -441,7 +441,7 @@ namespace level5Server.Models.level5.Api
                 list = highscores;
             }
             // time highscore
-            if ((modeid > 6 && modeid < 10))
+            if ((modeid > 6 && modeid < 10) || modeid == 25)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)

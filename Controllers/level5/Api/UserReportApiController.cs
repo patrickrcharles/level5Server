@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace level5Server.Controllers.level5.Api
 {
     //[ApiVersion("1")]
-    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/userreport")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class UserReportApiController : Controller
     {
         private readonly Level5Context _context;

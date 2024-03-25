@@ -10,6 +10,7 @@ namespace level5Server.Controllers
 {
     [Route("api/servermessages")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ServerMessagesApi : Controller
     {
         private readonly Level5Context _context;

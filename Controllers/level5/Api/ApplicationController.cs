@@ -10,6 +10,7 @@ namespace level5Server.Controllers
 {
     [Route("api/application")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ApplicationController : Controller
     {
         private readonly Level5Context _context;

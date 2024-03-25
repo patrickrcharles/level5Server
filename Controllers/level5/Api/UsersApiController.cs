@@ -10,6 +10,8 @@ namespace level5Server.Models.level5
 {
     [Route("api/users")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class UsersApiController : Controller
     {
         private readonly Level5Context _context;

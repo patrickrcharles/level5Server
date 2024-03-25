@@ -12,6 +12,8 @@ namespace level5Server.Models.level5.Api
     //[Authorize]
     [Route("api/highscores")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class HighscoresApiController : Controller
     {
         private readonly Level5Context _context;
@@ -122,7 +124,7 @@ namespace level5Server.Models.level5.Api
         {
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
-            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid ==23 || modeid == 24 || modeid == 26)
+            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid ==23 || modeid == 24 || modeid == 26 || modeid == 27)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid
@@ -359,7 +361,7 @@ namespace level5Server.Models.level5.Api
         {
             ActionResult<IEnumerable<Object>> list = null;
             // totalpoints highscore
-            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid == 23 || modeid == 24 || modeid == 26)
+            if (modeid == 1 || (modeid > 14 && modeid < 20) || modeid == 23 || modeid == 24 || modeid == 26 || modeid == 27)
             {
                 var highscores = await _context.Highscores
                     .Where(x => x.Modeid == modeid)
@@ -783,6 +785,9 @@ namespace level5Server.Models.level5.Api
                             break;
                         case 26:
                             highscores.ModeName = "Beat tha Computahs";
+                            break;
+                        case 27:
+                            highscores.ModeName = "Lockdown";
                             break;
                         case 98:
                             highscores.ModeName = "Arcade";

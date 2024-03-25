@@ -14,8 +14,8 @@ using System.Threading.Tasks;
 namespace level5Server.Controllers.level5.Api
 {
     [Route("api/token")]
-    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class TokenController : Controller
     {
         public IConfiguration _configuration;
